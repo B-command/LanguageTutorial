@@ -32,7 +32,25 @@ namespace LanguageTutorial
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
+            RegistrationWindow options = new RegistrationWindow() { Title = "Настройки" };
+            options.Show();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            TestWindow testWindow = new TestWindow();
+            testWindow.Show();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

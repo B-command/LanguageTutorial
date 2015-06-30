@@ -28,8 +28,16 @@ namespace LanguageTutorial
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             RegistrationWindow regisrationWindow = new RegistrationWindow();
-            //this.Hide();
+            this.Close();
             regisrationWindow.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            
+            MainMenu mainMenu = new MainMenu();
+            this.Close();
+            mainMenu.Show();
         }
     }
 }

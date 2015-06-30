@@ -7,10 +7,10 @@
             <ColumnDefinition Width="83*"/>
             <ColumnDefinition Width="409*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Начать тестирование" HorizontalAlignment="Left" Margin="404,37,0,0" VerticalAlignment="Top" Width="191" Height="42" Grid.Column="1"/>
-        <Button Content="Посмотреть статистику" HorizontalAlignment="Left" Margin="404,102,0,0" VerticalAlignment="Top" Width="191" Height="42" Grid.Column="1"/>
+        <Button Content="Начать тестирование" HorizontalAlignment="Left" Margin="404,37,0,0" VerticalAlignment="Top" Width="191" Height="42" Grid.Column="1" Click="Button_Click_2"/>
+        <Button Content="Посмотреть статистику" HorizontalAlignment="Left" Margin="404,102,0,0" VerticalAlignment="Top" Width="191" Height="42" Grid.Column="1" Click="Button_Click_4"/>
         <Button Content="Изменить настройки" HorizontalAlignment="Left" Margin="404,162,0,0" VerticalAlignment="Top" Width="191" Height="42" Grid.Column="1" Click="Button_Click_1"/>
-        <Button Content="Сменить пользователя" HorizontalAlignment="Left" Margin="404,222,0,0" VerticalAlignment="Top" Width="191" Height="42" Grid.Column="1"/>
+        <Button Content="Сменить пользователя" HorizontalAlignment="Left" Margin="404,222,0,0" VerticalAlignment="Top" Width="191" Height="42" Grid.Column="1" Click="Button_Click_3"/>
         <Button Content="Выйти из программы" HorizontalAlignment="Left" Margin="404,287,0,0" VerticalAlignment="Top" Width="191" Height="42" Grid.Column="1" Click="Button_Click"/>
 
     </Grid>
