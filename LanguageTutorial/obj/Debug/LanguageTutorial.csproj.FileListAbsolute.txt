@@ -17,3 +17,26 @@ D:\FILES\Documents\УЧЁБА\СимбирСофт\Летний интенсив
 D:\FILES\Documents\УЧЁБА\СимбирСофт\Летний интенсив\LanguageTutorial\LanguageTutorial\obj\Debug\DialogWindow.g.cs
 D:\FILES\Documents\УЧЁБА\СимбирСофт\Летний интенсив\LanguageTutorial\LanguageTutorial\obj\Debug\MainMenu.baml
 D:\FILES\Documents\УЧЁБА\СимбирСофт\Летний интенсив\LanguageTutorial\LanguageTutorial\obj\Debug\MainMenu.g.cs
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\bin\Debug\LanguageTutorial.exe.config
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.exe
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.pdb
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\bin\Debug\LanguageTutorial.exe
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\bin\Debug\LanguageTutorial.pdb
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.csprojResolveAssemblyReference.cache
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\DialogWindow.baml
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\MainMenu.baml
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\MainWindow.baml
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\RegistrationWindow.baml
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\DialogWindow.g.cs
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\MainMenu.g.cs
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\MainWindow.g.cs
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\RegistrationWindow.g.cs
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\App.g.cs
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial_MarkupCompile.cache
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.g.resources
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.Properties.Resources.resources
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.csproj.GenerateResource.Cache
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\obj\Debug\App.baml
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\bin\Debug\MahApps.Metro.dll
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\bin\Debug\System.Windows.Interactivity.dll
+G:\_Cloud\GitHub\LanguageTutorial\LanguageTutorial\bin\Debug\MahApps.Metro.xml
