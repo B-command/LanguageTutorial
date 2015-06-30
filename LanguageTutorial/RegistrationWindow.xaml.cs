@@ -27,14 +27,15 @@ namespace LanguageTutorial
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            
+            MainWindow mainWindow = new MainWindow();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            DialogWindow dialogWindow = new DialogWindow();
-            dialogWindow.ShowDialog();
             this.Hide();
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.ShowDialog();
+           
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿<Window x:Class="LanguageTutorial.TestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Тест" Height="500" Width="700">
+    <Grid>
+        <Label Content="Слово" HorizontalAlignment="Left" Margin="263,105,0,0" VerticalAlignment="Top" Width="164" FontSize="18"/>
+        <Label Content="Перевод" HorizontalAlignment="Left" Margin="263,192,0,0" VerticalAlignment="Top" Width="114" FontSize="18"/>
+        <Button Content="Пропустить слово" HorizontalAlignment="Left" Margin="263,298,0,0" VerticalAlignment="Top" Width="114" Height="40"/>
+
+    </Grid>
+</Window>
