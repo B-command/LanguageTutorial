@@ -17,7 +17,7 @@ namespace LanguageTutorial
     /// <summary>
     /// Логика взаимодействия для MainMenu.xaml
     /// </summary>
-    public partial class MainMenu : Window
+    public partial class MainMenu
     {
         public MainMenu()
         {            

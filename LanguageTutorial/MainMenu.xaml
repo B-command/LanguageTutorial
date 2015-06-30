@@ -1,6 +1,7 @@
-﻿<Window x:Class="LanguageTutorial.MainMenu"
+﻿<Controls:MetroWindow x:Class="LanguageTutorial.MainMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         Title="MainMenu" Height="400" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,4 +15,4 @@
         <Button Content="Выйти из программы" HorizontalAlignment="Left" Margin="404,287,0,0" VerticalAlignment="Top" Width="191" Height="42" Grid.Column="1" Click="Button_Click"/>
 
     </Grid>
-</Window>
+</Controls:MetroWindow>

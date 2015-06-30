@@ -17,7 +17,7 @@ namespace LanguageTutorial
     /// <summary>
     /// Логика взаимодействия для RegistrationWindow.xaml
     /// </summary>
-    public partial class RegistrationWindow : Window
+    public partial class RegistrationWindow
     {
         public RegistrationWindow()
         {
