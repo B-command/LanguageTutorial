@@ -22,7 +22,6 @@ namespace LanguageTutorial
         public MainMenu()
         {            
             InitializeComponent();
-            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -50,6 +49,10 @@ namespace LanguageTutorial
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e) {
 
         }
     }

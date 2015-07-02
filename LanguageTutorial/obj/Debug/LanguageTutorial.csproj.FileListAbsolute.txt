@@ -36,3 +36,25 @@ D:\FILES\Documents\УЧЁБА\СимбирСофт\Летний интенсив
 D:\FILES\Documents\УЧЁБА\СимбирСофт\Летний интенсив\MyLT\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.g.resources
 D:\FILES\Documents\УЧЁБА\СимбирСофт\Летний интенсив\MyLT\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.Properties.Resources.resources
 D:\FILES\Documents\УЧЁБА\СимбирСофт\Летний интенсив\MyLT\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.csproj.GenerateResource.Cache
+D:\practica\LanguageTutorial\LanguageTutorial\bin\Debug\LanguageTutorial.exe.config
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.exe
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.pdb
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.csprojResolveAssemblyReference.cache
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\MainMenu.baml
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\MainWindow.baml
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\RegistrationWindow.baml
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\TestWindow.baml
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\App.baml
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\MainMenu.g.cs
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\MainWindow.g.cs
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\RegistrationWindow.g.cs
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\TestWindow.g.cs
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\App.g.cs
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial_MarkupCompile.cache
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.g.resources
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.Properties.Resources.resources
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\LanguageTutorial.csproj.GenerateResource.Cache
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\Styles\VS2012\VS2012WindowStyle.baml
+D:\practica\LanguageTutorial\LanguageTutorial\obj\Debug\Styles\VS2012\VS2012WindowStyle.g.cs
+D:\practica\LanguageTutorial\LanguageTutorial\bin\Debug\LanguageTutorial.exe
+D:\practica\LanguageTutorial\LanguageTutorial\bin\Debug\LanguageTutorial.pdb
