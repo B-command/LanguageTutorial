@@ -64,7 +64,41 @@ namespace LanguageTutorial
         {
             if ( combobox_Users.SelectedIndex != -1 )
             {// Если пользователь выбран, то запоминаем и храним его глобально
+
                 App.oActiveUser = combobox_Users.SelectedItem as Users;
+
+                // Загружаем настройки пользователя
+                foreach ( var c in App.oCourseRepository.lCourse )
+                {// Находим обучающий курс пользователя
+
+                    if ( c.Users_Id == App.oActiveUser.Id )
+                    {
+                        foreach ( var l in App.oLanguagesRepository.lLanguages )
+                        {// Находим язык обучения
+
+                            if ( c.Languages_Id == l.Id )
+                            {
+                                foreach ( var s in App.oSettingsRepository.lSettings )
+                                {// Находим настройки
+
+                                    if ( c.Settings_Id == s.Id )
+                                    {
+                                        // Запоминаем настройки
+                                        if (l.Name == "English")
+                                        {
+                                            App.oSettingsEnglish = s;
+                                        }
+                                        else
+                                        {
+                                            App.oSettingsFrançais = s;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 // Открываем окно главного меню
                 MainMenuWindow oMainMenuWindow = new MainMenuWindow();
 
