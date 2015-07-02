@@ -15,24 +15,21 @@ using System.Windows.Shapes;
 namespace LanguageTutorial
 {
     /// <summary>
-    /// Логика взаимодействия для MainMenu.xaml
+    /// Interaction logic for SettingsWindow.xaml
     /// </summary>
-    public partial class MainMenu
+    public partial class SettingsWindow
     {
-        public MainMenu()
-        {            
+        public SettingsWindow()
+        {
             InitializeComponent();
-            
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Close();            
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            
+            num_Number_of_Words_Per_Seans.Value = 20;
+            num_Number_of_Words_To_Study.Value = 50;
+            num_Number_of_Seans_Per_Day.Value = 5;
+            num_Number_of_True_Answer.Value = 5;
         }
     }
 }
