@@ -6,7 +6,7 @@
 
     <Grid x:Name="grid" DataContext="null" Margin="0,0,-8,-18">
 
-        <Label x:Name="label_Settings" Content="{Binding Name}" VerticalContentAlignment="Center"  Height="36" Width="259" FontSize="14" FontStyle="Italic" FontWeight="Bold" Margin="21,10,24,313">
+        <Label x:Name="label_Settings" VerticalContentAlignment="Center"  Height="36" Width="259" FontSize="14" FontStyle="Italic" FontWeight="Bold" Margin="21,10,24,313">
         </Label>
 
         <Label x:Name="label_Number_of_Words_Per_Seans" Content="Количество слов за сеанс" VerticalContentAlignment="Center" Width="259" FontSize="12" FontStyle="Italic" Margin="21,51,24,284"/>
@@ -21,9 +21,9 @@
         <Label x:Name="label_Number_of_True_Answer" Content="Количество правильных ответов" VerticalContentAlignment="Center" Width="259" FontSize="12" FontStyle="Italic" Margin="21,231,24,104"/>
         <Controls:NumericUpDown x:Name="num_Number_of_True_Answer" Value="{Binding NumberOfTrueAnswers}" Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="22" Margin="21,260,0,0" VerticalAlignment="Top" Width="259"/>
 
-        <Button x:Name="button_Accept" Content="Принять" HorizontalAlignment="Left" Margin="21,300,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.107,0.455" Height="30"/>
+        <Button x:Name="button_Accept" Content="Принять" HorizontalAlignment="Left" Margin="21,300,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.107,0.455" Height="30" Click="button_Accept_Click"/>
 
-        <Button x:Name="button_Cancel" Content="Отмена" HorizontalAlignment="Left" Margin="185,300,0,0" VerticalAlignment="Top" Width="95" Height="30"/>
+        <Button x:Name="button_Cancel" Content="Отмена" HorizontalAlignment="Left" Margin="185,300,0,0" VerticalAlignment="Top" Width="95" Height="30" Click="button_Cancel_Click"/>
 
     </Grid>
 </Controls:MetroWindow>
