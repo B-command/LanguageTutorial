@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Collections;
 
 namespace Whush.Demo.Styles.CustomizedWindow {
-    internal static class LocalExtensions {
+    internal static class LocalExtensions {//коммент
         public static void ForWindowFromChild(this object childDependencyObject, Action<Window> action) {
             var element = childDependencyObject as DependencyObject;
             while (element != null) {
