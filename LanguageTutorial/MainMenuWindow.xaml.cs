@@ -52,7 +52,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Statistics_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Статистика");
         }
 
         /// <summary>
@@ -62,6 +62,10 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Change_User_Click(object sender, RoutedEventArgs e)
         {
+            App.oActiveUser = null;
+            App.oSettingsEnglish = null;
+            App.oSettingsFrançais = null;
+
             MainWindow oMainWindow = new MainWindow();
 
             oMainWindow.ShowDialog();
@@ -169,7 +173,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void StartTesting(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Тестирование - Трей");
         }
 
         /// <summary>
@@ -192,24 +196,6 @@ namespace LanguageTutorial
 
         }
 
-        private void timer_example()
-        {
-            // Create a timer with a ten second interval.
-            Timer aTimer = new Timer();
-
-            // Hook up the Elapsed event for the timer.
-            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-
-            // Set the Interval to 2 seconds (2000 milliseconds).
-            aTimer.Interval = 5000;
-            aTimer.Enabled = true;
-        }
-
-        private static void OnTimedEvent(object source, ElapsedEventArgs e)
-        {
-            MessageBox.Show("Работает таймер");
-        }
-
         /// <summary>
         /// Пункт меню в трее.
         /// </summary>
@@ -227,7 +213,6 @@ namespace LanguageTutorial
             oMainWindow.Activate(); // обязательно нужно отдать фокус окну,
             // иначе пользователь сильно удивится, когда увидит окно
             // но не сможет в него ничего ввести с клавиатуры
-
 
             CanClose = true;
 
@@ -321,6 +306,26 @@ namespace LanguageTutorial
         {
             CanClose = true;
             Close();
+        }
+
+        // ПРИМЕР ТАЙМЕРА
+        private void timer_example()
+        {
+            // Create a timer with a ten second interval.
+            Timer aTimer = new Timer();
+
+            // Hook up the Elapsed event for the timer.
+            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+
+            // Set the Interval to 2 seconds (2000 milliseconds).
+            aTimer.Interval = 5000;
+            aTimer.Enabled = true;
+        }
+
+        // СОБЫТИЕ ТАЙМЕРА
+        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            MessageBox.Show("Работает таймер");
         }
     }
 }

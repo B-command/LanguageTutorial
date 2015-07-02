@@ -28,12 +28,35 @@ namespace LanguageTutorial
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            button_Settings_English.IsEnabled = false;
+            button_Settings_Français.IsEnabled = false;
+
             if (App.oActiveUser != null)
             {// Заполняем значениями профиля
+
                 grid.DataContext = App.oActiveUser;
+
+                // Ставим галочки и активируем управление языков
+                foreach ( var c in App.oCourseRepository.lCourse )
+                {
+                    if ( c.Users_Id == App.oActiveUser.Id )
+                    {
+                        if ( c.Languages_Id == 0 )
+                        {
+                            check_English.IsChecked = true;
+                            button_Settings_English.IsEnabled = true;
+                        }
+                        else
+                        {
+                            check_Français.IsChecked = true;
+                            button_Settings_Français.IsEnabled = true;
+                        }
+                    }
+                }
             }
             else
-            {// Заполняем стд. значениями настройки языков
+            {// Заполняем стандартными значениями настройки языков
+
                 Settings English = new Settings(App.oSettingsRepository.lSettings, 20, 50, 5, 5);
                 App.oSettingsEnglish = English;
 
@@ -143,6 +166,11 @@ namespace LanguageTutorial
             this.Close();
         }
 
+        /// <summary>
+        /// Открытие настроек языка Английский
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_Settings_English_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow oSettingsWindow = new SettingsWindow("English");
@@ -150,11 +178,50 @@ namespace LanguageTutorial
             oSettingsWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// Открытие настроек языка Французский
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_Settings_Français_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow oSettingsWindow = new SettingsWindow("Français");
 
             oSettingsWindow.ShowDialog();
+        }
+
+        /// <summary>
+        /// Активация\Деактивация кнопки настроек при активации\деактивации галочки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void check_English_Click(object sender, RoutedEventArgs e)
+        {
+            if ( check_English.IsChecked == true )
+            {
+                button_Settings_English.IsEnabled = true;
+            }
+            else
+            {
+                button_Settings_English.IsEnabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Активация\Деактивация кнопки настроек при активации\деактивации галочки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void check_Français_Click(object sender, RoutedEventArgs e)
+        {
+            if (check_Français.IsChecked == true)
+            {
+                button_Settings_Français.IsEnabled = true;
+            }
+            else
+            {
+                button_Settings_Français.IsEnabled = false;
+            }
         }
     }
 }
