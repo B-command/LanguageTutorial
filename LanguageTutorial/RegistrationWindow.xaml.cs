@@ -31,8 +31,6 @@ namespace LanguageTutorial
             if (App.oActiveUser != null)
             {// Заполняем значениями профиля
                 grid.DataContext = App.oActiveUser;
-
-
             }
             else
             {// Заполняем стд. значениями настройки языков
@@ -54,22 +52,29 @@ namespace LanguageTutorial
         private void button_Accept_Click(object sender, RoutedEventArgs e)
         {
             if (App.oActiveUser == null)
-            {// Создаём новый профиль
+            {// Создаём новый профиль, если профиль не выбран
+
                 if ( textbox_Profile_Name.Text != "" )
-                {
+                {// Проверка на имя профиля
+
                     if ( num_Time_Between_Seans.Value != null )
-                    {
+                    {// Проверка на часы меж сеансами
+
                         if ((check_English.IsChecked == true || check_Français.IsChecked == true))
-                        {
+                        {// Проверка на то, что выбран хотя бы 1 язык
+                            // Создаём пользователя
                             Users newUser = new Users(App.oUsersRepository.lUsers, textbox_Profile_Name.Text, (double)num_Time_Between_Seans.Value);
 
+                            // Добавляем пользователя в БД
                             App.oUsersRepository.lUsers.Add(newUser);
-                            // Запоминаем текущего пользователя
+
+                            // Делаем нового пользователя текущим
                             App.oActiveUser = newUser;
 
                             // Создаём привязку пользователя к курсам и сохраняем настройки
                             if (check_English.IsChecked == true)
                             {// Курсы английского
+
                                 Course oCourseEnglish = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oSettingsEnglish.Id, 0);
                                 App.oCourseRepository.lCourse.Add(oCourseEnglish);
 
@@ -78,6 +83,7 @@ namespace LanguageTutorial
 
                             if (check_Français.IsChecked == true)
                             {// Курсы французского
+
                                 Course oCourseFrançais = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oSettingsFrançais.Id, 1);
                                 App.oCourseRepository.lCourse.Add(oCourseFrançais);
 
@@ -139,12 +145,16 @@ namespace LanguageTutorial
 
         private void button_Settings_English_Click(object sender, RoutedEventArgs e)
         {
+            SettingsWindow oSettingsWindow = new SettingsWindow("English");
 
+            oSettingsWindow.ShowDialog();
         }
 
         private void button_Settings_Français_Click(object sender, RoutedEventArgs e)
         {
+            SettingsWindow oSettingsWindow = new SettingsWindow("Français");
 
+            oSettingsWindow.ShowDialog();
         }
     }
 }
