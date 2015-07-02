@@ -25,10 +25,19 @@ namespace LanguageTutorial
 
         public static Users oActiveUser { get; set; } // Активный профиль
         public static bool Registered { get; set; } // Проверка на успешную регистрацию
+        public static Settings oSettingsEnglish { get; set; }
+        public static Settings oSettingsFrançais { get; set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            oUsersRepository = new UsersRepository();
+            oLanguagesRepository = new LanguagesRepository();
+            oSettingsRepository = new SettingsRepository();
+            oDictionaryRepository = new DictionaryRepository();
+            oCourseRepository = new CourseRepository();
+            oSessionRepository = new SessionRepository();
 
             oUsersRepository.Load();
             oLanguagesRepository.Load();
@@ -40,6 +49,10 @@ namespace LanguageTutorial
 
         protected override void OnExit(ExitEventArgs e)
         {
+            //Languages lang = new Languages(oLanguagesRepository.lLanguages, "English");
+            //oLanguagesRepository.lLanguages.Add(lang);
+            //lang = new Languages(oLanguagesRepository.lLanguages, "Français");
+            //oLanguagesRepository.lLanguages.Add(lang);
             oUsersRepository.Save();
             oLanguagesRepository.Save();
             oSettingsRepository.Save();
