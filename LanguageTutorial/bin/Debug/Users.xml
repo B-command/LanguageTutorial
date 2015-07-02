@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUsers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Users>
+    <Id>0</Id>
+    <Name>Денис</Name>
+    <TimeBetweenSeans>1</TimeBetweenSeans>
+  </Users>
+  <Users>
+    <Id>1</Id>
+    <Name>ывф</Name>
+    <TimeBetweenSeans>2</TimeBetweenSeans>
+  </Users>
+  <Users>
+    <Id>2</Id>
+    <Name>2</Name>
+    <TimeBetweenSeans>2</TimeBetweenSeans>
+  </Users>
+</ArrayOfUsers>
