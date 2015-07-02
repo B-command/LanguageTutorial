@@ -12,7 +12,7 @@ using LanguageTutorial.DataModel;
 
 namespace LanguageTutorial.Repository
 {
-    class DictionaryRepository
+    public class DictionaryRepository
     {
         public List<Dictionary> lDictionary { get; set; }
 

@@ -12,7 +12,7 @@ using LanguageTutorial.DataModel;
 
 namespace LanguageTutorial.Repository
 {
-    class LanguagesRepository
+    public class LanguagesRepository
     {
         public List<Languages> lLanguages { get; set; }
 

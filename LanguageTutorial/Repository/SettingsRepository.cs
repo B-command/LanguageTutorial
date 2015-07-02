@@ -12,7 +12,7 @@ using LanguageTutorial.DataModel;
 
 namespace LanguageTutorial.Repository
 {
-    class SettingsRepository
+    public class SettingsRepository
     {
         public List<Settings> lSettings { get; set; }
 

@@ -12,7 +12,7 @@ using LanguageTutorial.DataModel;
 
 namespace LanguageTutorial.Repository
 {
-    class SessionRepository
+    public class SessionRepository
     {
         public List<Session> lSession { get; set; }
 

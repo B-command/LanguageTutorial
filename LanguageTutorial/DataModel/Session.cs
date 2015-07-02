@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LanguageTutorial.DataModel
 {
-    class Session
+    public class Session
     {
         public int Id { get; set; }
         public DateTime Datetime { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LanguageTutorial.DataModel
 {
-    class Settings
+    public class Settings
     {
         public int Id { get; set; }
         public int NumberOfWordsPerSeans { get; set; }

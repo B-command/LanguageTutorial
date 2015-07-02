@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LanguageTutorial.DataModel
 {
-    class Dictionary
+    public class Dictionary
     {
         public int Id { get; set; }
         public string Word { get; set; }
