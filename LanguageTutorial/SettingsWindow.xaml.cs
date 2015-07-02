@@ -97,7 +97,7 @@ namespace LanguageTutorial
                 }
             }
 
-
+            this.Close();
         }
 
         /// <summary>
