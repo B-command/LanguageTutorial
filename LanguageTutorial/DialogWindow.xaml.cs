@@ -26,7 +26,7 @@ namespace LanguageTutorial
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainMenu menu = new MainMenu();           
+            MainMenuWindow menu = new MainMenuWindow();           
             menu.Show();
             this.Close();
         }
