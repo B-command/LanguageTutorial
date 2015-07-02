@@ -4,13 +4,24 @@
                       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
                       Height="232"
                       Width="249" Title="Авторизация"
-                      WindowStartupLocation="CenterScreen">
+                      WindowStartupLocation="CenterScreen"
+                      Loaded="MetroWindow_Loaded">
     <Grid>
 
-        <ComboBox HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="221" Height="40"/>
+        <Label x:Name="label" Content="Выберите профиль" FontSize="16" FontStyle="Italic" Margin="10,30,10,141" VerticalContentAlignment="Center"/>
+        <ComboBox x:Name="combobox_Users" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="221" Height="25" SelectionChanged="combobox_Users_SelectionChanged">
 
-        <Button Content="Вход" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Width="221" Height="39"/>
-        <Button Content="Регистрация" HorizontalAlignment="Left" Margin="131,160,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click" Height="30"/>
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+
+        </ComboBox>
+
+        <Button x:Name="button_SignIn" Content="Вход" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" Width="221" Height="30" Click="button_SignIn_Click"/>
+
+        <Button x:Name="button_Registrarion" Content="Регистрация" HorizontalAlignment="Left" Margin="131,160,0,0" VerticalAlignment="Top" Width="100" Click="button_Registrarion_Click" Height="30"/>
 
     </Grid>
 </Controls:MetroWindow>
