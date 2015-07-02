@@ -15,13 +15,20 @@ using System.Windows.Shapes;
 namespace LanguageTutorial
 {
     /// <summary>
-    /// Логика взаимодействия для TestWindow.xaml
+    /// Логика взаимодействия для DialogWindow.xaml
     /// </summary>
-    public partial class TestWindow : Window
+    public partial class DialogWindow : Window
     {
-        public TestWindow()
+        public DialogWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainMenuWindow menu = new MainMenuWindow();           
+            menu.Show();
+            this.Close();
         }
     }
 }
