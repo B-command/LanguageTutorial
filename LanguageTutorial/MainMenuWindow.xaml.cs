@@ -40,7 +40,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Start_Testing_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Начать Тестирование - Меню (заглушка)");
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Statistics_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Статистика");
+            MessageBox.Show("Статистика - Меню (заглушка)");
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void StartTesting(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Тестирование - Трей");
+            MessageBox.Show("Тестирование - Трей (заглушка)");
         }
 
         /// <summary>
@@ -215,6 +215,10 @@ namespace LanguageTutorial
         {
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
+            App.oActiveUser = null;
+            App.oActiveSettingsEnglish = null;
+            App.oActiveSettingsFrançais = null;
+
             // показываем
             MainWindow oMainWindow = new MainWindow();
 
@@ -239,7 +243,7 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             // показываем
-            MessageBox.Show("Статистика");
+            MessageBox.Show("Статистика - Трей (заглушка)");
             Activate(); // обязательно нужно отдать фокус окну,
             // иначе пользователь сильно удивится, когда увидит окно
             // но не сможет в него ничего ввести с клавиатуры
