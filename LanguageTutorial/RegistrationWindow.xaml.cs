@@ -98,7 +98,7 @@ namespace LanguageTutorial
                             if (check_English.IsChecked == true)
                             {// Курсы английского
 
-                                Course oCourseEnglish = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oActiveSettingsEnglish.Id, 0);
+                                Course oCourseEnglish = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oActiveSettingsEnglish.Id, 0, true);
                                 App.oCourseRepository.lCourse.Add(oCourseEnglish);
 
                                 App.oSettingsRepository.lSettings.Add(App.oActiveSettingsEnglish);
@@ -107,7 +107,7 @@ namespace LanguageTutorial
                             if (check_Français.IsChecked == true)
                             {// Курсы французского
 
-                                Course oCourseFrançais = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oActiveSettingsFrançais.Id, 1);
+                                Course oCourseFrançais = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oActiveSettingsFrançais.Id, 1, true);
                                 App.oCourseRepository.lCourse.Add(oCourseFrançais);
 
                                 App.oSettingsRepository.lSettings.Add(App.oActiveSettingsFrançais);
