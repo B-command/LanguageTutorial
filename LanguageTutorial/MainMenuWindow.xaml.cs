@@ -38,6 +38,16 @@ namespace LanguageTutorial
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void button_Start_Testing_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_Settings_Click(object sender, RoutedEventArgs e)
         {
             RegistrationWindow oRegistrationWindow = new RegistrationWindow();
