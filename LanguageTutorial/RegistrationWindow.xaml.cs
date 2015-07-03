@@ -354,5 +354,10 @@ namespace LanguageTutorial
                 button_Settings_Français.IsEnabled = false;
             }
         }
+
+        private void textbox_Profile_Name_LostFocus(object sender, RoutedEventArgs e)
+        {
+            textbox_Profile_Name.Text = textbox_Profile_Name.Text.Trim();
+        }
     }
 }
