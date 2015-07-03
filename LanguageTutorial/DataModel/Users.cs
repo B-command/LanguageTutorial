@@ -11,7 +11,9 @@ namespace LanguageTutorial.DataModel
         public int Id { get; set; }
 
         public string Name { get; set; }
-
         public double SessionPeriod { get; set; }
+
+        public virtual ICollection<Course> Course { get; set; }
+        public virtual ICollection<WordQueue> WordQueue { get; set; }
     }
 }
