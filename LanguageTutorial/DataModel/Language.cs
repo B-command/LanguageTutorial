@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace LanguageTutorial.DataModel
 {
-    public class Session
+    public class Language
     {
         public int Id { get; set; }
-        public DateTime Datetime { get; set; }
-        public int Points { get; set; }
-        public int Words { get; set; }
-        public int FinishedWords { get; set; }
+        public string Name { get; set; }
     }
 }
