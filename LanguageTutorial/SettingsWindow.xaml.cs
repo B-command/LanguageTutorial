@@ -21,11 +21,19 @@ namespace LanguageTutorial
     /// </summary>
     public partial class SettingsWindow
     {
+        const int minWordsForSession = 10, maxWordsForSession = 50, minWordsForStudy = 30, maxWordsForStudy = 100;
+
         public SettingsWindow(string Lang)
         {
             InitializeComponent();
 
             label_Settings.Content = Lang;
+
+            num_Number_of_Words_Per_Seans.Maximum = maxWordsForSession;
+            num_Number_of_Words_Per_Seans.Minimum = minWordsForSession;
+
+            num_Number_of_Words_To_Study.Maximum = maxWordsForStudy;
+            num_Number_of_Words_To_Study.Minimum = minWordsForStudy;
 
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/64180878_1284827358_31.png");
             BitmapImage bitmap = new BitmapImage(uri);
@@ -113,6 +121,16 @@ namespace LanguageTutorial
         private void button_Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void num_Number_of_Words_Per_Seans_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value) num_Number_of_Words_Per_Seans.Value = num_Number_of_Words_To_Study.Value;
+        }
+
+        private void num_Number_of_Words_To_Study_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value) num_Number_of_Words_To_Study = num_Number_of_Words_Per_Seans;
         }
     }
 }
