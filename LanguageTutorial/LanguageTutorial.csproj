@@ -181,7 +181,9 @@
   <ItemGroup>
     <None Include="Bulb.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\catsdogs.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cat.png" />
   </ItemGroup>
@@ -190,6 +192,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\0_8052d_c46e96c_XL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\catsdogs7.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

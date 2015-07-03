@@ -32,8 +32,8 @@ namespace LanguageTutorial
         public static Settings oActiveSettingsFrançais { get; set; } // Настройки французского языка активного профиля
 
         // Устанавливаются после нажатия клавиши "Принять" в окне настроек конкретного языка
-        public static Settings oTempSettingsEnglish { get; set; } // Временные Настройки английского языка активного профиля
-        public static Settings oTempSettingsFrançais { get; set; } // Временные Настройки французского языка активного профиля
+        //public static Settings oTempSettingsEnglish { get; set; } // Временные Настройки английского языка активного профиля
+        //public static Settings oTempSettingsFrançais { get; set; } // Временные Настройки французского языка активного профиля
 
         protected override void OnStartup(StartupEventArgs e)
         {

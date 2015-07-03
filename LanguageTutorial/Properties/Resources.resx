@@ -121,4 +121,19 @@
   <data name="Bulb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Bulb.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="cat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="catsdogs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\catsdogs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="catsdogs7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\catsdogs7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_0_8052d_c46e96c_XL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\0_8052d_c46e96c_XL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_64180878_1284827358_31" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\64180878_1284827358_31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
