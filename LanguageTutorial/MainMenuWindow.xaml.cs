@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using System.Timers;
+using System.Windows.Threading;
 
 
 namespace LanguageTutorial
@@ -22,19 +23,24 @@ namespace LanguageTutorial
     /// </summary>
     public partial class MainMenuWindow
     {
+        //public static DispatcherTimer aTimer;
         public MainMenuWindow()
         {            
             InitializeComponent();
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/cat.png");
             BitmapImage bitmap = new BitmapImage(uri);
-            //Image img = new Image();
             img.Source = bitmap;
-            
+
+            App.aTimer = new DispatcherTimer();
+            App.aTimer.Tick += new EventHandler(OnTimedEvent);
+            App.aTimer.Interval = new TimeSpan(0, 0, 20);
+            ///while (n != 4) ;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             textblock_Username.DataContext = App.oActiveUser;
+            App.aTimer.Start();
         }
 
         /// <summary>
@@ -44,7 +50,9 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Start_Testing_Click(object sender, RoutedEventArgs e)
         {
+            App.aTimer.Stop();
             MessageBox.Show("Начать Тестирование - Меню (заглушка)");
+            App.aTimer.Start();
         }
 
         /// <summary>
@@ -123,7 +131,7 @@ namespace LanguageTutorial
                 TrayIcon.Icon = LanguageTutorial.Properties.Resources.Bulb; // изображение для трея
                 // обратите внимание, за ресурсом с картинкой мы лезем в свойства проекта, а не окна,
                 // поэтому нужно указать полный namespace
-                TrayIcon.Text = "Here is tray icon text."; // текст подсказки, всплывающей над иконкой
+                TrayIcon.Text = "Учебник иностранных языков"; // текст подсказки, всплывающей над иконкой
                 TrayMenu = Resources["TrayMenu"] as ContextMenu; // а здесь уже ресурсы окна и тот самый x:Key
 
                 // сразу же опишем поведение при щелчке мыши, о котором мы говорили ранее
@@ -187,7 +195,9 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void StartTesting(object sender, RoutedEventArgs e)
         {
+            App.aTimer.Stop();
             MessageBox.Show("Тестирование - Трей (заглушка)");
+            App.aTimer.Start();
         }
 
         /// <summary>
@@ -326,24 +336,15 @@ namespace LanguageTutorial
             Close();
         }
 
-        // ПРИМЕР ТАЙМЕРА
-        private void timer_example()
-        {
-            // Create a timer with a ten second interval.
-            Timer aTimer = new Timer();
-
-            // Hook up the Elapsed event for the timer.
-            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-
-            // Set the Interval to 2 seconds (2000 milliseconds).
-            aTimer.Interval = 5000;
-            aTimer.Enabled = true;
-        }
-
         // СОБЫТИЕ ТАЙМЕРА
-        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        private static void OnTimedEvent(object source, EventArgs e)
         {
-            MessageBox.Show("Работает таймер");
+                App.aTimer.Stop();
+                WindowTimerTest timerWin = new WindowTimerTest();
+                timerWin.ShowDialog();
+                App.aTimer.Start();
+
+            //n++;
         }
     }
 }

@@ -8,7 +8,7 @@
                       Loaded="MetroWindow_Loaded">
     <Grid>
 
-        <Label x:Name="label" Content="Выберите профиль" FontSize="16" FontStyle="Italic" Margin="10,15,10,156" VerticalContentAlignment="Center"/>
+        <Label x:Name="label" Content="Выбери профиль" FontSize="16" FontStyle="Italic" Margin="10,15,10,156" VerticalContentAlignment="Center"/>
         <ComboBox x:Name="combobox_Users" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="221" Height="25" SelectionChanged="combobox_Users_SelectionChanged">
 
             <ComboBox.ItemTemplate>
@@ -21,8 +21,8 @@
 
         <Button x:Name="button_SignIn" Content="Вход" HorizontalAlignment="Left" Margin="110,114,0,0" VerticalAlignment="Top" Width="121" Height="30" Click="button_SignIn_Click"/>
 
-        <Button x:Name="button_Registrarion" Content="Регистрация" HorizontalAlignment="Left" Margin="131,160,0,0" VerticalAlignment="Top" Width="100" Click="button_Registrarion_Click" Height="30"/>
-        <Image x:Name="img" HorizontalAlignment="Left" Height="120" Margin="10,76,0,0" VerticalAlignment="Top" Width="116"/>
+        <Button x:Name="button_Registrarion" Content="Регистрация" HorizontalAlignment="Left" Margin="110,149,0,0" VerticalAlignment="Top" Width="121" Click="button_Registrarion_Click" Height="30"/>
+        <Image x:Name="img" HorizontalAlignment="Left" Height="115" Margin="10,81,0,0" VerticalAlignment="Top" Width="100"/>
 
     </Grid>
 </Controls:MetroWindow>

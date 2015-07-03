@@ -37,7 +37,6 @@ namespace LanguageTutorial
 
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/64180878_1284827358_31.png");
             BitmapImage bitmap = new BitmapImage(uri);
-            //Image img = new Image();
             img.Source = bitmap;
         }
 

@@ -119,7 +119,7 @@ namespace LanguageTutorial
         private void button_Registrarion_Click(object sender, RoutedEventArgs e)
         {
             RegistrationWindow oRegistrationWindow = new RegistrationWindow();
-
+            oRegistrationWindow.Title = "Регистрация";
             oRegistrationWindow.ShowDialog();
 
             if ( App.Registered )
@@ -145,7 +145,6 @@ namespace LanguageTutorial
                 button_SignIn.IsEnabled = true;
             }
         }
-
 
     }
 }

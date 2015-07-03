@@ -113,6 +113,9 @@
     </Compile>
     <Compile Include="Style\papka\VS2012WindowStyle.cs" />
     <Compile Include="Style\VS2012\VS2012WindowStyle.cs" />
+    <Compile Include="WindowTimerTest.xaml.cs">
+      <DependentUpon>WindowTimerTest.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainMenuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +143,10 @@
     <Page Include="Style\VS2012\VS2012WindowStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WindowTimerTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +210,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\catsdogs7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Без имени-6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Без имени-5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
