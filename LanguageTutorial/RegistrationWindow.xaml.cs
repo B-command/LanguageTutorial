@@ -45,12 +45,13 @@ namespace LanguageTutorial
                 {
                     if ( c.Users_Id == App.oActiveUser.Id )
                     {
-                        if ( c.Languages_Id == 0 )
+                        if ( c.Languages_Id == 0 && c.Active == true )
                         {
                             check_English.IsChecked = true;
                             button_Settings_English.IsEnabled = true;
                         }
-                        else
+
+                        if ( c.Languages_Id == 1 && c.Active == true )
                         {
                             check_Français.IsChecked = true;
                             button_Settings_Français.IsEnabled = true;
@@ -141,6 +142,7 @@ namespace LanguageTutorial
             {// Обновляем текущий профиль
                 if ( check_English.IsChecked == true || check_Français.IsChecked == true )
                 {// Запоминаем новые данные
+
                     // Удаляем запись из базы
                     App.oUsersRepository.lUsers.Remove(App.oActiveUser);
 
@@ -150,6 +152,131 @@ namespace LanguageTutorial
 
                     // Загружаем обратно в бд
                     App.oUsersRepository.lUsers.Add(App.oActiveUser);
+
+                    // Проверка изменения курсов пользователя
+                    bool Course_Finded = false;
+
+                    if (check_English.IsChecked == true)
+                    {// Курсы английского
+                        
+                        //Проверка на наличие у пользователя неактивного курса английского
+                        foreach ( var c in App.oCourseRepository.lCourse )
+                        {
+                            if (c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 0 )
+                            {// Если у пользователя есть активный курс английского
+                                Course_Finded = true;
+                            }
+
+                            if ( c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 0 && c.Active == false )
+                            {// Если у пользователя есть неактивный курс английского
+
+                                // Активировать курс
+                                App.oCourseRepository.lCourse.Remove(c);
+
+                                c.Active = true;
+
+                                App.oCourseRepository.lCourse.Add(c);
+
+                                break;
+                            }
+                        }
+
+                        if ( !Course_Finded )
+                        {// Если курс не найден, но галочка стоит, то необходимо создать курс для пользователя
+
+                            if ( App.oActiveSettingsEnglish == null )
+                            {
+                                App.oActiveSettingsEnglish = new Settings(App.oSettingsRepository.lSettings, 20, 50, 5, 5);
+                            }
+
+                            Course oCourseEnglish = new Course(App.oCourseRepository.lCourse, App.oActiveUser.Id, App.oActiveSettingsEnglish.Id, 0, true);
+                            App.oCourseRepository.lCourse.Add(oCourseEnglish);
+
+                            App.oSettingsRepository.lSettings.Add(App.oActiveSettingsEnglish);
+                        }
+                        
+                    }
+                    else
+                    {// Если галочки нет
+
+                        //Проверка на наличие у пользователя активного курса английского
+                        foreach (var c in App.oCourseRepository.lCourse)
+                        {
+
+                            if (c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 0 && c.Active == true)
+                            {// Если у пользователя есть активный курс английского
+
+                                // Деактивировать курс
+                                App.oCourseRepository.lCourse.Remove(c);
+
+                                c.Active = false;
+
+                                App.oCourseRepository.lCourse.Add(c);
+
+                                break;
+                            }
+                        }
+                    }
+
+                    Course_Finded = false;
+
+                    if (check_Français.IsChecked == true)
+                    {// Курсы французского
+
+                        //Проверка на наличие у пользователя данных курсов
+                        foreach (var c in App.oCourseRepository.lCourse)
+                        {
+                            if (c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 1 )
+                            {
+                                Course_Finded = true;
+                            }
+
+                            if (c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 1 && c.Active == false)
+                            {// Если у пользователя есть неактивный курс французского
+                                // Активировать курс
+                                App.oCourseRepository.lCourse.Remove(c);
+
+                                c.Active = true;
+
+                                App.oCourseRepository.lCourse.Add(c);
+
+                                break;
+                            }
+                        }
+
+                        if (!Course_Finded)
+                        {// Если курс не найден, но галочка стоит, то необходимо создать курс для пользователя
+                            if (App.oActiveSettingsFrançais == null)
+                            {
+                                App.oActiveSettingsFrançais = new Settings(App.oSettingsRepository.lSettings, 20, 50, 5, 5);
+                            }
+
+                            Course oCourseFrançais = new Course(App.oCourseRepository.lCourse, App.oActiveUser.Id, App.oActiveSettingsEnglish.Id, 1, true);
+                            App.oCourseRepository.lCourse.Add(oCourseFrançais);
+
+                            App.oSettingsRepository.lSettings.Add(App.oActiveSettingsFrançais);
+                        }
+
+                    }
+                    else
+                    {
+                        //Проверка на наличие у пользователя данного курса
+                        foreach (var c in App.oCourseRepository.lCourse)
+                        {
+                            if (c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 1 && c.Active == true)
+                            {// Если у пользователя есть активный курс французского
+
+                                // Деактивировать курс
+                                App.oCourseRepository.lCourse.Remove(c);
+
+                                c.Active = false;
+
+                                App.oCourseRepository.lCourse.Add(c);
+
+                                break;
+                            }
+                        }
+                    }
 
                     this.Close();
                 }
