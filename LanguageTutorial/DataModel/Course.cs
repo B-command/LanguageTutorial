@@ -12,16 +12,19 @@ namespace LanguageTutorial.DataModel
         public int Users_Id { get; set; }
         public int Settings_Id { get; set; }
         public int Languages_Id { get; set; }
+        public bool Active { get; set; }
 
         public Course() { }
 
-        public Course(List<Course> lCourse, int Users_Id, int Settings_Id, int Languages_Id)
+        public Course(List<Course> lCourse, int Users_Id, int Settings_Id, int Languages_Id, bool Active )
         {
             this.Id = Set_Id(lCourse);
 
             this.Users_Id = Users_Id;
             this.Settings_Id = Settings_Id;
             this.Languages_Id = Languages_Id;
+
+            this.Active = Active;
         }
 
         /// <summary>
