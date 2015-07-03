@@ -37,11 +37,11 @@ namespace LanguageTutorial
         {
             if (label_Settings.Content == "English")
             {
-                grid.DataContext = App.oSettingsEnglish;
+                grid.DataContext = App.oActiveSettingsEnglish;
             }
             else
             {
-                grid.DataContext = App.oSettingsFrançais;
+                grid.DataContext = App.oActiveSettingsFrançais;
             }
         }
 
@@ -57,17 +57,17 @@ namespace LanguageTutorial
 
                 if (label_Settings.Content == "English")
                 {
-                    App.oSettingsEnglish.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
-                    App.oSettingsEnglish.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
-                    App.oSettingsEnglish.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
-                    App.oSettingsEnglish.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
+                    App.oActiveSettingsEnglish.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
+                    App.oActiveSettingsEnglish.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
+                    App.oActiveSettingsEnglish.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
+                    App.oActiveSettingsEnglish.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
                 }
                 else
                 {
-                    App.oSettingsFrançais.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
-                    App.oSettingsFrançais.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
-                    App.oSettingsFrançais.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
-                    App.oSettingsFrançais.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
+                    App.oActiveSettingsFrançais.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
+                    App.oActiveSettingsFrançais.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
+                    App.oActiveSettingsFrançais.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
+                    App.oActiveSettingsFrançais.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
                 }
             }
             else
@@ -75,25 +75,25 @@ namespace LanguageTutorial
 
                 if (label_Settings.Content == "English")
                 {
-                    App.oSettingsRepository.lSettings.Remove(App.oSettingsEnglish);
+                    App.oSettingsRepository.lSettings.Remove(App.oActiveSettingsEnglish);
 
-                    App.oSettingsEnglish.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
-                    App.oSettingsEnglish.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
-                    App.oSettingsEnglish.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
-                    App.oSettingsEnglish.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
+                    App.oActiveSettingsEnglish.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
+                    App.oActiveSettingsEnglish.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
+                    App.oActiveSettingsEnglish.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
+                    App.oActiveSettingsEnglish.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
 
-                    App.oSettingsRepository.lSettings.Add(App.oSettingsEnglish);
+                    App.oSettingsRepository.lSettings.Add(App.oActiveSettingsEnglish);
                 }
                 else
                 {
-                    App.oSettingsRepository.lSettings.Remove(App.oSettingsFrançais);
+                    App.oSettingsRepository.lSettings.Remove(App.oActiveSettingsFrançais);
 
-                    App.oSettingsFrançais.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
-                    App.oSettingsFrançais.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
-                    App.oSettingsFrançais.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
-                    App.oSettingsFrançais.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
+                    App.oActiveSettingsFrançais.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
+                    App.oActiveSettingsFrançais.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
+                    App.oActiveSettingsFrançais.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
+                    App.oActiveSettingsFrançais.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
 
-                    App.oSettingsRepository.lSettings.Add(App.oSettingsFrançais);
+                    App.oSettingsRepository.lSettings.Add(App.oActiveSettingsFrançais);
                 }
             }
 

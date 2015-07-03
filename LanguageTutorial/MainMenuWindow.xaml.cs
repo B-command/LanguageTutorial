@@ -73,8 +73,8 @@ namespace LanguageTutorial
         private void button_Change_User_Click(object sender, RoutedEventArgs e)
         {
             App.oActiveUser = null;
-            App.oSettingsEnglish = null;
-            App.oSettingsFrançais = null;
+            App.oActiveSettingsEnglish = null;
+            App.oActiveSettingsFrançais = null;
 
             MainWindow oMainWindow = new MainWindow();
 

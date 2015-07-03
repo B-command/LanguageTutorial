@@ -86,11 +86,11 @@ namespace LanguageTutorial
                                         // Запоминаем настройки
                                         if (l.Name == "English")
                                         {
-                                            App.oSettingsEnglish = s;
+                                            App.oActiveSettingsEnglish = s;
                                         }
                                         else
                                         {
-                                            App.oSettingsFrançais = s;
+                                            App.oActiveSettingsFrançais = s;
                                         }
                                     }
                                 }

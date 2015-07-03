@@ -16,17 +16,24 @@ namespace LanguageTutorial
     /// </summary>
     public partial class App : Application
     {
-        public static UsersRepository oUsersRepository { get; set; }
-        public static LanguagesRepository oLanguagesRepository { get; set; }
-        public static SettingsRepository oSettingsRepository { get; set; }
-        public static DictionaryRepository oDictionaryRepository { get; set; }
-        public static CourseRepository oCourseRepository { get; set; }
-        public static SessionRepository oSessionRepository { get; set; }
+        public static UsersRepository oUsersRepository { get; set; } // БД Пользователи
+        public static LanguagesRepository oLanguagesRepository { get; set; } // БД Языки 
+        public static SettingsRepository oSettingsRepository { get; set; } // БД Настройки
+        public static DictionaryRepository oDictionaryRepository { get; set; } // БД Словарь
+        public static CourseRepository oCourseRepository { get; set; } // БД Курсов
+        public static SessionRepository oSessionRepository { get; set; } // БД Сессий
+
+        public static bool Registered { get; set; } // Проверка на успешную регистрацию
 
         public static Users oActiveUser { get; set; } // Активный профиль
-        public static bool Registered { get; set; } // Проверка на успешную регистрацию
-        public static Settings oSettingsEnglish { get; set; }
-        public static Settings oSettingsFrançais { get; set; }
+
+        // Устанавлвиаются после нажатия клавиши "Принять" в окне настроек\регистрации
+        public static Settings oActiveSettingsEnglish { get; set; } // Настройки английского языка активного профиля
+        public static Settings oActiveSettingsFrançais { get; set; } // Настройки французского языка активного профиля
+
+        // Устанавливаются после нажатия клавиши "Принять" в окне настроек конкретного языка
+        public static Settings oTempSettingsEnglish { get; set; } // Временные Настройки английского языка активного профиля
+        public static Settings oTempSettingsFrançais { get; set; } // Временные Настройки французского языка активного профиля
 
         protected override void OnStartup(StartupEventArgs e)
         {

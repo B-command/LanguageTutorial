@@ -58,10 +58,10 @@ namespace LanguageTutorial
             {// Заполняем стандартными значениями настройки языков
 
                 Settings English = new Settings(App.oSettingsRepository.lSettings, 20, 50, 5, 5);
-                App.oSettingsEnglish = English;
+                App.oActiveSettingsEnglish = English;
 
                 Settings Français = new Settings(App.oSettingsRepository.lSettings, 20, 50, 5, 5);
-                App.oSettingsFrançais = Français;
+                App.oActiveSettingsFrançais = Français;
             }
 
             App.Registered = false;
@@ -98,19 +98,19 @@ namespace LanguageTutorial
                             if (check_English.IsChecked == true)
                             {// Курсы английского
 
-                                Course oCourseEnglish = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oSettingsEnglish.Id, 0);
+                                Course oCourseEnglish = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oActiveSettingsEnglish.Id, 0);
                                 App.oCourseRepository.lCourse.Add(oCourseEnglish);
 
-                                App.oSettingsRepository.lSettings.Add(App.oSettingsEnglish);
+                                App.oSettingsRepository.lSettings.Add(App.oActiveSettingsEnglish);
                             }
 
                             if (check_Français.IsChecked == true)
                             {// Курсы французского
 
-                                Course oCourseFrançais = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oSettingsFrançais.Id, 1);
+                                Course oCourseFrançais = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oActiveSettingsFrançais.Id, 1);
                                 App.oCourseRepository.lCourse.Add(oCourseFrançais);
 
-                                App.oSettingsRepository.lSettings.Add(App.oSettingsFrançais);
+                                App.oSettingsRepository.lSettings.Add(App.oActiveSettingsFrançais);
                             }
 
                             App.Registered = true;
