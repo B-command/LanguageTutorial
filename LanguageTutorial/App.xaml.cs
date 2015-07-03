@@ -52,14 +52,19 @@ namespace LanguageTutorial
             oDictionaryRepository.Load();
             oCourseRepository.Load();
             oSessionRepository.Load();
+
+            if (oLanguagesRepository.lLanguages.Count == 0)
+            {
+                Languages lang = new Languages(oLanguagesRepository.lLanguages, "English");
+                oLanguagesRepository.lLanguages.Add(lang);
+                lang = new Languages(oLanguagesRepository.lLanguages, "Français");
+                oLanguagesRepository.lLanguages.Add(lang);
+            }
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
-            //Languages lang = new Languages(oLanguagesRepository.lLanguages, "English");
-            //oLanguagesRepository.lLanguages.Add(lang);
-            //lang = new Languages(oLanguagesRepository.lLanguages, "Français");
-            //oLanguagesRepository.lLanguages.Add(lang);
+
             oUsersRepository.Save();
             oLanguagesRepository.Save();
             oSettingsRepository.Save();
