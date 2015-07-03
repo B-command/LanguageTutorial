@@ -27,7 +27,6 @@ namespace LanguageTutorial
             InitializeComponent();
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/0_8052d_c46e96c_XL.png");
             BitmapImage bitmap = new BitmapImage(uri);
-            //Image img = new Image();
             img.Source = bitmap;
         }
 

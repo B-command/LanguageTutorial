@@ -22,7 +22,7 @@ namespace LanguageTutorial.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace LanguageTutorial.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LanguageTutorial.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace LanguageTutorial.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace LanguageTutorial.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _0_8052d_c46e96c_XL {
+        public static System.Drawing.Bitmap _0_8052d_c46e96c_XL {
             get {
                 object obj = ResourceManager.GetObject("_0_8052d_c46e96c_XL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace LanguageTutorial.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _64180878_1284827358_31 {
+        public static System.Drawing.Bitmap _64180878_1284827358_31 {
             get {
                 object obj = ResourceManager.GetObject("_64180878_1284827358_31", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace LanguageTutorial.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon Bulb {
+        public static System.Drawing.Icon Bulb {
             get {
                 object obj = ResourceManager.GetObject("Bulb", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
@@ -93,7 +93,7 @@ namespace LanguageTutorial.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cat {
+        public static System.Drawing.Bitmap cat {
             get {
                 object obj = ResourceManager.GetObject("cat", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace LanguageTutorial.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap catsdogs {
+        public static System.Drawing.Bitmap catsdogs {
             get {
                 object obj = ResourceManager.GetObject("catsdogs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace LanguageTutorial.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap catsdogs7 {
+        public static System.Drawing.Bitmap catsdogs7 {
             get {
                 object obj = ResourceManager.GetObject("catsdogs7", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
