@@ -25,6 +25,10 @@ namespace LanguageTutorial
         public MainMenuWindow()
         {            
             InitializeComponent();
+            Uri uri = new Uri("pack://siteoforigin:,,,/Resources/cat.png");
+            BitmapImage bitmap = new BitmapImage(uri);
+            //Image img = new Image();
+            img.Source = bitmap;
             
         }
 

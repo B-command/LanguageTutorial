@@ -24,6 +24,10 @@ namespace LanguageTutorial
         public RegistrationWindow()
         {
             InitializeComponent();
+            Uri uri = new Uri("pack://siteoforigin:,,,/Resources/catsdogs.png");
+            BitmapImage bitmap = new BitmapImage(uri);
+            //Image img = new Image();
+            img.Source = bitmap;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)

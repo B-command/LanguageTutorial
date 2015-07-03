@@ -2,26 +2,27 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="Регистрация" Height="372" Width="304" Loaded="MetroWindow_Loaded">
+        Title="Регистрация" Height="372" Width="304" Loaded="MetroWindow_Loaded" ResizeMode="CanMinimize">
 
     <Grid x:Name="grid" DataContext="null" Margin="0,0,-8,-18">
 
-        <Label x:Name="label_Profile_Name" Content="Название профиля" VerticalContentAlignment="Center" Width="259" FontSize="12" FontStyle="Italic" Margin="21,15,24,320"/>
+        <Label x:Name="label_Profile_Name" Content="Название профиля" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="21,15,24,320"/>
         <TextBox x:Name="textbox_Profile_Name" Text="{Binding Name}" Controls:TextBoxHelper.Watermark="Имя профиля" Width="259" TextWrapping="Wrap" VerticalContentAlignment="Center" Margin="21,44,24,289" />
 
-        <Label x:Name="label_Time_Between_Seans" Content="Промежуток между сеансами ( часов )" VerticalContentAlignment="Center" Width="259" FontSize="12" FontStyle="Italic" Margin="21,201,24,134"/>
+        <Label x:Name="label_Time_Between_Seans" Content="Промежуток между сеансами ( часов )" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="21,201,24,134"/>
         <Controls:NumericUpDown x:Name="num_Time_Between_Seans" Value="{Binding TimeBetweenSeans}" HorizontalAlignment="Left" Height="22" Margin="21,230,0,0" VerticalAlignment="Top" Width="259"/>
 
 
-        <Label x:Name="label_Language" Content="Языки обучения" VerticalContentAlignment="Center" Width="259" FontSize="12" FontStyle="Italic" Margin="21,85,24,250"/>
+        <Label x:Name="label_Language" Content="Языки обучения" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="21,85,24,250"/>
         <CheckBox x:Name="check_English" Content="English" FontWeight="Bold" Margin="21,120,124,214" Click="check_English_Click"></CheckBox>
         <CheckBox x:Name="check_Français" Content="Français" FontWeight="Bold" Margin="21,159,124,175" Click="check_Français_Click"></CheckBox>
-        <Button x:Name="button_Settings_English" Content="Настройки" HorizontalAlignment="Left" Margin="185,120,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.107,0.455" FontSize="8" Height="25" Click="button_Settings_English_Click"/>
-        <Button x:Name="button_Settings_Français" Content="Настройки" HorizontalAlignment="Left" Margin="185,160,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.107,0.455" FontSize="8" Height="25" Click="button_Settings_Français_Click"/>
+        <Button x:Name="button_Settings_English" Content="Настройки" HorizontalAlignment="Left" Margin="130,123,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.107,0.455" FontSize="8" Height="25" Click="button_Settings_English_Click"/>
+        <Button x:Name="button_Settings_Français" Content="Настройки" HorizontalAlignment="Left" Margin="130,162,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.107,0.455" FontSize="8" Height="25" Click="button_Settings_Français_Click"/>
 
         <Button x:Name="button_Accept" Content="Принять" HorizontalAlignment="Left" Margin="21,281,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.107,0.455" Click="button_Accept_Click" Height="30"/>
 
         <Button x:Name="button_Cancel" Content="Отмена" HorizontalAlignment="Left" Margin="185,281,0,0" VerticalAlignment="Top" Width="95" Click="button_Cancel_Click" Height="30"/>
+        <Image x:Name="img" HorizontalAlignment="Left" Height="100" Margin="237,128,0,0" VerticalAlignment="Top" Width="44" RenderTransformOrigin="0.159,-0.08"/>
 
     </Grid>
 </Controls:MetroWindow>

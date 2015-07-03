@@ -2,12 +2,12 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-                      Title="Главное меню"
+                      Title="Учебник иностранных языков"
                       Height="371"
                       Width="500.582"
                       MinHeight="130"
                       MinWidth="260"
-                      Loaded="MetroWindow_Loaded">
+                      Loaded="MetroWindow_Loaded" ResizeMode="CanMinimize" FontSize="14">
 
     <Window.Resources>
         <ContextMenu x:Key="TrayMenu">
@@ -40,7 +40,7 @@
                 FontSize="16" 
                 Grid.ColumnSpan="2"
                 Click="button_Start_Testing_Click"/>
-        
+
         <Button x:Name="button_Statistics"
                 Content="Посмотреть статистику" 
                 HorizontalAlignment="Left" 
@@ -50,7 +50,7 @@
                 FontSize="16"
                 Grid.ColumnSpan="2"
                 Click="button_Statistics_Click"/>
-        
+
         <Button x:Name="button_Settings"
                 Content="Изменить настройки" 
                 HorizontalAlignment="Left"
@@ -60,7 +60,7 @@
                 FontSize="16"
                 Grid.ColumnSpan="2"
                 Click="button_Settings_Click"/>
-        
+
         <Button x:Name="button_Change_User"
                 Content="Сменить пользователя"
                 HorizontalAlignment="Left"
@@ -70,7 +70,7 @@
                 FontSize="16" 
                 Grid.ColumnSpan="2"
                 Click="button_Change_User_Click"/>
-        
+
         <Button x:Name="button_Exit"
                 Content="Выйти из программы"
                 HorizontalAlignment="Left"
@@ -80,6 +80,6 @@
                 FontSize="16"
                 Grid.ColumnSpan="2"
                 Click="button_Exit_Click"/>
-
+        <Image x:Name="img" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="154" Margin="10,145,0,0" VerticalAlignment="Top" Width="141" />
     </Grid>
 </Controls:MetroWindow>
