@@ -37,7 +37,7 @@ namespace LanguageTutorial
             button_Settings_English.IsEnabled = false;
             button_Settings_Français.IsEnabled = false;
 
-            if (App.oActiveUser != null)
+            if (App.oActiveUser != null && App.ChangeUser )
             {// Заполняем значениями профиля
 
                 grid.DataContext = App.oActiveUser;
