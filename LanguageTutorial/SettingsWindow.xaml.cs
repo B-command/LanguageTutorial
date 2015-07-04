@@ -21,7 +21,10 @@ namespace LanguageTutorial
     /// </summary>
     public partial class SettingsWindow
     {
-        const int minWordsForSession = 10, maxWordsForSession = 50, minWordsForStudy = 30, maxWordsForStudy = 100;
+        const int minWordsForSession = 10, maxWordsForSession = 50, defaultWordsForSession = 20,
+                  minWordsForStudy = 30, maxWordsForStudy = 100, defaultWordsForStudy = 50,
+                  defaultSessionsPerDay = 5,
+                  defaultTrueAnsers = 3;
 
         public SettingsWindow(string Lang)
         {
@@ -66,17 +69,33 @@ namespace LanguageTutorial
         {
                 if (label_Settings.Content == "English")
                 {
-                    App.oCourseEnglish.WordsPerSession = (int)num_Number_of_Words_Per_Seans.Value;
-                    App.oCourseEnglish.WordsToStudy = (int)num_Number_of_Words_To_Study.Value;
-                    App.oCourseEnglish.SeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
-                    App.oCourseEnglish.TrueAnswers = (int)num_Number_of_True_Answer.Value;
+                    try
+                    {
+                        App.oCourseEnglish.WordsPerSession = (int)num_Number_of_Words_Per_Seans.Value;
+                        App.oCourseEnglish.WordsToStudy = (int)num_Number_of_Words_To_Study.Value;
+                        App.oCourseEnglish.SeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
+                        App.oCourseEnglish.TrueAnswers = (int)num_Number_of_True_Answer.Value;
+                    }
+
+                    catch
+                    {
+                        this.Close(); //Если какие-то из значений пустые, то происходит отмена изменений
+                    }
+                    
                 }
                 else
                 {
-                    App.oCourseFrançais.WordsPerSession = (int)num_Number_of_Words_Per_Seans.Value;
-                    App.oCourseFrançais.WordsToStudy = (int)num_Number_of_Words_To_Study.Value;
-                    App.oCourseFrançais.SeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
-                    App.oCourseFrançais.TrueAnswers = (int)num_Number_of_True_Answer.Value;
+                    try
+                    {
+                        App.oCourseFrançais.WordsPerSession = (int)num_Number_of_Words_Per_Seans.Value;
+                        App.oCourseFrançais.WordsToStudy = (int)num_Number_of_Words_To_Study.Value;
+                        App.oCourseFrançais.SeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
+                        App.oCourseFrançais.TrueAnswers = (int)num_Number_of_True_Answer.Value;
+                    }
+                    catch
+                    {
+                        this.Close();  //Если какие-то из значений пустые, то происходит отмена изменений
+                    }
                 }
 
             this.Close();
@@ -100,6 +119,16 @@ namespace LanguageTutorial
         private void num_Number_of_Words_To_Study_LostFocus(object sender, RoutedEventArgs e)
         {
             if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value) num_Number_of_Words_To_Study = num_Number_of_Words_Per_Seans;
+        }
+
+        private void num_Number_of_Words_Per_Seans_LostFocus_1(object sender, RoutedEventArgs e)
+        {
+            //if (num_Number_of_Words_Per_Seans.Value == null) num_Number_of_Words_Per_Seans.Value = defaultWordsForSession;
+        }
+
+        private void num_Number_of_Words_To_Study_LostFocus_1(object sender, RoutedEventArgs e)
+        {
+           // if (num_Number_of_Words_To_Study.Value == null) num_Number_of_Words_To_Study.Value = defaultWordsForStudy;
         }
     }
 }
