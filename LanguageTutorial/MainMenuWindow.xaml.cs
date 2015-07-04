@@ -77,8 +77,8 @@ namespace LanguageTutorial
         private void button_Change_User_Click(object sender, RoutedEventArgs e)
         {
             App.oActiveUser = null;
-            App.oActiveSettingsEnglish = null;
-            App.oActiveSettingsFrançais = null;
+            //App.oActiveSettingsEnglish = null;
+            //App.oActiveSettingsFrançais = null;
 
             MainWindow oMainWindow = new MainWindow();
 
@@ -220,8 +220,8 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             App.oActiveUser = null;
-            App.oActiveSettingsEnglish = null;
-            App.oActiveSettingsFrançais = null;
+            //App.oActiveSettingsEnglish = null;
+            //App.oActiveSettingsFrançais = null;
 
             // показываем
             MainWindow oMainWindow = new MainWindow();

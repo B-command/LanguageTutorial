@@ -7,10 +7,10 @@ namespace LanguageTutorial
 {
     public class LanguageTutorialContext : DbContext
     {
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<Language> Language  { get; set; }
         public DbSet<Course> Course { get; set; }
-        public DbSet<Word> Word { get; set; }
+        public DbSet<Dictionary> Dictionary { get; set; }
         public DbSet<WordQueue> WordQueue { get; set; }
         public DbSet<Session> Session { get; set; }
 
