@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace LanguageTutorial.DataModel
 {
-    class WordQueue
+    public class WordQueue
     {
         public int Id { get; set; }
 
         public int TrueAnswers { get; set; }
         public bool IsLearned { get; set; }
 
-        public int User_Id { get; set; }
-        public int Word_Id { get; set; }
+        public int UserId { get; set; }
+        public int DictionaryId { get; set; }
 
-        public virtual Users User { get; set; }
-        public virtual Word Word { get; set; }
+        public virtual User User { get; set; }
+        public virtual Dictionary Dictionary { get; set; }
     }
 }

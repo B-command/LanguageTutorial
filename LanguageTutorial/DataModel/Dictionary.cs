@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace LanguageTutorial.DataModel
 {
-    public class Word
+    public class Dictionary
     {
         public int Id { get; set; }
 
         public string Word { get; set; }
         public string Translate { get; set; }
 
-        public int Language_Id { get; set; }
+        public int LanguageId { get; set; }
 
         public virtual Language Language { get; set; }
 

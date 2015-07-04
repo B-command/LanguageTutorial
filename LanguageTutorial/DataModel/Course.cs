@@ -16,10 +16,10 @@ namespace LanguageTutorial.DataModel
         public int SeansPerDay { get; set; }
         public int TrueAnswers { get; set; }
 
-        public int User_Id { get; set; }
-        public int Language_Id { get; set; }
+        public int UserId { get; set; }
+        public int LanguageId { get; set; }
 
-        public virtual Users User { get; set; }
+        public virtual User User { get; set; }
         public virtual Language Language { get; set; }
 
         public virtual ICollection<Session> Session { get; set; }

@@ -12,6 +12,6 @@ namespace LanguageTutorial.DataModel
         public string Name { get; set; }
 
         public virtual ICollection<Course> Course { get; set; }
-        public virtual ICollection<Word> Word { get; set; }
+        public virtual ICollection<Dictionary> Dictionary { get; set; }
     }
 }

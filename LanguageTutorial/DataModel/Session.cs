@@ -15,7 +15,7 @@ namespace LanguageTutorial.DataModel
         public int Words { get; set; }
         public int FinishedWords { get; set; }
 
-        public int Course_Id { get; set; }
+        public int CourseId { get; set; }
 
         public virtual Course Course { get; set; }
     }
