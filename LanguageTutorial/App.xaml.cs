@@ -18,6 +18,8 @@ namespace LanguageTutorial
     {
         public static bool Registered { get; set; } // Проверка на успешную регистрацию
 
+        public static bool ChangeUser { get; set; }
+
         public static User oActiveUser { get; set; } // Активный профиль
 
         public static Course oCourseEnglish { get; set; } // Английский курс и его настройки активного профиля

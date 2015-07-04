@@ -39,6 +39,8 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            App.ChangeUser = false;
+
             Update_ComboBox_Users();
 
             Clear_Control();
@@ -73,13 +75,14 @@ namespace LanguageTutorial
         {
             if ( combobox_Users.SelectedIndex != -1 )
             {// Если пользователь выбран, то запоминаем и храним его глобально
+                App.ChangeUser = true;
 
                 App.oActiveUser = combobox_Users.SelectedItem as User;
 
                 // Открываем окно главного меню
-                //MainMenuWindow oMainMenuWindow = new MainMenuWindow();
+                MainMenuWindow oMainMenuWindow = new MainMenuWindow();
 
-                //oMainMenuWindow.Show();
+                oMainMenuWindow.Show();
 
                 this.Close();
             }
@@ -98,9 +101,9 @@ namespace LanguageTutorial
 
             if ( App.Registered )
             {// Если пользователь зарегестрировался
-                //MainMenuWindow oMainMenuWindow = new MainMenuWindow();
+                MainMenuWindow oMainMenuWindow = new MainMenuWindow();
 
-                //oMainMenuWindow.Show();
+                oMainMenuWindow.Show();
 
                 this.Close();
             }

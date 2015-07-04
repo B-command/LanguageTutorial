@@ -76,17 +76,17 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Change_User_Click(object sender, RoutedEventArgs e)
         {
-            App.oActiveUser = null;
-            //App.oActiveSettingsEnglish = null;
-            //App.oActiveSettingsFrançais = null;
-
             MainWindow oMainWindow = new MainWindow();
 
             oMainWindow.ShowDialog();
 
-            CanClose = true;
+            if ( App.ChangeUser )
+            {
+                CanClose = true;
 
-            this.Close();
+                this.Close();
+            }
+
         }
 
         /// <summary>
@@ -219,10 +219,6 @@ namespace LanguageTutorial
         {
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
-            App.oActiveUser = null;
-            //App.oActiveSettingsEnglish = null;
-            //App.oActiveSettingsFrançais = null;
-
             // показываем
             MainWindow oMainWindow = new MainWindow();
 
@@ -232,9 +228,12 @@ namespace LanguageTutorial
             // иначе пользователь сильно удивится, когда увидит окно
             // но не сможет в него ничего ввести с клавиатуры
 
-            CanClose = true;
+            if (App.ChangeUser)
+            {
+                CanClose = true;
 
-            this.Close();
+                this.Close();
+            }
         }
 
         /// <summary>
