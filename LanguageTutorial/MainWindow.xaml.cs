@@ -39,8 +39,6 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            App.ChangeUser = false;
-
             Update_ComboBox_Users();
 
             Clear_Control();
@@ -121,6 +119,13 @@ namespace LanguageTutorial
             {
                 button_SignIn.IsEnabled = true;
             }
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            App.ChangeUser = false;
+
+            base.OnClosing(e);
         }
 
     }

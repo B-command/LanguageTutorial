@@ -6,6 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
+using System.IO;
+using System.Data.Entity;
+
 using LanguageTutorial.DataModel;
 
 
@@ -35,6 +38,70 @@ namespace LanguageTutorial
         public static int EngSession = 0;
         public static int FranSession = 0;
         //public static int SessionIncrement = 0;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            App.ChangeUser = false;
+
+            // Загрузка языков и их слов при 1 запуске программы
+            using ( var db = new LanguageTutorialContext())
+            {
+                if ( db.Language.ToList().Count == 0 )
+                { // Если таблица пуста, значит программа запущена впервые.
+
+                    // Заполнение языков
+                    db.Language.Add(new Language() { Name = "English" });
+                    db.SaveChanges();
+
+                    db.Language.Add(new Language() { Name = "Français"});
+                    db.SaveChanges();
+
+                    // Заполнение словаря Английского языка
+                    using ( var loadDictionary = new StreamReader("Dictionary\\English.txt"))
+                    {
+                        string str = String.Empty;
+
+                        while (str != null)
+                        {
+                            str = loadDictionary.ReadLine();
+                            // добавляем новый элемент в коллекцию, хранящую словарь
+                            if (str != null)
+                            {
+                                string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
+
+                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 0, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
+                                db.SaveChanges();
+                            }
+                        }
+
+                        loadDictionary.Close();
+                    }
+
+                    // Заполнение словаря Французского языка
+                    using (var loadDictionary = new StreamReader("Dictionary\\Français.txt"))
+                    {
+                        string str = String.Empty;
+
+                        while (str != null)
+                        {
+                            str = loadDictionary.ReadLine();
+
+                            if (str != null)
+                            {
+                                string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
+
+                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 1, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
+                                db.SaveChanges();
+                            }
+                        }
+
+                        loadDictionary.Close();
+                    }
+                }
+            }
+        }
 
 
     }

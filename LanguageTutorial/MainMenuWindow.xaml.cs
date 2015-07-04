@@ -29,7 +29,6 @@ namespace LanguageTutorial
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/cat.png");
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
-
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -90,6 +89,8 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Change_User_Click(object sender, RoutedEventArgs e)
         {
+            App.ChangeUser = true;
+
             MainWindow oMainWindow = new MainWindow();
 
             oMainWindow.ShowDialog();
@@ -239,6 +240,7 @@ namespace LanguageTutorial
         {
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
+            App.ChangeUser = true;
             // показываем
             MainWindow oMainWindow = new MainWindow();
 

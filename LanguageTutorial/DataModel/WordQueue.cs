@@ -14,9 +14,9 @@ namespace LanguageTutorial.DataModel
         public bool IsLearned { get; set; }
 
         public int UserId { get; set; }
-        public int DictionaryId { get; set; }
+        public int WordDictionaryId { get; set; }
 
         public virtual User User { get; set; }
-        public virtual Dictionary Dictionary { get; set; }
+        public virtual WordDictionary WordDictionary { get; set; }
     }
 }
