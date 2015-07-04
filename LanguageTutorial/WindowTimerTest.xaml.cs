@@ -25,18 +25,12 @@ namespace LanguageTutorial {
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e) {
-            if (App.EngSession < 5) { //заменить на значение из базы
+            if (App.EngSession < Querry.numberSessionsLanguage("English")) { //заменить на значение из базы
                 cb_language.Items.Add("English");
             }
-            if (App.FranSession < 5) {
+            if (App.FranSession < Querry.numberSessionsLanguage("Français")) {
                 cb_language.Items.Add("Français");
             }
-
-            /*if (App.EngSession == 5 || App.FranSession == 5 || App.FranActive == false || App.EngActive == false) { //заменить на значение из базы
-                cb_language.Items.Add("English");
-            } else {
-            
-            }*/
         }
 
         private void MetroWindow_Closed(object sender, EventArgs e) {
@@ -49,9 +43,10 @@ namespace LanguageTutorial {
         }
 
         private void button_pass_test_Click(object sender, RoutedEventArgs e) {
+            Close();
             MessageBox.Show("Начать Тестирование - Всплывающее окно (заглушка)");
             App.EngSession++; //убрать когда появится тест
-            if (App.EngSession < 5 || App.FranSession < 5) {//переместить код в тест
+            if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
                 App.aTimer.Start();
             } // если не закончились сессии по английскому и французскому
             //заменить константы на данные из бд

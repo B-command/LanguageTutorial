@@ -28,6 +28,9 @@ namespace LanguageTutorial {
         private void Button_Click(object sender, RoutedEventArgs e) {
             Close();
             MessageBox.Show("Начать Тестирование - Всплывающее окно (заглушка)");
+            if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
+                App.aTimer.Start();
+            }
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e) {

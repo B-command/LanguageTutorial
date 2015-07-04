@@ -47,19 +47,18 @@ namespace LanguageTutorial
         private void button_Start_Testing_Click(object sender, RoutedEventArgs e)
         {
             App.aTimer.Stop();
-            if (App.EngSession < 5 && App.FranSession < 5) { //заменить константы на данные из бд
+            if (App.EngSession < Querry.numberSessionsLanguage("English") && App.FranSession < Querry.numberSessionsLanguage("Français")) { //заменить константы на данные из бд
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
             } else { 
                 //запускаем тест по которому доступны сеансы
                 MessageBox.Show("Начать Тестирование - Меню (заглушка)");
+                App.EngSession++; //убрать когда появится тест
+                if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
+                    App.aTimer.Start();
+                } // если не закончились сессии по английскому и французскому
+                //заменить константы на данные из бд
             }
-            App.EngSession++; //убрать когда появится тест
-            if (App.EngSession < 5 || App.FranSession < 5) {//переместить код в тест
-                App.aTimer.Start();
-            } // если не закончились сессии по английскому и французскому
-            //заменить константы на данные из бд
-            
         }
 
         /// <summary>
@@ -205,7 +204,7 @@ namespace LanguageTutorial
             App.aTimer.Stop();
             MessageBox.Show("Тестирование - Трей (заглушка)");
             App.FranSession++; //убрать когда появится тест
-            if (App.EngSession < 5 || App.FranSession < 5) { //переместить код в тест
+            if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
                 App.aTimer.Start();
             } // если не закончились сессии по английскому и французскому
             //заменить константы на данные из бд
@@ -347,10 +346,17 @@ namespace LanguageTutorial
         }
 
         public void timer() {
+            int min;
+            using (var db = new LanguageTutorialContext()) {
+                min = (int)(App.oActiveUser.SessionPeriod * 60);
+            }
+
             App.aTimer = new DispatcherTimer();
             App.aTimer.Tick += new EventHandler(OnTimedEvent);
-            App.aTimer.Interval = new TimeSpan(0, 0, 5); //изменить время на время из базы
+            App.aTimer.Interval = new TimeSpan(0, min, 0); //изменить время на время из базы
         }
+
+
 
         // СОБЫТИЕ ТАЙМЕРА
         private static void OnTimedEvent(object source, EventArgs e)
