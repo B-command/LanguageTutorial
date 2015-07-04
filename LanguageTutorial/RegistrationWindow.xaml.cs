@@ -124,10 +124,10 @@ namespace LanguageTutorial
                                     var nCourse = new Course();
 
                                     nCourse.Active = true;
-                                    nCourse.WordsPerSession = 20;
-                                    nCourse.WordsToStudy = 50;
-                                    nCourse.SeansPerDay = 5;
-                                    nCourse.TrueAnswers = 5;
+                                    nCourse.WordsPerSession = App.oCourseEnglish.WordsPerSession;
+                                    nCourse.WordsToStudy = App.oCourseEnglish.WordsToStudy;
+                                    nCourse.SeansPerDay = App.oCourseEnglish.SeansPerDay;
+                                    nCourse.TrueAnswers = App.oCourseEnglish.TrueAnswers;
                                     nCourse.UserId = nUser.Id;
 
                                     var lang = from Language in db.Language
@@ -149,10 +149,10 @@ namespace LanguageTutorial
                                     var nCourse = new Course();
 
                                     nCourse.Active = true;
-                                    nCourse.WordsPerSession = 20;
-                                    nCourse.WordsToStudy = 50;
-                                    nCourse.SeansPerDay = 5;
-                                    nCourse.TrueAnswers = 5;
+                                    nCourse.WordsPerSession = App.oCourseFrançais.WordsPerSession;
+                                    nCourse.WordsToStudy = App.oCourseFrançais.WordsToStudy;
+                                    nCourse.SeansPerDay = App.oCourseFrançais.SeansPerDay;
+                                    nCourse.TrueAnswers = App.oCourseFrançais.TrueAnswers;
                                     nCourse.UserId = nUser.Id;
                                     nCourse.LanguageId = 1;
 
