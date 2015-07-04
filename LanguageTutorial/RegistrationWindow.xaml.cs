@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using System.Data.Entity;
+
 using LanguageTutorial.DataModel;
 
 namespace LanguageTutorial
@@ -41,81 +43,122 @@ namespace LanguageTutorial
                 grid.DataContext = App.oActiveUser;
 
                 // Ставим галочки и активируем управление языков
-                foreach ( var c in App.oCourseRepository.lCourse )
+                using (var db = new LanguageTutorialContext())
                 {
-                    if ( c.Users_Id == App.oActiveUser.Id )
+                    //var result = db.Course.Where(course => course.UserId == App.oActiveUser.Id && course.LanguageId == 0);
+                    var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 0);
+
+                    if (result != null)
                     {
-                        if ( c.Languages_Id == 0 && c.Active == true )
+                        App.oCourseEnglish = result as Course;
+
+                        if (App.oCourseEnglish.Active)
                         {
                             check_English.IsChecked = true;
                             button_Settings_English.IsEnabled = true;
                         }
+                    }
 
-                        if ( c.Languages_Id == 1 && c.Active == true )
+                    result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 1);
+
+                    if (result != null)
+                    {
+                        App.oCourseFrançais = result as Course;
+
+                        if (App.oCourseFrançais.Active)
                         {
                             check_Français.IsChecked = true;
                             button_Settings_Français.IsEnabled = true;
                         }
                     }
+
                 }
             }
             else
             {// Заполняем стандартными значениями настройки языков
-
-                Settings English = new Settings(App.oSettingsRepository.lSettings, 20, 50, 5, 5);
-                App.oActiveSettingsEnglish = English;
-
-                Settings Français = new Settings(App.oSettingsRepository.lSettings, 20, 50, 5, 5);
-                App.oActiveSettingsFrançais = Français;
+                App.oCourseEnglish = new Course() { LanguageId = 0, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 5 };
+                App.oCourseFrançais = new Course() { LanguageId = 1, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 5 };
             }
 
             App.Registered = false;
         }
 
         /// <summary>
-        /// Подтверждение регистрации, создание нового профиля
+        /// Подтверждение регистрации, создание нового профиля или обновление данных активного профиля
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void button_Accept_Click(object sender, RoutedEventArgs e)
         {
-            if (App.oActiveUser == null)
-            {// Создаём новый профиль, если профиль не выбран
+            if (textbox_Profile_Name.Text.Trim() != "")
+            {// Проверка на имя профиля
 
-                if ( textbox_Profile_Name.Text != "" )
-                {// Проверка на имя профиля
+                if (num_Time_Between_Seans.Value != null)
+                {// Проверка на часы меж сеансами
 
-                    if ( num_Time_Between_Seans.Value != null )
-                    {// Проверка на часы меж сеансами
+                    if ((check_English.IsChecked == true || check_Français.IsChecked == true))
+                    {// Проверка на то, что выбран хотя бы 1 язык
 
-                        if ((check_English.IsChecked == true || check_Français.IsChecked == true))
-                        {// Проверка на то, что выбран хотя бы 1 язык
+                        if (App.oActiveUser == null)
+                        {// Если активного пользователя нет, то создаём новый профиль ( регистрация
+
                             // Создаём пользователя
-                            Users newUser = new Users(App.oUsersRepository.lUsers, textbox_Profile_Name.Text, (double)num_Time_Between_Seans.Value);
+                            User nUser = new User() { Name = textbox_Profile_Name.Text.Trim(), SessionPeriod = (double)num_Time_Between_Seans.Value };
 
                             // Добавляем пользователя в БД
-                            App.oUsersRepository.lUsers.Add(newUser);
+                            using (var db = new LanguageTutorialContext())
+                            {
+                                db.User.Add(nUser);
+                                db.SaveChanges();
+                            }
 
-                            // Делаем нового пользователя текущим
-                            App.oActiveUser = newUser;
+                            // Делаем текущего пользователя активным
+                            App.oActiveUser = nUser;
 
                             // Создаём привязку пользователя к курсам и сохраняем настройки
                             if (check_English.IsChecked == true)
                             {// Курсы английского
 
-                                Course oCourseEnglish = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oActiveSettingsEnglish.Id, 0, true);
-                                App.oCourseRepository.lCourse.Add(oCourseEnglish);
+                                using (var db = new LanguageTutorialContext())
+                                {
+                                    var nCourse = new Course();
 
-                                App.oSettingsRepository.lSettings.Add(App.oActiveSettingsEnglish);
+                                    nCourse.Active = true;
+                                    nCourse.WordsPerSession = 20;
+                                    nCourse.WordsToStudy = 50;
+                                    nCourse.SeansPerDay = 5;
+                                    nCourse.TrueAnswers = 5;
+                                    nCourse.UserId = nUser.Id;
+
+                                    var lang = from Language in db.Language
+                                               where Language.Id == 0
+                                               select Language;
+
+                                    nCourse.LanguageId = db.Language.ToList()[0].Id;
+
+                                    db.Course.Add(nCourse);
+                                    db.SaveChanges();
+                                }
                             }
 
                             if (check_Français.IsChecked == true)
                             {// Курсы французского
 
-                                Course oCourseFrançais = new Course(App.oCourseRepository.lCourse, newUser.Id, App.oActiveSettingsFrançais.Id, 1, true);
-                                App.oCourseRepository.lCourse.Add(oCourseFrançais);
+                                using (var db = new LanguageTutorialContext())
+                                {
+                                    var nCourse = new Course();
 
-                                App.oSettingsRepository.lSettings.Add(App.oActiveSettingsFrançais);
+                                    nCourse.Active = true;
+                                    nCourse.WordsPerSession = 20;
+                                    nCourse.WordsToStudy = 50;
+                                    nCourse.SeansPerDay = 5;
+                                    nCourse.TrueAnswers = 5;
+                                    nCourse.UserId = nUser.Id;
+                                    nCourse.LanguageId = 1;
+
+                                    db.Course.Add(nCourse);
+                                    db.SaveChanges();
+                                }
                             }
 
                             App.Registered = true;
@@ -123,167 +166,189 @@ namespace LanguageTutorial
                             this.Close();
                         }
                         else
-                        {
-                            MessageBox.Show("Язык обучения не выбран!");
+                        {// Если есть активный пользователь, то необходимо обновить его настройки
+
+                            // Применяем изменения в профиле
+                            App.oActiveUser.Name = textbox_Profile_Name.Text.Trim();
+                            App.oActiveUser.SessionPeriod = (double)num_Time_Between_Seans.Value;
+
+                            // Обновляем профиль в БД
+                            using (var db = new LanguageTutorialContext())
+                            {
+                                var original = db.User.Find(App.oActiveUser.Id);
+
+                                if (original != null)
+                                {
+                                    original.Name = textbox_Profile_Name.Text.Trim();
+                                    original.SessionPeriod = (double)num_Time_Between_Seans.Value;
+
+                                    db.SaveChanges();
+                                }
+                            }
+
+                            // Проверка изменения курсов пользователя
+                            bool Course_Finded = false;
+
+                            if (check_English.IsChecked == true)
+                            {// Курсы английского
+
+                                //Проверка на наличие у пользователя неактивного курса английского
+                                using (var db = new LanguageTutorialContext())
+                                {
+                                    var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 0);
+
+                                    if (result != null)
+                                    {// Если нашли курс, то запоминаем это
+                                        Course_Finded = true;
+
+                                        if ((result as Course).Active == false)
+                                        { // Если курс был неактивен, то делаем его активным
+                                            (result as Course).Active = true;
+                                            db.SaveChanges();
+                                        }
+                                    }
+                                }
+
+                                if (Course_Finded)
+                                {// Если курс найден, то применяем к нему обновлённые настройки
+                                    using (var db = new LanguageTutorialContext())
+                                    {
+                                        var original = db.Course.Find(App.oCourseEnglish.Id);
+
+                                        original.WordsPerSession = App.oCourseEnglish.WordsPerSession;
+                                        original.WordsToStudy = App.oCourseEnglish.WordsToStudy;
+                                        original.SeansPerDay = App.oCourseEnglish.SeansPerDay;
+                                        original.TrueAnswers = App.oCourseEnglish.TrueAnswers;
+
+                                        db.SaveChanges();
+                                    }
+                                }
+                                else
+                                {// Если курс не найден, но галочка стоит, то необходимо создать курс для пользователя
+
+                                    using (var db = new LanguageTutorialContext())
+                                    {
+                                        var nCourse = new Course();
+
+                                        nCourse.Active = true;
+                                        nCourse.WordsPerSession = 20;
+                                        nCourse.WordsToStudy = 50;
+                                        nCourse.SeansPerDay = 5;
+                                        nCourse.TrueAnswers = 5;
+                                        nCourse.UserId = App.oActiveUser.Id;
+                                        nCourse.LanguageId = 0;
+
+                                        db.Course.Add(nCourse);
+                                        db.SaveChanges();
+                                    }
+
+                                }
+
+                            }
+                            else
+                            {// Если галочки нет
+
+                                //Проверка на наличие у пользователя активного курса английского
+                                using (var db = new LanguageTutorialContext())
+                                {
+                                    var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 0 && Course.Active == true);
+
+                                    if (result != null)
+                                    {
+                                        (result as Course).Active = false;
+                                        db.SaveChanges();
+                                    }
+                                }
+                            }
+
+                            Course_Finded = false;
+
+                            if (check_Français.IsChecked == true)
+                            {// Курсы английского
+
+                                //Проверка на наличие у пользователя неактивного курса французского
+                                using (var db = new LanguageTutorialContext())
+                                {
+                                    var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 1);
+
+                                    if (result != null)
+                                    {// Если нашли курс, то запоминаем это
+                                        Course_Finded = true;
+
+                                        if ((result as Course).Active == false)
+                                        { // Если курс был неактивен, то делаем его активным
+                                            (result as Course).Active = true;
+                                            db.SaveChanges();
+                                        }
+                                    }
+                                }
+
+                                if (Course_Finded)
+                                {// Если курс найден, то применяем к нему обновлённые настройки
+                                    using (var db = new LanguageTutorialContext())
+                                    {
+                                        var original = db.Course.Find(App.oCourseFrançais.Id);
+
+                                        original.WordsPerSession = App.oCourseFrançais.WordsPerSession;
+                                        original.WordsToStudy = App.oCourseFrançais.WordsToStudy;
+                                        original.SeansPerDay = App.oCourseFrançais.SeansPerDay;
+                                        original.TrueAnswers = App.oCourseFrançais.TrueAnswers;
+
+                                        db.SaveChanges();
+                                    }
+                                }
+                                else
+                                {// Если курс не найден, но галочка стоит, то необходимо создать курс для пользователя
+
+                                    using (var db = new LanguageTutorialContext())
+                                    {
+                                        var nCourse = new Course();
+
+                                        nCourse.Active = true;
+                                        nCourse.WordsPerSession = 20;
+                                        nCourse.WordsToStudy = 50;
+                                        nCourse.SeansPerDay = 5;
+                                        nCourse.TrueAnswers = 5;
+                                        nCourse.UserId = App.oActiveUser.Id;
+                                        nCourse.LanguageId = 1;
+
+                                        db.Course.Add(nCourse);
+                                        db.SaveChanges();
+                                    }
+                                }
+                            }
+                            else
+                            {// Если галочки нет
+
+                                //Проверка на наличие у пользователя активного курса французского
+                                using (var db = new LanguageTutorialContext())
+                                {
+                                    var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 1 && Course.Active == true);
+
+                                    if (result != null)
+                                    {
+                                        (result as Course).Active = false;
+                                        db.SaveChanges();
+                                    }
+                                }
+                            }
+
+                            this.Close();
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Количество часов не указанно!");
+                        MessageBox.Show("Язык обучения не выбран!");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Имя профиля не указано!");
+                    MessageBox.Show("Количество часов не указанно!");
                 }
-                
             }
             else
-            {// Обновляем текущий профиль
-                if ( check_English.IsChecked == true || check_Français.IsChecked == true )
-                {// Запоминаем новые данные
-
-                    // Удаляем запись из базы
-                    App.oUsersRepository.lUsers.Remove(App.oActiveUser);
-
-                    //Запоминаем изменения
-                    App.oActiveUser.Name = textbox_Profile_Name.Text;
-                    App.oActiveUser.TimeBetweenSeans = (double)num_Time_Between_Seans.Value;
-
-                    // Загружаем обратно в бд
-                    App.oUsersRepository.lUsers.Add(App.oActiveUser);
-
-                    // Проверка изменения курсов пользователя
-                    bool Course_Finded = false;
-
-                    if (check_English.IsChecked == true)
-                    {// Курсы английского
-                        
-                        //Проверка на наличие у пользователя неактивного курса английского
-                        foreach ( var c in App.oCourseRepository.lCourse )
-                        {
-                            if (c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 0 )
-                            {// Если у пользователя есть активный курс английского
-                                Course_Finded = true;
-                            }
-
-                            if ( c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 0 && c.Active == false )
-                            {// Если у пользователя есть неактивный курс английского
-
-                                // Активировать курс
-                                App.oCourseRepository.lCourse.Remove(c);
-
-                                c.Active = true;
-
-                                App.oCourseRepository.lCourse.Add(c);
-
-                                break;
-                            }
-                        }
-
-                        if ( !Course_Finded )
-                        {// Если курс не найден, но галочка стоит, то необходимо создать курс для пользователя
-
-                            if ( App.oActiveSettingsEnglish == null )
-                            {
-                                App.oActiveSettingsEnglish = new Settings(App.oSettingsRepository.lSettings, 20, 50, 5, 5);
-                            }
-
-                            Course oCourseEnglish = new Course(App.oCourseRepository.lCourse, App.oActiveUser.Id, App.oActiveSettingsEnglish.Id, 0, true);
-                            App.oCourseRepository.lCourse.Add(oCourseEnglish);
-
-                            App.oSettingsRepository.lSettings.Add(App.oActiveSettingsEnglish);
-                        }
-                        
-                    }
-                    else
-                    {// Если галочки нет
-
-                        //Проверка на наличие у пользователя активного курса английского
-                        foreach (var c in App.oCourseRepository.lCourse)
-                        {
-
-                            if (c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 0 && c.Active == true)
-                            {// Если у пользователя есть активный курс английского
-
-                                // Деактивировать курс
-                                App.oCourseRepository.lCourse.Remove(c);
-
-                                c.Active = false;
-
-                                App.oCourseRepository.lCourse.Add(c);
-
-                                break;
-                            }
-                        }
-                    }
-
-                    Course_Finded = false;
-
-                    if (check_Français.IsChecked == true)
-                    {// Курсы французского
-
-                        //Проверка на наличие у пользователя данных курсов
-                        foreach (var c in App.oCourseRepository.lCourse)
-                        {
-                            if (c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 1 )
-                            {
-                                Course_Finded = true;
-                            }
-
-                            if (c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 1 && c.Active == false)
-                            {// Если у пользователя есть неактивный курс французского
-                                // Активировать курс
-                                App.oCourseRepository.lCourse.Remove(c);
-
-                                c.Active = true;
-
-                                App.oCourseRepository.lCourse.Add(c);
-
-                                break;
-                            }
-                        }
-
-                        if (!Course_Finded)
-                        {// Если курс не найден, но галочка стоит, то необходимо создать курс для пользователя
-                            if (App.oActiveSettingsFrançais == null)
-                            {
-                                App.oActiveSettingsFrançais = new Settings(App.oSettingsRepository.lSettings, 20, 50, 5, 5);
-                            }
-
-                            Course oCourseFrançais = new Course(App.oCourseRepository.lCourse, App.oActiveUser.Id, App.oActiveSettingsEnglish.Id, 1, true);
-                            App.oCourseRepository.lCourse.Add(oCourseFrançais);
-
-                            App.oSettingsRepository.lSettings.Add(App.oActiveSettingsFrançais);
-                        }
-
-                    }
-                    else
-                    {
-                        //Проверка на наличие у пользователя данного курса
-                        foreach (var c in App.oCourseRepository.lCourse)
-                        {
-                            if (c.Users_Id == App.oActiveUser.Id && c.Languages_Id == 1 && c.Active == true)
-                            {// Если у пользователя есть активный курс французского
-
-                                // Деактивировать курс
-                                App.oCourseRepository.lCourse.Remove(c);
-
-                                c.Active = false;
-
-                                App.oCourseRepository.lCourse.Add(c);
-
-                                break;
-                            }
-                        }
-                    }
-
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Язык обучения не выбран!");
-                }
+            {
+                MessageBox.Show("Имя профиля не указано!");
             }
         }
 
@@ -328,7 +393,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void check_English_Click(object sender, RoutedEventArgs e)
         {
-            if ( check_English.IsChecked == true )
+            if (check_English.IsChecked == true)
             {
                 button_Settings_English.IsEnabled = true;
             }

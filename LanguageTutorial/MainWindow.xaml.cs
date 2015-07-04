@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Data.Entity;
+
 using LanguageTutorial.DataModel;
 
 namespace LanguageTutorial
@@ -37,6 +39,8 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            App.ChangeUser = false;
+
             Update_ComboBox_Users();
 
             Clear_Control();
@@ -47,7 +51,11 @@ namespace LanguageTutorial
         /// </summary>
         private void Update_ComboBox_Users()
         {
-            combobox_Users.ItemsSource = App.oUsersRepository.lUsers;
+            using (var db = new LanguageTutorialContext())
+            {
+                combobox_Users.ItemsSource = db.User.ToList();
+            }
+
         }
 
         /// <summary>
@@ -67,40 +75,9 @@ namespace LanguageTutorial
         {
             if ( combobox_Users.SelectedIndex != -1 )
             {// Если пользователь выбран, то запоминаем и храним его глобально
+                App.ChangeUser = true;
 
-                App.oActiveUser = combobox_Users.SelectedItem as Users;
-
-                // Загружаем настройки пользователя
-                foreach ( var c in App.oCourseRepository.lCourse )
-                {// Находим обучающий курс пользователя
-
-                    if ( c.Users_Id == App.oActiveUser.Id )
-                    {
-                        foreach ( var l in App.oLanguagesRepository.lLanguages )
-                        {// Находим язык обучения
-
-                            if ( c.Languages_Id == l.Id )
-                            {
-                                foreach ( var s in App.oSettingsRepository.lSettings )
-                                {// Находим настройки
-
-                                    if ( c.Settings_Id == s.Id )
-                                    {
-                                        // Запоминаем настройки
-                                        if (l.Name == "English")
-                                        {
-                                            App.oActiveSettingsEnglish = s;
-                                        }
-                                        else
-                                        {
-                                            App.oActiveSettingsFrançais = s;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                App.oActiveUser = combobox_Users.SelectedItem as User;
 
                 // Открываем окно главного меню
                 MainMenuWindow oMainMenuWindow = new MainMenuWindow();

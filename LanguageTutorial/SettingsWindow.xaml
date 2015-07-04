@@ -10,16 +10,16 @@
         </Label>
 
         <Label x:Name="label_Number_of_Words_Per_Seans" Content="Количество слов за сеанс" VerticalContentAlignment="Center" Width="259" FontSize="12" FontStyle="Italic" Margin="21,51,24,284"/>
-        <Controls:NumericUpDown x:Name="num_Number_of_Words_Per_Seans" ToolTip="Количество слов, которое ты можешь выучить за 1 сеанс." Value="{Binding NumberOfWordsPerSeans}" Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="22" Margin="21,80,0,0" VerticalAlignment="Top" Width="259" LostFocus="num_Number_of_Words_Per_Seans_LostFocus"/>
+        <Controls:NumericUpDown x:Name="num_Number_of_Words_Per_Seans" Maximum="50" Minimum="20" ToolTip="Количество слов, которое ты можешь выучить за 1 сеанс." Value="{Binding NumberOfWordsPerSeans}" Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="22" Margin="21,80,0,0" VerticalAlignment="Top" Width="259"/>
 
         <Label x:Name="label_Number_of_Words_To_Study" Content="Количество слов в обучении" VerticalContentAlignment="Center" Width="259" FontSize="12" FontStyle="Italic" Margin="21,111,24,224"/>
-        <Controls:NumericUpDown x:Name="num_Number_of_Words_To_Study" ToolTip="Количество слов, которое ты хотел бы выучить за всё время обучения." Value="{Binding NumberOfWordsToStudy}" Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="22" Margin="21,140,0,0" VerticalAlignment="Top" Width="259" LostFocus="num_Number_of_Words_To_Study_LostFocus"/>
+        <Controls:NumericUpDown x:Name="num_Number_of_Words_To_Study" Maximum="100" Minimum="30" ToolTip="Количество слов, которое ты хотел бы выучить за всё время обучения." Value="{Binding NumberOfWordsToStudy}" Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="22" Margin="21,140,0,0" VerticalAlignment="Top" Width="259"/>
 
         <Label x:Name="label_Number_of_Seans_Per_Day" Content="Количество сеансов в день" VerticalContentAlignment="Center" Width="259" FontSize="12" FontStyle="Italic" Margin="21,171,24,164"/>
-        <Controls:NumericUpDown x:Name="num_Number_of_Seans_Per_Day" Maximum="20" Minimum="3" ToolTip="Указывает, сколько раз в день ты будешь проходить тестирование." Value="{Binding NumberOfSeansPerDay}" Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="22" Margin="21,200,0,0" VerticalAlignment="Top" Width="259"/>
+        <Controls:NumericUpDown x:Name="num_Number_of_Seans_Per_Day" Maximum="20" Minimum="3" ToolTip="Указывает, сколько раз в день ты будешь проходить тестирование." Value="{Binding SeansPerDay}" Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="22" Margin="21,200,0,0" VerticalAlignment="Top" Width="259"/>
 
         <Label x:Name="label_Number_of_True_Answer" Content="Количество правильных ответов" VerticalContentAlignment="Center" Width="259" FontSize="12" FontStyle="Italic" Margin="21,231,24,104"/>
-        <Controls:NumericUpDown x:Name="num_Number_of_True_Answer" Maximum="10" Minimum="1" ToolTip="Указывает, сколько раз нужно правильно ответить, чтобы слово считалось выученным." Value="{Binding NumberOfTrueAnswers}" Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="22" Margin="21,260,0,0" VerticalAlignment="Top" Width="259"/>
+        <Controls:NumericUpDown x:Name="num_Number_of_True_Answer" Maximum="10" Minimum="1" ToolTip="Указывает, сколько раз нужно правильно ответить, чтобы слово считалось выученным." Value="{Binding TrueAnswers}" Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="22" Margin="21,260,0,0" VerticalAlignment="Top" Width="259"/>
 
         <Button x:Name="button_Accept" Content="Принять" ToolTip="Принять настройки" HorizontalAlignment="Left" Margin="21,300,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.107,0.455" Height="30" Click="button_Accept_Click"/>
 

@@ -49,11 +49,11 @@ namespace LanguageTutorial
         {
             if (label_Settings.Content == "English")
             {
-                grid.DataContext = App.oActiveSettingsEnglish;
+                grid.DataContext = App.oCourseEnglish;
             }
             else
             {
-                grid.DataContext = App.oActiveSettingsFrançais;
+                grid.DataContext = App.oCourseFrançais;
             }
         }
 
@@ -64,50 +64,20 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Accept_Click(object sender, RoutedEventArgs e)
         {
-            if (App.oActiveUser == null)
-            {// Если пользователь регистрируется, просто меняем настройки
-
                 if (label_Settings.Content == "English")
                 {
-                    App.oActiveSettingsEnglish.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
-                    App.oActiveSettingsEnglish.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
-                    App.oActiveSettingsEnglish.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
-                    App.oActiveSettingsEnglish.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
+                    App.oCourseEnglish.WordsPerSession = (int)num_Number_of_Words_Per_Seans.Value;
+                    App.oCourseEnglish.WordsToStudy = (int)num_Number_of_Words_To_Study.Value;
+                    App.oCourseEnglish.SeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
+                    App.oCourseEnglish.TrueAnswers = (int)num_Number_of_True_Answer.Value;
                 }
                 else
                 {
-                    App.oActiveSettingsFrançais.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
-                    App.oActiveSettingsFrançais.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
-                    App.oActiveSettingsFrançais.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
-                    App.oActiveSettingsFrançais.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
+                    App.oCourseFrançais.WordsPerSession = (int)num_Number_of_Words_Per_Seans.Value;
+                    App.oCourseFrançais.WordsToStudy = (int)num_Number_of_Words_To_Study.Value;
+                    App.oCourseFrançais.SeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
+                    App.oCourseFrançais.TrueAnswers = (int)num_Number_of_True_Answer.Value;
                 }
-            }
-            else
-            {// Если пользователь меняет настройки, то изменяем их и в БД
-
-                if (label_Settings.Content == "English")
-                {
-                    App.oSettingsRepository.lSettings.Remove(App.oActiveSettingsEnglish);
-
-                    App.oActiveSettingsEnglish.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
-                    App.oActiveSettingsEnglish.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
-                    App.oActiveSettingsEnglish.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
-                    App.oActiveSettingsEnglish.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
-
-                    App.oSettingsRepository.lSettings.Add(App.oActiveSettingsEnglish);
-                }
-                else
-                {
-                    App.oSettingsRepository.lSettings.Remove(App.oActiveSettingsFrançais);
-
-                    App.oActiveSettingsFrançais.NumberOfWordsPerSeans = (int)num_Number_of_Words_Per_Seans.Value;
-                    App.oActiveSettingsFrançais.NumberOfWordsToStudy = (int)num_Number_of_Words_To_Study.Value;
-                    App.oActiveSettingsFrançais.NumberOfSeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
-                    App.oActiveSettingsFrançais.NumberOfTrueAnswers = (int)num_Number_of_True_Answer.Value;
-
-                    App.oSettingsRepository.lSettings.Add(App.oActiveSettingsFrançais);
-                }
-            }
 
             this.Close();
         }
