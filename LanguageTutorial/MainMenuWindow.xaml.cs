@@ -23,7 +23,6 @@ namespace LanguageTutorial
     /// </summary>
     public partial class MainMenuWindow
     {
-        //public static DispatcherTimer aTimer;
         public MainMenuWindow()
         {            
             InitializeComponent();
@@ -31,15 +30,12 @@ namespace LanguageTutorial
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
 
-            App.aTimer = new DispatcherTimer();
-            App.aTimer.Tick += new EventHandler(OnTimedEvent);
-            App.aTimer.Interval = new TimeSpan(0, 0, 20);
-            ///while (n != 4) ;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             textblock_Username.DataContext = App.oActiveUser;
+            timer();
             App.aTimer.Start();
         }
 
@@ -51,8 +47,19 @@ namespace LanguageTutorial
         private void button_Start_Testing_Click(object sender, RoutedEventArgs e)
         {
             App.aTimer.Stop();
-            MessageBox.Show("Начать Тестирование - Меню (заглушка)");
-            App.aTimer.Start();
+            if (App.EngSession < 5 && App.FranSession < 5) { //заменить константы на данные из бд
+                WindowLanguage winLan = new WindowLanguage();
+                winLan.ShowDialog();
+            } else { 
+                //запускаем тест по которому доступны сеансы
+                MessageBox.Show("Начать Тестирование - Меню (заглушка)");
+            }
+            App.EngSession++; //убрать когда появится тест
+            if (App.EngSession < 5 || App.FranSession < 5) {//переместить код в тест
+                App.aTimer.Start();
+            } // если не закончились сессии по английскому и французскому
+            //заменить константы на данные из бд
+            
         }
 
         /// <summary>
@@ -197,7 +204,11 @@ namespace LanguageTutorial
         {
             App.aTimer.Stop();
             MessageBox.Show("Тестирование - Трей (заглушка)");
-            App.aTimer.Start();
+            App.FranSession++; //убрать когда появится тест
+            if (App.EngSession < 5 || App.FranSession < 5) { //переместить код в тест
+                App.aTimer.Start();
+            } // если не закончились сессии по английскому и французскому
+            //заменить константы на данные из бд
         }
 
         /// <summary>
@@ -336,15 +347,19 @@ namespace LanguageTutorial
             Close();
         }
 
+        public void timer() {
+            App.aTimer = new DispatcherTimer();
+            App.aTimer.Tick += new EventHandler(OnTimedEvent);
+            App.aTimer.Interval = new TimeSpan(0, 0, 5); //изменить время на время из базы
+        }
+
         // СОБЫТИЕ ТАЙМЕРА
         private static void OnTimedEvent(object source, EventArgs e)
         {
                 App.aTimer.Stop();
                 WindowTimerTest timerWin = new WindowTimerTest();
                 timerWin.ShowDialog();
-                App.aTimer.Start();
 
-            //n++;
         }
     }
 }

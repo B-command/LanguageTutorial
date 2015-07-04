@@ -1,0 +1,13 @@
+﻿<Controls:MetroWindow x:Class="LanguageTutorial.WindowLanguage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="Выбор языка" Height="183.582" Width="425.373" Loaded="MetroWindow_Loaded">
+    <Grid Margin="0,0,0,-30">
+        <ComboBox x:Name="cb_language" HorizontalAlignment="Left" Margin="106,64,0,0" VerticalAlignment="Top" Width="298"/>
+        <Label Content="Выбери язык" HorizontalAlignment="Left" Margin="106,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.281,-0.672" Width="226" Height="38" FontSize="16" FontStyle="Italic"/>
+        <Image x:Name="img" HorizontalAlignment="Left" Height="118" Margin="25,21,0,0" VerticalAlignment="Top" Width="57"/>
+        <Button  Content="Продолжить" HorizontalAlignment="Left" Margin="290,109,0,0" VerticalAlignment="Top" Width="114" Height="30" Click="Button_Click" />
+
+    </Grid>
+</Controls:MetroWindow>

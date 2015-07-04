@@ -35,7 +35,12 @@ namespace LanguageTutorial
         //public static Settings oTempSettingsEnglish { get; set; } // Временные Настройки английского языка активного профиля
         //public static Settings oTempSettingsFrançais { get; set; } // Временные Настройки французского языка активного профиля
 
+        
+        //Переменные для работы таймера
         public static System.Windows.Threading.DispatcherTimer aTimer;
+        public static int EngSession = 0;
+        public static int FranSession = 0;
+        //public static int SessionIncrement = 0;
 
         protected override void OnStartup(StartupEventArgs e)
         {
