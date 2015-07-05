@@ -165,7 +165,7 @@ namespace LanguageTutorial
                                     db.Course.Add(nCourse);
                                     db.SaveChanges();
 
-                                    for (int i = 1; i <= App.oCourseFrançais.WordsToStudy; i++)
+                                    for (int i = 496; i < 496 + App.oCourseFrançais.WordsToStudy; i++)
                                     {
                                         db.WordQueue.Add(new WordQueue() { TrueAnswers = 0, IsLearned = false, UserId = nUser.Id, WordDictionaryId = i });
                                         db.SaveChanges();
