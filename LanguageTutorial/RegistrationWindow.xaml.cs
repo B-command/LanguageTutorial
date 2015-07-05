@@ -256,6 +256,8 @@ namespace LanguageTutorial
                                             db.Course.Add(nCourse);
                                             db.SaveChanges();
 
+                                            App.oCourseEnglish = nCourse;
+
                                             for (int i = 1; i <= App.oCourseEnglish.WordsToStudy; i++)
                                             {
                                                 db.WordQueue.Add(new WordQueue() { TrueAnswers = 0, IsLearned = false, UserId = App.oActiveUser.Id, WordDictionaryId = i });
@@ -333,6 +335,8 @@ namespace LanguageTutorial
 
                                             db.Course.Add(nCourse);
                                             db.SaveChanges();
+
+                                            App.oCourseFrançais = nCourse;
 
                                             for (int i = 1; i <= App.oCourseFrançais.WordsToStudy; i++)
                                             {
