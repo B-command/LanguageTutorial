@@ -19,9 +19,10 @@ namespace LanguageTutorial
     /// </summary>
     public partial class App : Application
     {
-        public static bool Registered { get; set; } // Проверка на успешную регистрацию
+        public static bool Registered { get; set; } // Проверка на успешную регистрацию.
 
-        public static bool ChangeUser { get; set; } // Проверка на смену пользователя
+        public static bool ChangeUser { get; set; } // Проверка на состояние смену пользователя.
+        public static bool UserChanged { get; set; } // Смена пользователя произошла.
 
         public static User oActiveUser { get; set; } // Активный профиль
 
@@ -71,7 +72,7 @@ namespace LanguageTutorial
                             {
                                 string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
 
-                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 0, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
+                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 1, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
                                 db.SaveChanges();
                             }
                         }
@@ -92,7 +93,7 @@ namespace LanguageTutorial
                             {
                                 string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
 
-                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 1, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
+                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 2, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
                                 db.SaveChanges();
                             }
                         }

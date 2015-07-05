@@ -73,9 +73,29 @@ namespace LanguageTutorial
         {
             if ( combobox_Users.SelectedIndex != -1 )
             {// Если пользователь выбран, то запоминаем и храним его глобально
-                App.ChangeUser = true;
+                App.UserChanged = true;
 
                 App.oActiveUser = combobox_Users.SelectedItem as User;
+
+                using ( var db = new LanguageTutorialContext() )
+                {
+                    var result = db.Course.Where(course => course.Active == true && course.UserId == App.oActiveUser.Id);
+
+                    if ( result != null )
+                    {
+                        foreach ( var c in result )
+                        {
+                            if ( c.LanguageId == 1 )
+                            {
+                                App.oCourseEnglish = c;
+                            }
+                            else
+                            {
+                                App.oCourseFrançais = c;
+                            }
+                        }
+                    }
+                }
 
                 // Открываем окно главного меню
                 MainMenuWindow oMainMenuWindow = new MainMenuWindow();
@@ -120,13 +140,5 @@ namespace LanguageTutorial
                 button_SignIn.IsEnabled = true;
             }
         }
-
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            App.ChangeUser = false;
-
-            base.OnClosing(e);
-        }
-
     }
 }
