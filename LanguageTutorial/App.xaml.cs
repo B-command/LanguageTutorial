@@ -72,7 +72,7 @@ namespace LanguageTutorial
                             {
                                 string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
 
-                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 0, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
+                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 1, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
                                 db.SaveChanges();
                             }
                         }
@@ -93,7 +93,7 @@ namespace LanguageTutorial
                             {
                                 string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
 
-                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 1, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
+                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 2, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
                                 db.SaveChanges();
                             }
                         }
