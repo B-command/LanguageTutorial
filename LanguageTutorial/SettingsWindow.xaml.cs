@@ -130,5 +130,13 @@ namespace LanguageTutorial
         {
            // if (num_Number_of_Words_To_Study.Value == null) num_Number_of_Words_To_Study.Value = defaultWordsForStudy;
         }
+
+        private void validationError(object sender, ValidationErrorEventArgs e)
+        {
+            if (e.Action == ValidationErrorEventAction.Added)
+            {
+                e.Error.ErrorContent = "Поле не может быть пустым";
+            }
+        }
     }
 }

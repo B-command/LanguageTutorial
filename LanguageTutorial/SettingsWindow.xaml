@@ -19,8 +19,8 @@
         <Controls:NumericUpDown x:Name="num_Number_of_Seans_Per_Day" Maximum="10" Minimum="3" ToolTip="Указывает, сколько раз в день ты будешь проходить тестирование." Value="{Binding SeansPerDay}" Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="22" Margin="21,200,0,0" VerticalAlignment="Top" Width="259"/>
 
         <Label x:Name="label_Number_of_True_Answer" Content="Количество правильных ответов" VerticalContentAlignment="Center" Width="259" FontSize="12" FontStyle="Italic" Margin="21,231,24,104"/>
-        <Controls:NumericUpDown x:Name="num_Number_of_True_Answer" Maximum="10" Minimum="1" ToolTip="Указывает, сколько раз нужно правильно ответить, чтобы слово считалось выученным." Value="{Binding TrueAnswers}" Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Height="22" Margin="21,260,0,0" VerticalAlignment="Top" Width="259"/>
-
+        <Controls:NumericUpDown x:Name="num_Number_of_True_Answer" Maximum="10" Minimum="1" ToolTip="Указывает, сколько раз нужно правильно ответить, чтобы слово считалось выученным." Controls:TextBoxHelper.Watermark="" HorizontalAlignment="Left" Value="{Binding TrueAnswers}" Height="22" Margin="21,260,0,0" VerticalAlignment="Top" Width="259"/>
+      
         <Button x:Name="button_Accept" Content="Принять" ToolTip="Принять настройки" HorizontalAlignment="Left" Margin="21,300,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.107,0.455" Height="30" Click="button_Accept_Click"/>
 
         <Button x:Name="button_Cancel" Content="Отмена" ToolTip="Отменить изменнения" HorizontalAlignment="Left" Margin="185,300,0,0" VerticalAlignment="Top" Width="95" Height="30" Click="button_Cancel_Click"/>
