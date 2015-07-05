@@ -34,6 +34,7 @@ namespace LanguageTutorial
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             textblock_Username.DataContext = App.oActiveUser;
+
             timer();
             App.aTimer.Start();
         }
@@ -91,16 +92,26 @@ namespace LanguageTutorial
         {
             App.ChangeUser = true;
 
+            this.Visibility = System.Windows.Visibility.Hidden;
+
             MainWindow oMainWindow = new MainWindow();
 
             oMainWindow.ShowDialog();
 
-            if ( App.ChangeUser )
+            if ( App.UserChanged )
             {
+                App.UserChanged = false;
+
                 CanClose = true;
 
                 this.Close();
             }
+            else
+            {
+                this.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            App.ChangeUser = false;
 
         }
 
@@ -241,6 +252,9 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             App.ChangeUser = true;
+
+            this.Visibility = System.Windows.Visibility.Visible;
+
             // показываем
             MainWindow oMainWindow = new MainWindow();
 
@@ -250,12 +264,20 @@ namespace LanguageTutorial
             // иначе пользователь сильно удивится, когда увидит окно
             // но не сможет в него ничего ввести с клавиатуры
 
-            if (App.ChangeUser)
+            if (App.UserChanged)
             {
+                App.UserChanged = false;
+
                 CanClose = true;
 
                 this.Close();
             }
+            else
+            {
+                this.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            App.ChangeUser = false;
         }
 
         /// <summary>

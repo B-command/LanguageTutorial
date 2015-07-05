@@ -73,7 +73,7 @@ namespace LanguageTutorial
         {
             if ( combobox_Users.SelectedIndex != -1 )
             {// Если пользователь выбран, то запоминаем и храним его глобально
-                App.ChangeUser = true;
+                App.UserChanged = true;
 
                 App.oActiveUser = combobox_Users.SelectedItem as User;
 
@@ -120,13 +120,5 @@ namespace LanguageTutorial
                 button_SignIn.IsEnabled = true;
             }
         }
-
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            App.ChangeUser = false;
-
-            base.OnClosing(e);
-        }
-
     }
 }
