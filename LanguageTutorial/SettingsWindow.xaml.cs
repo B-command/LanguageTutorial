@@ -131,11 +131,35 @@ namespace LanguageTutorial
            // if (num_Number_of_Words_To_Study.Value == null) num_Number_of_Words_To_Study.Value = defaultWordsForStudy;
         }
 
-        private void validationError(object sender, ValidationErrorEventArgs e)
+        private void num_Number_of_Seans_Per_Day_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
-            if (e.Action == ValidationErrorEventAction.Added)
+            if (num_Number_of_Seans_Per_Day.Value == null)
             {
-                e.Error.ErrorContent = "Поле не может быть пустым";
+                num_Number_of_Seans_Per_Day.Value = defaultSessionsPerDay;
+            }
+        }
+
+        private void num_Number_of_Words_To_Study_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (num_Number_of_Words_To_Study.Value == null)
+            {
+                num_Number_of_Words_To_Study.Value = defaultWordsForStudy;
+            }
+        }
+
+        private void num_Number_of_Words_Per_Seans_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (num_Number_of_Words_Per_Seans.Value == null)
+            {
+                num_Number_of_Words_Per_Seans.Value = defaultWordsForSession;
+            }
+        }
+
+        private void num_Number_of_True_Answer_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (num_Number_of_True_Answer.Value == null)
+            {
+                num_Number_of_True_Answer.Value = defaultTrueAnsers;
             }
         }
     }
