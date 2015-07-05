@@ -77,6 +77,26 @@ namespace LanguageTutorial
 
                 App.oActiveUser = combobox_Users.SelectedItem as User;
 
+                using ( var db = new LanguageTutorialContext() )
+                {
+                    var result = db.Course.Where(course => course.Active == true && course.UserId == App.oActiveUser.Id);
+
+                    if ( result != null )
+                    {
+                        foreach ( var c in result )
+                        {
+                            if ( c.LanguageId == 1 )
+                            {
+                                App.oCourseEnglish = c;
+                            }
+                            else
+                            {
+                                App.oCourseFrançais = c;
+                            }
+                        }
+                    }
+                }
+
                 // Открываем окно главного меню
                 MainMenuWindow oMainMenuWindow = new MainMenuWindow();
 
