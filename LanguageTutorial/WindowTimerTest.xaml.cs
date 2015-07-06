@@ -29,10 +29,10 @@ namespace LanguageTutorial {
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e) {
-            if (App.EngSession < Querry.numberSessionsLanguage("English")) { //заменить на значение из базы
+            if (App.EngSession < Querry.numberSessionsLanguageEng()) { //заменить на значение из базы
                 cb_language.Items.Add("English");
             }
-            if (App.FranSession < Querry.numberSessionsLanguage("Français")) {
+            if (App.FranSession < Querry.numberSessionsLanguageFran()) {
                 cb_language.Items.Add("Français");
             }
         }

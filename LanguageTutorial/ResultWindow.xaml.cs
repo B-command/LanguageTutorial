@@ -17,7 +17,7 @@ namespace LanguageTutorial
     /// <summary>
     /// Interaction logic for ResultWindow.xaml
     /// </summary>
-    public partial class ResultWindow : Window
+    public partial class ResultWindow
     {
         int LanguageID;
         public ResultWindow(int language)
@@ -26,6 +26,10 @@ namespace LanguageTutorial
             InitializeComponent();
             lblBall.Content = "Ваш результат за текущую сессию " + TestWindow.result + WriteBall(TestWindow.result.ToString());
             lblRight.Content = "Вы отгадали " + TestWindow.countRightWord + WriteWord(TestWindow.countRightWord.ToString());
+
+            Uri uri = new Uri("pack://siteoforigin:,,,/Resources/pack://siteoforigin:,,,/Resources/caty.png");
+            BitmapImage bitmap = new BitmapImage(uri);
+            img.Source = bitmap;
         }
         string WriteWord(string result)
         {
@@ -89,5 +93,14 @@ namespace LanguageTutorial
             }
             return w;
         }
+<<<<<<< origin/master
+=======
+
+        private void Window_Closed(object sender, EventArgs e) {
+            if (App.EngSession < Querry.numberSessionsLanguageEng() || App.FranSession < Querry.numberSessionsLanguageFran()) {//переместить код в тест
+                App.aTimer.Start();
+            }
+        }
+>>>>>>> local
     }
 }

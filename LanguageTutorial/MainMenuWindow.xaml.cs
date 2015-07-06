@@ -47,8 +47,8 @@ namespace LanguageTutorial
         private void button_Start_Testing_Click(object sender, RoutedEventArgs e)
         {
             App.aTimer.Stop();
-            int eng = Querry.numberSessionsLanguage("English");
-            int fr = Querry.numberSessionsLanguage("Français");
+            int eng = Querry.numberSessionsLanguageEng();
+            int fr = Querry.numberSessionsLanguageFran();
             if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
@@ -223,8 +223,8 @@ namespace LanguageTutorial
         private void StartTesting(object sender, RoutedEventArgs e)
         {
             App.aTimer.Stop();
-            int eng = Querry.numberSessionsLanguage("English");
-            int fr = Querry.numberSessionsLanguage("Français");
+            int eng = Querry.numberSessionsLanguageEng();
+            int fr = Querry.numberSessionsLanguageFran();
             if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
