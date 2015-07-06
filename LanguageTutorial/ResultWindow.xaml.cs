@@ -109,17 +109,6 @@ namespace LanguageTutorial
         }
 
         private void bt_ok_Click(object sender, RoutedEventArgs e) {
-<<<<<<< origin/master
-           /* if (LanguageID == 1) {
-                App.EngSession++;
-            }
-            if (LanguageID == 2) {
-                App.FranSession++;
-            }
-            if (App.EngSession < Querry.numberSessionsLanguageEng() || App.FranSession < Querry.numberSessionsLanguageFran()) {//переместить код в тест
-                App.aTimer.Start();
-            }*/
-=======
             //if (LanguageID == 1) {
             //    App.EngSession++;
             //}
@@ -129,7 +118,6 @@ namespace LanguageTutorial
             //if (App.EngSession < Querry.numberSessionsLanguageEng() || App.FranSession < Querry.numberSessionsLanguageFran()) {//переместить код в тест
             //    App.aTimer.Start();
             //}
->>>>>>> local
             Close();
         }
 
