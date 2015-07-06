@@ -58,12 +58,10 @@ namespace LanguageTutorial
                 if (App.EngSession < eng && App.oCourseEnglish != null) {
                     test = new TestWindow(1);
                     test.ShowDialog();
-                    App.EngSession++;
                 }
                 if (App.FranSession < fr && App.oCourseFrançais != null) {
                     test = new TestWindow(2);
                     test.ShowDialog();
-                    App.FranSession++;
                 }
             } else {
                 MessageBox.Show("Все тесты на сегодня пройдены");
@@ -234,12 +232,10 @@ namespace LanguageTutorial
                 if (App.EngSession < eng && App.oCourseEnglish != null) {
                     test = new TestWindow(1);
                     test.ShowDialog();
-                    App.EngSession++;
                 }
                 if (App.FranSession < fr && App.oCourseFrançais != null) {
                     test = new TestWindow(2);
                     test.ShowDialog();
-                    App.FranSession++;
                 }
             } else {
                 MessageBox.Show("Все тесты на сегодня пройдены");

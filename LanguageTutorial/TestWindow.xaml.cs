@@ -500,6 +500,7 @@ namespace LanguageTutorial
         {
             ResultWindow resultWindow = new ResultWindow(LanguageID);
             resultWindow.ShowDialog();
+            Close();
         }
         string WriteWord(string result)
         {
