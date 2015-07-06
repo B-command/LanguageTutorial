@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Data.Entity;
 
 using LanguageTutorial.DataModel;
+using System.Windows.Threading;
 
 namespace LanguageTutorial
 {
@@ -177,6 +178,11 @@ namespace LanguageTutorial
                             App.Registered = true;
                             App.UserChanged = true;
 
+                            DispatcherTimer Timer = new DispatcherTimer();
+                            Timer.Tick += new EventHandler(TimerMet.OnTimedEvent);
+                            Timer.Interval = new TimeSpan(0, /*min*/0, (int)(App.oActiveUser.SessionPeriod * 60)/*0*/);
+                            App.aTimer = Timer;
+                            
                             this.Close();
                         }
                         else

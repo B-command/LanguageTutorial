@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LanguageTutorial {
-    public static class Querry {
+    public static class TimerMet {
 
         static public int numberSessionsLanguageEng() {
             if (App.oCourseEnglish != null) {
@@ -29,6 +29,13 @@ namespace LanguageTutorial {
             } else {
                 return 0;
             }
+        }
+
+        public static void OnTimedEvent(object source, EventArgs e) {
+            App.aTimer.Stop();
+            WindowTimerTest timerWin = new WindowTimerTest();
+            timerWin.ShowDialog();
+
         }
     }
 }

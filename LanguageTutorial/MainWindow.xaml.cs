@@ -103,7 +103,7 @@ namespace LanguageTutorial
 
                 
                 DispatcherTimer Timer = new DispatcherTimer();
-                Timer.Tick += new EventHandler(OnTimedEvent);
+                Timer.Tick += new EventHandler(TimerMet.OnTimedEvent);
                 Timer.Interval = new TimeSpan(0, /*min*/0, (int)(App.oActiveUser.SessionPeriod * 60)/*0*/);
                 App.aTimer = Timer;
 
@@ -115,12 +115,7 @@ namespace LanguageTutorial
             }
         }
 
-        private static void OnTimedEvent(object source, EventArgs e) {
-            App.aTimer.Stop();
-            WindowTimerTest timerWin = new WindowTimerTest();
-            timerWin.ShowDialog();
 
-        }
 
         /// <summary>
         /// Регистраия нового пользователя

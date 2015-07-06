@@ -103,7 +103,7 @@ namespace LanguageTutorial
             if (LanguageID == 2) {
                 App.FranSession++;
             }
-            if (App.EngSession < Querry.numberSessionsLanguageEng() || App.FranSession < Querry.numberSessionsLanguageFran()) {//переместить код в тест
+            if (App.EngSession < TimerMet.numberSessionsLanguageEng() || App.FranSession < TimerMet.numberSessionsLanguageFran()) {//переместить код в тест
                 App.aTimer.Start();
             }
         }

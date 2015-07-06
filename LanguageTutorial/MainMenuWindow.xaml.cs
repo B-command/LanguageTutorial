@@ -36,8 +36,6 @@ namespace LanguageTutorial
             textblock_Username.DataContext = App.oActiveUser;
             App.EngSession = 0;
             App.FranSession = 0;
-            //App.aTimer.Stop();
-            MessageBox.Show(App.aTimer.Interval.ToString());
             App.aTimer.Start();
         }
 
@@ -49,8 +47,8 @@ namespace LanguageTutorial
         private void button_Start_Testing_Click(object sender, RoutedEventArgs e)
         {
             App.aTimer.Stop();
-            int eng = Querry.numberSessionsLanguageEng();
-            int fr = Querry.numberSessionsLanguageFran();
+            int eng = TimerMet.numberSessionsLanguageEng();
+            int fr = TimerMet.numberSessionsLanguageFran();
             if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
@@ -226,8 +224,8 @@ namespace LanguageTutorial
         private void StartTesting(object sender, RoutedEventArgs e)
         {
             App.aTimer.Stop();
-            int eng = Querry.numberSessionsLanguageEng();
-            int fr = Querry.numberSessionsLanguageFran();
+            int eng = TimerMet.numberSessionsLanguageEng();
+            int fr = TimerMet.numberSessionsLanguageFran();
             if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
