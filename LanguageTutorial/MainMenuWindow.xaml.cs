@@ -397,7 +397,7 @@ namespace LanguageTutorial
 
             App.aTimer = new DispatcherTimer();
             App.aTimer.Tick += new EventHandler(OnTimedEvent);
-            App.aTimer.Interval = new TimeSpan(0, min, 0); //изменить время на время из базы
+            App.aTimer.Interval = new TimeSpan(0, /*min*/0, min/*0*/); //изменить время на время из базы
         }
 
 
