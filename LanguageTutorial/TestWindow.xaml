@@ -11,7 +11,7 @@
         <Label x:Name="lblSchetchik" Content="Label" HorizontalAlignment="Left" Margin="596,24,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="18"/>
         <Label Content="Буквы откроются по мере нажатия на клавиши клавиатуры." HorizontalAlignment="Left" Margin="35,32,0,0" VerticalAlignment="Top" FontSize="16" Height="35" FontStyle="Italic"/>
         <Label Content="Отгадай перевод слова, спрятаный за звездочками.  " HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" Height="31" FontSize="16" FontStyle="Italic"/>
-        <Image x:Name="img" HorizontalAlignment="Left" Height="114" Margin="512,20,0,0" VerticalAlignment="Top" Width="134"/>
+        <Image x:Name="img" HorizontalAlignment="Left" Height="114" Margin="512,72,0,0" VerticalAlignment="Top" Width="134"/>
 
     </Grid>
 </Controls:MetroWindow>
