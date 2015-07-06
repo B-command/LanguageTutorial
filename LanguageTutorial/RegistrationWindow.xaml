@@ -10,7 +10,7 @@
         <TextBox x:Name="textbox_Profile_Name" ToolTip="Введи имя, под которым хочешь быть зарегистрирован в дальнейшем. Оно не должно привышать 50 символов. Можешь использовать любые символы." Text="{Binding Name}" Controls:TextBoxHelper.Watermark="Имя профиля" Width="259" TextWrapping="Wrap" VerticalContentAlignment="Center" Margin="21,44,24,289" LostFocus="textbox_Profile_Name_LostFocus" />
 
         <Label x:Name="label_Time_Between_Seans" Content="Промежуток между сеансами ( часов )" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="21,201,24,134"/>
-        <Controls:NumericUpDown x:Name="num_Time_Between_Seans" ToolTip="Выбери время между прохождениями теста в часах." Maximum="4" Minimum="0.5" Value="{Binding SessionPeriod}" HorizontalAlignment="Left" Height="22" Margin="21,230,0,0" VerticalAlignment="Top" Width="259" Interval="0.5"/>
+        <Controls:NumericUpDown x:Name="num_Time_Between_Seans" ToolTip="Выбери время между прохождениями теста в часах." Maximum="4" Minimum="0.5" Value="{Binding SessionPeriod}" HorizontalAlignment="Left" Height="22" Margin="22,230,0,0" VerticalAlignment="Top" Width="258" Interval="0.5"/>
 
 
         <Label x:Name="label_Language" Content="Языки обучения" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="21,85,24,250"/>
@@ -23,6 +23,7 @@
 
         <Button x:Name="button_Cancel" Content="Отмена" ToolTip="Отменить изменения" HorizontalAlignment="Left" Margin="185,281,0,0" VerticalAlignment="Top" Width="95" Click="button_Cancel_Click" Height="30"/>
         <Image x:Name="img" HorizontalAlignment="Left" Height="100" Margin="237,128,0,0" VerticalAlignment="Top" Width="44" RenderTransformOrigin="0.159,-0.08"/>
+        <Label Content=" " HorizontalAlignment="Left" Margin="22,230,0,0" VerticalAlignment="Top" Width="215"/>
 
     </Grid>
 </Controls:MetroWindow>
