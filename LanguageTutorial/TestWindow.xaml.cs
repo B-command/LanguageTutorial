@@ -319,6 +319,7 @@ namespace LanguageTutorial
             translatingWord[1] = dict.ElementAt(translatingWordIndex).Value;
             //условие, по которому определяем, переводим ли мы с ин.языка на русский
             //или с русского на иностранный
+            //
             if (rnd.Next(0, 19) > 9)
             {
                 //если условие выполнилось, то меняем местами в "cat" и "кошка"
