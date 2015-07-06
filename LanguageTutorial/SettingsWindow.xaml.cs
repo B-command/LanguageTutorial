@@ -113,24 +113,14 @@ namespace LanguageTutorial
 
         private void num_Number_of_Words_Per_Seans_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value) num_Number_of_Words_Per_Seans.Value = num_Number_of_Words_To_Study.Value;
+            //if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value) num_Number_of_Words_Per_Seans.Value = num_Number_of_Words_To_Study.Value;
         }
 
         private void num_Number_of_Words_To_Study_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value) num_Number_of_Words_To_Study = num_Number_of_Words_Per_Seans;
+           // if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value) num_Number_of_Words_To_Study = num_Number_of_Words_Per_Seans;
         }
-
-        private void num_Number_of_Words_Per_Seans_LostFocus_1(object sender, RoutedEventArgs e)
-        {
-            //if (num_Number_of_Words_Per_Seans.Value == null) num_Number_of_Words_Per_Seans.Value = defaultWordsForSession;
-        }
-
-        private void num_Number_of_Words_To_Study_LostFocus_1(object sender, RoutedEventArgs e)
-        {
-            // if (num_Number_of_Words_To_Study.Value == null) num_Number_of_Words_To_Study.Value = defaultWordsForStudy;
-        }
-
+               
         private void num_Number_of_Seans_Per_Day_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
             if (num_Number_of_Seans_Per_Day.Value == null)
@@ -141,6 +131,11 @@ namespace LanguageTutorial
 
         private void num_Number_of_Words_To_Study_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
+            if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value)
+            {
+                num_Number_of_Words_Per_Seans.Maximum = (double)num_Number_of_Words_To_Study.Value;
+            }
+
             if (num_Number_of_Words_To_Study.Value == null)
             {
                 num_Number_of_Words_To_Study.Value = defaultWordsForStudy;
@@ -149,6 +144,11 @@ namespace LanguageTutorial
 
         private void num_Number_of_Words_Per_Seans_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
+            if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value)
+            {
+                num_Number_of_Words_Per_Seans.Maximum = (double)num_Number_of_Words_To_Study.Value;
+            }
+
             if (num_Number_of_Words_Per_Seans.Value == null)
             {
                 num_Number_of_Words_Per_Seans.Value = defaultWordsForSession;
