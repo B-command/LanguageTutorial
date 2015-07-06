@@ -5,17 +5,13 @@
         Title="Тестирование" Height="465" Width="686" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid x:Name="GridTest" Margin="0,0,0,-20">
         <Label x:Name="lblWord" Content="Слово" HorizontalAlignment="Left" Margin="44,72,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Microsoft Sans Serif"/>
-        <Button x:Name="SkipWord" Content="Пропустить слово" HorizontalAlignment="Left" Margin="532,354,0,0" VerticalAlignment="Top" Width="114" Height="33" Click="SkipWord_Click"/>
+        <Button x:Name="SkipWord" Content="Пропустить слово" HorizontalAlignment="Left" Margin="438,354,0,0" VerticalAlignment="Top" Width="208" Height="33" Click="SkipWord_Click"/>
         <StackPanel x:Name="PanelLetters" HorizontalAlignment="Left" Margin="35,212,0,0" VerticalAlignment="Top"/>
-<<<<<<< origin/master
-        <Label x:Name="lblResult" Content="Вы набрали" HorizontalAlignment="Left" Margin="35,313,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.374,-2.605" FontStyle="Italic" FontFamily="Microsoft Sans Serif" FontSize="20"/>
-        <Label x:Name="lblSchetchik" Content="Label" HorizontalAlignment="Left" Margin="596,24,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="18"/>
-=======
         <Label x:Name="lblResult" Content="Ты набрал" HorizontalAlignment="Left" Margin="35,313,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.374,-2.605" FontStyle="Italic" FontFamily="Microsoft Sans Serif" FontSize="20"/>
+        <Label x:Name="lblSchetchik" Content="Label" HorizontalAlignment="Left" Margin="596,24,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="18"/>
         <Label Content="Буквы откроются по мере нажатия на клавиши клавиатуры." HorizontalAlignment="Left" Margin="35,32,0,0" VerticalAlignment="Top" FontSize="16" Height="35" FontStyle="Italic"/>
         <Label Content="Отгадай перевод слова, спрятаный за звездочками.  " HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" Height="31" FontSize="16" FontStyle="Italic"/>
         <Image x:Name="img" HorizontalAlignment="Left" Height="114" Margin="512,20,0,0" VerticalAlignment="Top" Width="134"/>
->>>>>>> local
 
     </Grid>
 </Controls:MetroWindow>

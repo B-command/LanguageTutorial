@@ -1,20 +1,11 @@
 ﻿<Controls:MetroWindow x:Class="LanguageTutorial.ResultWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-<<<<<<< origin/master
-        Title="ResultWindow" Height="300" Width="374.157">
-    <Grid>
-        <Label x:Name="lblBall" Content="Label" HorizontalAlignment="Center" Margin="48,44,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblRight" Content="Label" HorizontalAlignment="Center" Margin="48,97,0,0" VerticalAlignment="Top"/>
-=======
-        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"               
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"  
         Title="Результат" Height="383.582" Width="407.463" Closed="Window_Closed">
     <Grid>
-        <Image x:Name="img" HorizontalAlignment="Left" Height="294" Margin="-13,25,0,0" VerticalAlignment="Top" Width="412" />
-
-        <Label x:Name="lblBall" Content="Label" HorizontalAlignment="Left" Margin="91,80,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblRight" Content="Label" HorizontalAlignment="Left" Margin="129,106,0,0" VerticalAlignment="Top"/>
->>>>>>> local
-
+        <Image x:Name="img" HorizontalAlignment="Left" Height="294" Margin="0,29,-13,0" VerticalAlignment="Top" Width="412" Source="pack://siteoforigin:,,,/Resources/caty.png" />
+        <Label x:Name="lblBall" Content="Label" HorizontalAlignment="Center" Margin="152,57,209,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblRight" Content="Label" HorizontalAlignment="Center" Margin="116,88,245,0" VerticalAlignment="Top" RenderTransformOrigin="-2.174,0.378"/>
     </Grid>
 </Controls:MetroWindow>

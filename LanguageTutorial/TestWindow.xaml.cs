@@ -28,14 +28,12 @@ namespace LanguageTutorial
         {
             LanguageID = language;
             InitializeComponent();
-<<<<<<< origin/master
-=======
 
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/Без имени-3.png");
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
->>>>>>> local
         }
+
         public TestWindow()
         {
             InitializeComponent();
@@ -207,12 +205,9 @@ namespace LanguageTutorial
                     }
                     translatingWord[1] = s;
                 }
-<<<<<<< origin/master
+
                 lblSchetchik.Content = schet+ "/" + countWordOfS;
-                lblResult.Content = "Вы набрали " + result + WriteWord(result.ToString());
-=======
-                lblResult.Content = "Ты набрал " + result;
->>>>>>> local
+                lblResult.Content = "Ты набрал " + result + WriteWord(result.ToString());
                 //прогоняем слова из словаря
                 //выводим слово с заглавной буквы
                 lblWord.Content = translatingWord[0].Substring(0, 1).ToUpper() + translatingWord[0].Substring(1, translatingWord[0].Length - 1);
@@ -437,11 +432,7 @@ namespace LanguageTutorial
             {
                 result -= 1;
                 LetterFalse += 1;
-<<<<<<< origin/master
-                lblResult.Content = "Вы набрали " + result + WriteWord(result.ToString());
-=======
-                lblResult.Content = "Ты набрал " + result;
->>>>>>> local
+                lblResult.Content = "Ты набрал " + result + WriteWord(result.ToString());
             }
             //записываем из Label букву
             string ss = "";
@@ -455,20 +446,12 @@ namespace LanguageTutorial
                 if (toRussian)
                 {
                     result += 2 * translatingWord[1].Length;
-<<<<<<< origin/master
-                    lblResult.Content = "Вы набрали " + result + WriteWord(result.ToString());
-=======
-                    lblResult.Content = "Ты набрал " + result;
->>>>>>> local
+                    lblResult.Content = "Ты набрал " + result + WriteWord(result.ToString());
                 }
                 else
                 {
                     result += 3 * translatingWord[1].Length;
-<<<<<<< origin/master
-                    lblResult.Content = "Вы набрали " + result + WriteWord(result.ToString());
-=======
-                    lblResult.Content = "Ты набрал " + result + " " + LetterFalse;
->>>>>>> local
+                    lblResult.Content = "Ты набрал " + result + WriteWord(result.ToString());
                 }
                 if (LetterFalse == 0)
                 {
@@ -498,20 +481,12 @@ namespace LanguageTutorial
             if (toRussian)
             {
                 result -= 3 * translatingWord[1].Length;
-<<<<<<< origin/master
-                lblResult.Content = "Вы набрали " + result+WriteWord(result.ToString());
-=======
-                lblResult.Content = "Ты набрал " + result;
->>>>>>> local
+                lblResult.Content = "Ты набрал " + result+WriteWord(result.ToString());
             }
             else
             {
                 result -= 2 * translatingWord[1].Length;
-<<<<<<< origin/master
-                lblResult.Content = "Вы набрали " + result + WriteWord(result.ToString());
-=======
-                lblResult.Content = "Ты набрал " + result;
->>>>>>> local
+                lblResult.Content = "Ты набрал " + result + WriteWord(result.ToString());
             }
             //следующее слово
             schet++;
