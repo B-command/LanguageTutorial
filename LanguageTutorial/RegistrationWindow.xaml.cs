@@ -76,8 +76,8 @@ namespace LanguageTutorial
             }
             else
             {// Заполняем стандартными значениями настройки языков
-                App.oCourseEnglish = new Course() { LanguageId = 1, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
-                App.oCourseFrançais = new Course() { LanguageId = 2, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
+                App.oCourseEnglish = new Course() { LanguageId = 1, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 5 };
+                App.oCourseFrançais = new Course() { LanguageId = 2, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 5 };
             }
 
             App.Registered = false;
@@ -249,13 +249,12 @@ namespace LanguageTutorial
                                             nCourse.WordsPerSession = 20;
                                             nCourse.WordsToStudy = 50;
                                             nCourse.SeansPerDay = 5;
-                                            nCourse.TrueAnswers = 3;
+                                            nCourse.TrueAnswers = 5;
                                             nCourse.UserId = App.oActiveUser.Id;
                                             nCourse.LanguageId = 1;
 
                                             db.Course.Add(nCourse);
                                             db.SaveChanges();
-
                                             App.oCourseEnglish = nCourse;
 
                                             for (int i = 1; i <= App.oCourseEnglish.WordsToStudy; i++)
@@ -329,7 +328,7 @@ namespace LanguageTutorial
                                             nCourse.WordsPerSession = 20;
                                             nCourse.WordsToStudy = 50;
                                             nCourse.SeansPerDay = 5;
-                                            nCourse.TrueAnswers = 3;
+                                            nCourse.TrueAnswers = 5;
                                             nCourse.UserId = App.oActiveUser.Id;
                                             nCourse.LanguageId = 2;
 
@@ -337,7 +336,6 @@ namespace LanguageTutorial
                                             db.SaveChanges();
 
                                             App.oCourseFrançais = nCourse;
-
                                             for (int i = 1; i <= App.oCourseFrançais.WordsToStudy; i++)
                                             {
                                                 db.WordQueue.Add(new WordQueue() { TrueAnswers = 0, IsLearned = false, UserId = App.oActiveUser.Id, WordDictionaryId = i });

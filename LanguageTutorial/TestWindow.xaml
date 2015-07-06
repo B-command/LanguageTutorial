@@ -1,11 +1,13 @@
 ﻿<Window x:Class="LanguageTutorial.TestWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Тест" Height="500" Width="700">
-    <Grid>
-        <Label Content="Слово" HorizontalAlignment="Left" Margin="263,105,0,0" VerticalAlignment="Top" Width="164" FontSize="18"/>
-        <Label Content="Перевод" HorizontalAlignment="Left" Margin="263,192,0,0" VerticalAlignment="Top" Width="114" FontSize="18"/>
-        <Button Content="Пропустить слово" HorizontalAlignment="Left" Margin="263,298,0,0" VerticalAlignment="Top" Width="114" Height="40"/>
+        Title="Тестирование" Height="465" Width="686" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
+    <Grid x:Name="GridTest">
+        <Label x:Name="lblWord" Content="Слово" HorizontalAlignment="Left" Margin="44,72,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Microsoft Sans Serif"/>
+        <Button x:Name="SkipWord" Content="Пропустить слово" HorizontalAlignment="Left" Margin="532,354,0,0" VerticalAlignment="Top" Width="114" Height="33" Click="SkipWord_Click"/>
+        <StackPanel x:Name="PanelLetters" HorizontalAlignment="Left" Margin="35,212,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblResult" Content="Вы набрали" HorizontalAlignment="Left" Margin="35,313,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.374,-2.605" FontStyle="Italic" FontFamily="Microsoft Sans Serif" FontSize="20"/>
 
     </Grid>
 </Window>
+

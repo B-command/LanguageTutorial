@@ -39,6 +39,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+
             Update_ComboBox_Users();
 
             Clear_Control();
@@ -80,7 +81,7 @@ namespace LanguageTutorial
                 using ( var db = new LanguageTutorialContext() )
                 {
                     var result = db.Course.Where(course => course.Active == true && course.UserId == App.oActiveUser.Id);
-
+ 
                     if ( result != null )
                     {
                         foreach ( var c in result )
@@ -96,7 +97,6 @@ namespace LanguageTutorial
                         }
                     }
                 }
-
                 // Открываем окно главного меню
                 MainMenuWindow oMainMenuWindow = new MainMenuWindow();
 

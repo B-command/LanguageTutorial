@@ -27,7 +27,10 @@ namespace LanguageTutorial {
 
         private void Button_Click(object sender, RoutedEventArgs e) {
             Close();
-            MessageBox.Show("Начать Тестирование - Всплывающее окно (заглушка)");
+            ///!!!!!!!!если английский, то передать параметр 1 в конструктор, если нет(французский) -2
+            TestWindow test = new TestWindow();
+            test.ShowDialog();
+            //MessageBox.Show("Начать Тестирование - Всплывающее окно (заглушка)");
             if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
                 App.aTimer.Start();
             }

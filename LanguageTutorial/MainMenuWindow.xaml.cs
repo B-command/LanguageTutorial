@@ -50,10 +50,23 @@ namespace LanguageTutorial
             if (App.EngSession < Querry.numberSessionsLanguage("English") && App.FranSession < Querry.numberSessionsLanguage("Français")) { //заменить константы на данные из бд
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
-            } else { 
+            } else {
+                TestWindow test;
+                if (App.EngSession < Querry.numberSessionsLanguage("English") && App.oCourseEnglish != null)
+                {
+                    test = new TestWindow(1);
+                    test.ShowDialog();
+                    App.EngSession++;
+                }
+                if (App.FranSession < Querry.numberSessionsLanguage("Français") && App.oCourseFrançais != null)
+                {
+                    test = new TestWindow(2);
+                    test.ShowDialog();
+                    App.FranSession++;
+                }
                 //запускаем тест по которому доступны сеансы
-                MessageBox.Show("Начать Тестирование - Меню (заглушка)");
-                App.EngSession++; //убрать когда появится тест
+                //MessageBox.Show("Начать Тестирование - Меню (заглушка)");
+               // App.EngSession++; //убрать когда появится тест
                 if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
                     App.aTimer.Start();
                 } // если не закончились сессии по английскому и французскому
@@ -214,7 +227,10 @@ namespace LanguageTutorial
         private void StartTesting(object sender, RoutedEventArgs e)
         {
             App.aTimer.Stop();
-            MessageBox.Show("Тестирование - Трей (заглушка)");
+            ///!!!!!!!!!если английский, то передать параметр 1 в конструктор, если нет(французский) -2
+            TestWindow test = new TestWindow();
+            test.ShowDialog();
+            //MessageBox.Show("Тестирование - Трей (заглушка)");
             App.FranSession++; //убрать когда появится тест
             if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
                 App.aTimer.Start();
