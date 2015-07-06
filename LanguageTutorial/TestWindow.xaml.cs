@@ -533,6 +533,12 @@ namespace LanguageTutorial
             }
             return w;
         }
+
+        private void MetroWindow_Closed(object sender, EventArgs e) {
+            if (App.EngSession < Querry.numberSessionsLanguageEng() || App.FranSession < Querry.numberSessionsLanguageFran()) {//переместить код в тест
+                App.aTimer.Start();
+            }
+        }
         
     }
 }
