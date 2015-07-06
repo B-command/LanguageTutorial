@@ -142,8 +142,9 @@ namespace LanguageTutorial
                                     for ( int i = 1; i <= App.oCourseEnglish.WordsToStudy; i++)
                                     {
                                         db.WordQueue.Add(new WordQueue() { TrueAnswers = 0, IsLearned = false, UserId = nUser.Id, WordDictionaryId = i });
-                                        db.SaveChanges();
                                     }
+
+                                    db.SaveChanges();
                                 }
                             }
 

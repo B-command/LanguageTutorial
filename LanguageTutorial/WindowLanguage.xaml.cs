@@ -32,11 +32,11 @@ namespace LanguageTutorial {
         private void bt_continue_Click(object sender, RoutedEventArgs e) {
             Close();
             TestWindow test;
-            if (cb_language.SelectedIndex == 1) {
+            if (cb_language.SelectedIndex == 0) {
                 test = new TestWindow(1);
                 test.ShowDialog();
             }
-            if (cb_language.SelectedIndex == 2) { 
+            if (cb_language.SelectedIndex == 1) { 
                 test = new TestWindow(2);
                 test.ShowDialog();
             }
