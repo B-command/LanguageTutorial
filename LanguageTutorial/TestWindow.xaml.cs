@@ -143,12 +143,13 @@ namespace LanguageTutorial
         void SequenceWords()
         {
             //Если счетчик равен списку слов, то 
-            if (schet == countWordOfS+1)
+            if (schet > countWordOfS)
             {
                 //конец тестирования
                 //открывается форма с результатом
                 //MessageBox.Show("Ho-Ho-Ho! Это конец!");
                 SkipWord.Content = "Завершить тестирование";
+                SkipWord.Click += new RoutedEventHandler(OnTestEnd);
             }
             else
             {
@@ -471,13 +472,13 @@ namespace LanguageTutorial
 
         private void SkipWord_Click(object sender, RoutedEventArgs e)
         {
-            if (schet == countWordOfS)
-            {
-                SkipWord.Content = "Завершить тестирование";
-                SkipWord.Click+=new RoutedEventHandler(OnTestEnd);
-            }
-            else 
-            {
+            //if (schet >= countWordOfS)
+            //{
+              //  SkipWord.Content = "Завершить тестирование";
+                //SkipWord.Click+=new RoutedEventHandler(OnTestEnd);
+            //}
+            //else 
+           // {
             //вычитаем балы за пропуск
             if (toRussian)
             {
@@ -491,6 +492,16 @@ namespace LanguageTutorial
             }
             //следующее слово
             schet++;
+            if(schet>countWordOfS)
+            {
+                SkipWord.Content = "Завершить тестирование";
+                SkipWord.Click+=new RoutedEventHandler(OnTestEnd);
+            }
+            else
+            {
+
+            
+            //schet++;
             DeleteLabel();
             toRussian = true;
             translatingWord = NextWordChosing();
