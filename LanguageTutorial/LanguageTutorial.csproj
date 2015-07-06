@@ -281,14 +281,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Dictionary\English.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="Dictionary\English.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Dictionary\Français.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="Dictionary\Français.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\caty.png">

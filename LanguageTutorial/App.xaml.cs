@@ -47,61 +47,61 @@ namespace LanguageTutorial
             App.ChangeUser = false;
 
             // Загрузка языков и их слов при 1 запуске программы
-            using ( var db = new LanguageTutorialContext())
-            {
-                if ( db.Language.ToList().Count == 0 )
-                { // Если таблица пуста, значит программа запущена впервые.
+            //using ( var db = new LanguageTutorialContext())
+            //{
+            //    if ( db.Language.ToList().Count == 0 )
+            //    { // Если таблица пуста, значит программа запущена впервые.
 
-                    // Заполнение языков
-                    db.Language.Add(new Language() { Name = "English" });
-                    db.SaveChanges();
+            //        // Заполнение языков
+            //        db.Language.Add(new Language() { Name = "English" });
+            //        db.SaveChanges();
 
-                    db.Language.Add(new Language() { Name = "Français"});
-                    db.SaveChanges();
+            //        db.Language.Add(new Language() { Name = "Français"});
+            //        db.SaveChanges();
 
-                    // Заполнение словаря Английского языка
-                    using ( var loadDictionary = new StreamReader("Dictionary\\English.txt"))
-                    {
-                        string str = String.Empty;
+            //        // Заполнение словаря Английского языка
+            //        using ( var loadDictionary = new StreamReader("Dictionary\\English.txt"))
+            //        {
+            //            string str = String.Empty;
 
-                        while (str != null)
-                        {
-                            str = loadDictionary.ReadLine();
-                            // добавляем новый элемент в коллекцию, хранящую словарь
-                            if (str != null)
-                            {
-                                string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
+            //            while (str != null)
+            //            {
+            //                str = loadDictionary.ReadLine();
+            //                // добавляем новый элемент в коллекцию, хранящую словарь
+            //                if (str != null)
+            //                {
+            //                    string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
 
-                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 1, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
-                                db.SaveChanges();
-                            }
-                        }
+            //                    db.WordDictionary.Add(new WordDictionary() { LanguageId = 1, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
+            //                    db.SaveChanges();
+            //                }
+            //            }
 
-                        loadDictionary.Close();
-                    }
+            //            loadDictionary.Close();
+            //        }
 
-                    // Заполнение словаря Французского языка
-                    using (var loadDictionary = new StreamReader("Dictionary\\Français.txt"))
-                    {
-                        string str = String.Empty;
+            //        // Заполнение словаря Французского языка
+            //        using (var loadDictionary = new StreamReader("Dictionary\\Français.txt"))
+            //        {
+            //            string str = String.Empty;
 
-                        while (str != null)
-                        {
-                            str = loadDictionary.ReadLine();
+            //            while (str != null)
+            //            {
+            //                str = loadDictionary.ReadLine();
 
-                            if (str != null)
-                            {
-                                string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
+            //                if (str != null)
+            //                {
+            //                    string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
 
-                                db.WordDictionary.Add(new WordDictionary() { LanguageId = 2, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
-                                db.SaveChanges();
-                            }
-                        }
+            //                    db.WordDictionary.Add(new WordDictionary() { LanguageId = 2, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
+            //                    db.SaveChanges();
+            //                }
+            //            }
 
-                        loadDictionary.Close();
-                    }
-                }
-            }
+            //            loadDictionary.Close();
+            //        }
+            //    }
+            //}
         }
 
 
