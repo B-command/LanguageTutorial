@@ -42,7 +42,6 @@ namespace LanguageTutorial {
         }
 
         private void button_remember_later_Click(object sender, RoutedEventArgs e) {
-            App.aTimer.Start();
             Close();
         }
 

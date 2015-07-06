@@ -36,7 +36,8 @@ namespace LanguageTutorial
             textblock_Username.DataContext = App.oActiveUser;
             App.EngSession = 0;
             App.FranSession = 0;
-            timer();
+            //App.aTimer.Stop();
+            MessageBox.Show(App.aTimer.Interval.ToString());
             App.aTimer.Start();
         }
 
@@ -101,6 +102,8 @@ namespace LanguageTutorial
             App.ChangeUser = true;
 
             this.Visibility = System.Windows.Visibility.Hidden;
+            
+            App.aTimer.Stop();
 
             MainWindow oMainWindow = new MainWindow();
 
@@ -111,6 +114,7 @@ namespace LanguageTutorial
                 App.UserChanged = false;
 
                 CanClose = true;
+                
 
                 this.Close();
             }
@@ -390,25 +394,25 @@ namespace LanguageTutorial
         }
 
         public void timer() {
-            int min;
-            using (var db = new LanguageTutorialContext()) {
-                min = (int)(App.oActiveUser.SessionPeriod * 60);
-            }
+           // int min;
+           // //using (var db = new LanguageTutorialContext()) {
+           //     min = (int)(App.oActiveUser.SessionPeriod * 60);
+           //// }
 
-            App.aTimer = new DispatcherTimer();
-            App.aTimer.Tick += new EventHandler(OnTimedEvent);
-            App.aTimer.Interval = new TimeSpan(0, /*min*/0, min/*0*/); //изменить время на время из базы
+           // App.aTimer = new DispatcherTimer();
+           // App.aTimer.Tick += new EventHandler(OnTimedEvent);
+             //изменить время на время из базы
         }
 
 
 
         // СОБЫТИЕ ТАЙМЕРА
-        private static void OnTimedEvent(object source, EventArgs e)
-        {
-                App.aTimer.Stop();
-                WindowTimerTest timerWin = new WindowTimerTest();
-                timerWin.ShowDialog();
+        //private static void OnTimedEvent(object source, EventArgs e)
+        //{
+        //        App.aTimer.Stop();
+        //        WindowTimerTest timerWin = new WindowTimerTest();
+        //        timerWin.ShowDialog();
 
-        }
+        //}
     }
 }

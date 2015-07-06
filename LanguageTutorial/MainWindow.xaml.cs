@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using System.Data.Entity;
 
 using LanguageTutorial.DataModel;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace LanguageTutorial
 {
@@ -98,12 +100,26 @@ namespace LanguageTutorial
                     }
                 }
                 // Открываем окно главного меню
+
+                
+                DispatcherTimer Timer = new DispatcherTimer();
+                Timer.Tick += new EventHandler(OnTimedEvent);
+                Timer.Interval = new TimeSpan(0, /*min*/0, (int)(App.oActiveUser.SessionPeriod * 60)/*0*/);
+                App.aTimer = Timer;
+
                 MainMenuWindow oMainMenuWindow = new MainMenuWindow();
 
                 oMainMenuWindow.Show();
 
                 this.Close();
             }
+        }
+
+        private static void OnTimedEvent(object source, EventArgs e) {
+            App.aTimer.Stop();
+            WindowTimerTest timerWin = new WindowTimerTest();
+            timerWin.ShowDialog();
+
         }
 
         /// <summary>
