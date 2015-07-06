@@ -76,8 +76,8 @@ namespace LanguageTutorial
             }
             else
             {// Заполняем стандартными значениями настройки языков
-                App.oCourseEnglish = new Course() { LanguageId = 1, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 5 };
-                App.oCourseFrançais = new Course() { LanguageId = 2, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 5 };
+                App.oCourseEnglish = new Course() { LanguageId = 1, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
+                App.oCourseFrançais = new Course() { LanguageId = 2, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
             }
 
             App.Registered = false;
@@ -249,7 +249,7 @@ namespace LanguageTutorial
                                             nCourse.WordsPerSession = 20;
                                             nCourse.WordsToStudy = 50;
                                             nCourse.SeansPerDay = 5;
-                                            nCourse.TrueAnswers = 5;
+                                            nCourse.TrueAnswers = 3;
                                             nCourse.UserId = App.oActiveUser.Id;
                                             nCourse.LanguageId = 1;
 
@@ -328,7 +328,7 @@ namespace LanguageTutorial
                                             nCourse.WordsPerSession = 20;
                                             nCourse.WordsToStudy = 50;
                                             nCourse.SeansPerDay = 5;
-                                            nCourse.TrueAnswers = 5;
+                                            nCourse.TrueAnswers = 3;
                                             nCourse.UserId = App.oActiveUser.Id;
                                             nCourse.LanguageId = 2;
 
