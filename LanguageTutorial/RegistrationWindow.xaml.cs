@@ -453,5 +453,37 @@ namespace LanguageTutorial
         {
             textbox_Profile_Name.Text = textbox_Profile_Name.Text.Trim();
         }
+
+        // Перед закрытием окна обновить глобальные переменные настроек курса пользователя
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            using (var db = new LanguageTutorialContext())
+            {
+                var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 1);
+
+                if (result != null)
+                {
+                    App.oCourseEnglish = result as Course;
+                }
+                else
+                {
+                    App.oCourseEnglish = null;
+                }
+
+                result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 2);
+
+                if (result != null)
+                {
+                    App.oCourseFrançais = result as Course;
+                }
+                else
+                {
+                    App.oCourseFrançais = null;
+                }
+
+            }
+
+            base.OnClosing(e);
+        }
     }
 }
