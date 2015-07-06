@@ -27,7 +27,7 @@ namespace LanguageTutorial
             lblBall.Content = "Ваш результат за текущую сессию " + TestWindow.result + WriteBall(TestWindow.result.ToString());
             lblRight.Content = "Вы отгадали " + TestWindow.countRightWord + WriteWord(TestWindow.countRightWord.ToString());
 
-            Uri uri = new Uri("pack://siteoforigin:,,,/Resources/pack://siteoforigin:,,,/Resources/caty.png");
+            Uri uri = new Uri("pack://siteoforigin:,,,/Resources/caty.png");
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
         }
@@ -95,9 +95,28 @@ namespace LanguageTutorial
         }
 
         private void Window_Closed(object sender, EventArgs e) {
+            if (LanguageID == 1) {
+                App.EngSession++;
+            }
+            if (LanguageID == 2) {
+                App.FranSession++;
+            }
             if (App.EngSession < Querry.numberSessionsLanguageEng() || App.FranSession < Querry.numberSessionsLanguageFran()) {//переместить код в тест
                 App.aTimer.Start();
             }
+        }
+
+        private void bt_ok_Click(object sender, RoutedEventArgs e) {
+            if (LanguageID == 1) {
+                App.EngSession++;
+            }
+            if (LanguageID == 2) {
+                App.FranSession++;
+            }
+            if (App.EngSession < Querry.numberSessionsLanguageEng() || App.FranSession < Querry.numberSessionsLanguageFran()) {//переместить код в тест
+                App.aTimer.Start();
+            }
+            Close();
         }
 
     }

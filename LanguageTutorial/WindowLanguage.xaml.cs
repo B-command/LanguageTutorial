@@ -31,7 +31,6 @@ namespace LanguageTutorial {
 
         private void bt_continue_Click(object sender, RoutedEventArgs e) {
             Close();
-            ///!!!!!!!!если английский, то передать параметр 1 в конструктор, если нет(французский) -2
             TestWindow test;
             if (cb_language.SelectedIndex == 1) {
                 test = new TestWindow(1);

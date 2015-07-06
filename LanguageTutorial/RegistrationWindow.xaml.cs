@@ -199,7 +199,7 @@ namespace LanguageTutorial
                                     }
                                 }
 
-                                App.aTimer.Interval = new TimeSpan(0, (int)((double)num_Time_Between_Seans.Value * 60), 0);
+                                App.aTimer.Interval = new TimeSpan(0, /*(int)((double)num_Time_Between_Seans.Value * 60)*/0, /*0*/ (int)((double)num_Time_Between_Seans.Value * 60));
 
                                 // Проверка изменения курсов пользователя
                                 bool Course_Finded = false;
