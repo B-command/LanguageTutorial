@@ -29,6 +29,10 @@ namespace LanguageTutorial
             //LanguageID = language;
             LanguageID = 1;
             InitializeComponent();
+
+            //Uri uri = new Uri("pack://siteoforigin:,,,/Resources/Без имени-3.png");
+            //BitmapImage bitmap = new BitmapImage(uri);
+            //img.Source = bitmap;
         }
         public TestWindow()
         {

@@ -47,31 +47,27 @@ namespace LanguageTutorial
         private void button_Start_Testing_Click(object sender, RoutedEventArgs e)
         {
             App.aTimer.Stop();
-            if (App.EngSession < Querry.numberSessionsLanguage("English") && App.FranSession < Querry.numberSessionsLanguage("Français")) { //заменить константы на данные из бд
+            int eng = Querry.numberSessionsLanguage("English");
+            int fr = Querry.numberSessionsLanguage("Français");
+            if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
-            } else {
+            } else if (App.EngSession < eng || App.FranSession < fr) {
                 TestWindow test;
-                if (App.EngSession < Querry.numberSessionsLanguage("English") && App.oCourseEnglish != null)
-                {
+                if (App.EngSession < eng && App.oCourseEnglish != null) {
                     test = new TestWindow(1);
                     test.ShowDialog();
                     App.EngSession++;
                 }
-                if (App.FranSession < Querry.numberSessionsLanguage("Français") && App.oCourseFrançais != null)
-                {
+                if (App.FranSession < fr && App.oCourseFrançais != null) {
                     test = new TestWindow(2);
                     test.ShowDialog();
                     App.FranSession++;
                 }
-                //запускаем тест по которому доступны сеансы
-                //MessageBox.Show("Начать Тестирование - Меню (заглушка)");
-               // App.EngSession++; //убрать когда появится тест
-                if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
-                    App.aTimer.Start();
-                } // если не закончились сессии по английскому и французскому
-                //заменить константы на данные из бд
+            } else {
+                MessageBox.Show("Все тесты на сегодня пройдены");
             }
+
         }
 
         /// <summary>
@@ -227,15 +223,26 @@ namespace LanguageTutorial
         private void StartTesting(object sender, RoutedEventArgs e)
         {
             App.aTimer.Stop();
-            ///!!!!!!!!!если английский, то передать параметр 1 в конструктор, если нет(французский) -2
-            TestWindow test = new TestWindow();
-            test.ShowDialog();
-            //MessageBox.Show("Тестирование - Трей (заглушка)");
-            App.FranSession++; //убрать когда появится тест
-            if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
-                App.aTimer.Start();
-            } // если не закончились сессии по английскому и французскому
-            //заменить константы на данные из бд
+            int eng = Querry.numberSessionsLanguage("English");
+            int fr = Querry.numberSessionsLanguage("Français");
+            if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
+                WindowLanguage winLan = new WindowLanguage();
+                winLan.ShowDialog();
+            } else if (App.EngSession < eng || App.FranSession < fr) {
+                TestWindow test;
+                if (App.EngSession < eng && App.oCourseEnglish != null) {
+                    test = new TestWindow(1);
+                    test.ShowDialog();
+                    App.EngSession++;
+                }
+                if (App.FranSession < fr && App.oCourseFrançais != null) {
+                    test = new TestWindow(2);
+                    test.ShowDialog();
+                    App.FranSession++;
+                }
+            } else {
+                MessageBox.Show("Все тесты на сегодня пройдены");
+            }
         }
 
         /// <summary>

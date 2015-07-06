@@ -23,22 +23,43 @@ namespace LanguageTutorial {
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/catsdogs1.png");
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
+
+            if (cb_language.SelectedIndex == -1) {
+                bt_continue.IsEnabled = false;
+            }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
+        private void bt_continue_Click(object sender, RoutedEventArgs e) {
             Close();
             ///!!!!!!!!если английский, то передать параметр 1 в конструктор, если нет(французский) -2
-            TestWindow test = new TestWindow();
-            test.ShowDialog();
-            //MessageBox.Show("Начать Тестирование - Всплывающее окно (заглушка)");
-            if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
-                App.aTimer.Start();
+            TestWindow test;
+            if (cb_language.SelectedIndex == 1) {
+                test = new TestWindow(1);
+                test.ShowDialog();
             }
+            if (cb_language.SelectedIndex == 2) { 
+                test = new TestWindow(2);
+                test.ShowDialog();
+            }
+            
+
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e) {
             cb_language.Items.Add("English");
             cb_language.Items.Add("Français");
+        }
+
+        private void cb_language_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (cb_language.SelectedIndex == -1) {
+                bt_continue.IsEnabled = false;
+            } else {
+                bt_continue.IsEnabled = true;
+            }
+        }
+
+        private void MetroWindow_Closed(object sender, EventArgs e) {
+            App.aTimer.Start();
         }
 
     }

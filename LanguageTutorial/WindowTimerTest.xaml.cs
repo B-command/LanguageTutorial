@@ -22,6 +22,10 @@ namespace LanguageTutorial {
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/Без имени-5.png");
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
+
+            if (cb_language.SelectedIndex == -1) {
+                button_pass_test.IsEnabled = false;
+            }
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e) {
@@ -44,12 +48,23 @@ namespace LanguageTutorial {
 
         private void button_pass_test_Click(object sender, RoutedEventArgs e) {
             Close();
-            MessageBox.Show("Начать Тестирование - Всплывающее окно (заглушка)");
-            App.EngSession++; //убрать когда появится тест
-            if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
-                App.aTimer.Start();
-            } // если не закончились сессии по английскому и французскому
-            //заменить константы на данные из бд
+            TestWindow test;
+            if (cb_language.SelectedIndex == 1) {
+                test = new TestWindow(1);
+                test.ShowDialog();
+            }
+            if (cb_language.SelectedIndex == 2) {
+                test = new TestWindow(2);
+                test.ShowDialog();
+            }
+        }
+
+        private void cb_language_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (cb_language.SelectedIndex == -1) {
+                button_pass_test.IsEnabled = false;
+            } else {
+                button_pass_test.IsEnabled = true;
+            }
         }
 
 

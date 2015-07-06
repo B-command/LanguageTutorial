@@ -87,5 +87,11 @@ namespace LanguageTutorial
             }
             return w;
         }
+
+        private void Window_Closed(object sender, EventArgs e) {
+            if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
+                App.aTimer.Start();
+            }
+        }
     }
 }
