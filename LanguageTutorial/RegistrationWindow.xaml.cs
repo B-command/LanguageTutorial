@@ -468,28 +468,30 @@ namespace LanguageTutorial
         {
             using (var db = new LanguageTutorialContext())
             {
-                var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 1);
-
-                if (result != null)
+                if ( App.oActiveUser != null )
                 {
-                    App.oCourseEnglish = result as Course;
-                }
-                else
-                {
-                    App.oCourseEnglish = null;
-                }
+                    var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 1);
 
-                result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 2);
+                    if (result != null)
+                    {
+                        App.oCourseEnglish = result as Course;
+                    }
+                    else
+                    {
+                        App.oCourseEnglish = null;
+                    }
 
-                if (result != null)
-                {
-                    App.oCourseFrançais = result as Course;
-                }
-                else
-                {
-                    App.oCourseFrançais = null;
-                }
+                    result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 2);
 
+                    if (result != null)
+                    {
+                        App.oCourseFrançais = result as Course;
+                    }
+                    else
+                    {
+                        App.oCourseFrançais = null;
+                    }
+                }
             }
 
             base.OnClosing(e);
