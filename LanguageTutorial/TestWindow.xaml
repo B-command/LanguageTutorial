@@ -7,6 +7,7 @@
         <Button x:Name="SkipWord" Content="Пропустить слово" HorizontalAlignment="Left" Margin="532,354,0,0" VerticalAlignment="Top" Width="114" Height="33" Click="SkipWord_Click"/>
         <StackPanel x:Name="PanelLetters" HorizontalAlignment="Left" Margin="35,212,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblResult" Content="Вы набрали" HorizontalAlignment="Left" Margin="35,313,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.374,-2.605" FontStyle="Italic" FontFamily="Microsoft Sans Serif" FontSize="20"/>
+        <Label x:Name="lblSchetchik" Content="Label" HorizontalAlignment="Left" Margin="596,24,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="18"/>
 
     </Grid>
 </Window>

@@ -26,13 +26,8 @@ namespace LanguageTutorial
         int LanguageID;
         public TestWindow(int language)
         {
-            //LanguageID = language;
-            LanguageID = 1;
+            LanguageID = language;
             InitializeComponent();
-
-            //Uri uri = new Uri("pack://siteoforigin:,,,/Resources/Без имени-3.png");
-            //BitmapImage bitmap = new BitmapImage(uri);
-            //img.Source = bitmap;
         }
         public TestWindow()
         {
@@ -133,7 +128,7 @@ namespace LanguageTutorial
             //берем слово
             SequenceWords();
         }
-        int schet = 0;//счетчик слов
+        int schet = 1;//счетчик слов
         Label[] words;//массив Label для слов
         int length;//Длина угадываемого слова
 
@@ -143,13 +138,12 @@ namespace LanguageTutorial
         void SequenceWords()
         {
             //Если счетчик равен списку слов, то 
-            if (schet == countWordOfS)
+            if (schet == countWordOfS+1)
             {
                 //конец тестирования
                 //открывается форма с результатом
                 //MessageBox.Show("Ho-Ho-Ho! Это конец!");
-                ResultWindow resultWindow = new ResultWindow();
-                resultWindow.ShowDialog();
+                SkipWord.Content = "Завершить тестирование";
             }
             else
             {
@@ -206,7 +200,8 @@ namespace LanguageTutorial
                     }
                     translatingWord[1] = s;
                 }
-                lblResult.Content = "Вы набрали " + result;
+                lblSchetchik.Content = schet+ "/" + countWordOfS;
+                lblResult.Content = "Вы набрали " + result + WriteWord(result.ToString());
                 //прогоняем слова из словаря
                 //выводим слово с заглавной буквы
                 lblWord.Content = translatingWord[0].Substring(0, 1).ToUpper() + translatingWord[0].Substring(1, translatingWord[0].Length - 1);
@@ -431,7 +426,7 @@ namespace LanguageTutorial
             {
                 result -= 1;
                 LetterFalse += 1;
-                lblResult.Content = "Вы набрали " + result;
+                lblResult.Content = "Вы набрали " + result + WriteWord(result.ToString());
             }
             //записываем из Label букву
             string ss = "";
@@ -445,17 +440,17 @@ namespace LanguageTutorial
                 if (toRussian)
                 {
                     result += 2 * translatingWord[1].Length;
-                    lblResult.Content = "Вы набрали " + result;
+                    lblResult.Content = "Вы набрали " + result + WriteWord(result.ToString());
                 }
                 else
                 {
                     result += 3 * translatingWord[1].Length;
-                    lblResult.Content = "Вы набрали " + result + " " + LetterFalse;
+                    lblResult.Content = "Вы набрали " + result + WriteWord(result.ToString());
                 }
                 if (LetterFalse == 0)
                 {
                     countRightWord += 1;
-                    MessageBox.Show("С первого раза" + LetterFalse);
+                    //MessageBox.Show("С первого раза" + LetterFalse);
                 }
                 //даем другое слово
                 DeleteLabel();
@@ -469,16 +464,23 @@ namespace LanguageTutorial
 
         private void SkipWord_Click(object sender, RoutedEventArgs e)
         {
+            if (schet == countWordOfS)
+            {
+                SkipWord.Content = "Завершить тестирование";
+                SkipWord.Click+=new RoutedEventHandler(OnTestEnd);
+            }
+            else 
+            {
             //вычитаем балы за пропуск
             if (toRussian)
             {
                 result -= 3 * translatingWord[1].Length;
-                lblResult.Content = "Вы набрали " + result;
+                lblResult.Content = "Вы набрали " + result+WriteWord(result.ToString());
             }
             else
             {
                 result -= 2 * translatingWord[1].Length;
-                lblResult.Content = "Вы набрали " + result;
+                lblResult.Content = "Вы набрали " + result + WriteWord(result.ToString());
             }
             //следующее слово
             schet++;
@@ -486,6 +488,43 @@ namespace LanguageTutorial
             toRussian = true;
             translatingWord = NextWordChosing();
             SequenceWords();
+            }
+        }
+        void OnTestEnd(object sender, RoutedEventArgs e)
+        {
+            ResultWindow resultWindow = new ResultWindow(LanguageID);
+            resultWindow.ShowDialog();
+        }
+        string WriteWord(string result)
+        {
+            string w = "";
+            char last = result[result.Length - 1];
+            switch (last)
+            {
+                case '0':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    {
+                        w = " слов";
+                        break;
+                    }
+                case '1':
+                    {
+                        w = " слово";
+                        break;
+                    }
+                case '2':
+                case '3':
+                case '4':
+                    {
+                        w = " слова";
+                        break;
+                    }
+            }
+            return w;
         }
         
     }

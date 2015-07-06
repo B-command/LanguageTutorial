@@ -19,8 +19,10 @@ namespace LanguageTutorial
     /// </summary>
     public partial class ResultWindow : Window
     {
-        public ResultWindow()
+        int LanguageID;
+        public ResultWindow(int language)
         {
+            LanguageID=language;
             InitializeComponent();
             lblBall.Content = "Ваш результат за текущую сессию " + TestWindow.result + WriteBall(TestWindow.result.ToString());
             lblRight.Content = "Вы отгадали " + TestWindow.countRightWord + WriteWord(TestWindow.countRightWord.ToString());
@@ -86,12 +88,6 @@ namespace LanguageTutorial
                     }
             }
             return w;
-        }
-
-        private void Window_Closed(object sender, EventArgs e) {
-            if (App.EngSession < Querry.numberSessionsLanguage("English") || App.FranSession < Querry.numberSessionsLanguage("Français")) {//переместить код в тест
-                App.aTimer.Start();
-            }
         }
     }
 }
