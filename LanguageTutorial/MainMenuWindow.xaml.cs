@@ -34,7 +34,8 @@ namespace LanguageTutorial
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             textblock_Username.DataContext = App.oActiveUser;
-
+            App.EngSession = 0;
+            App.FranSession = 0;
             timer();
             App.aTimer.Start();
         }
