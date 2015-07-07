@@ -540,16 +540,21 @@ namespace LanguageTutorial
             SequenceWords();
             }
         }
+
+        bool timer = false;
         void OnTestEnd(object sender, RoutedEventArgs e)
         {
             ResultWindow resultWindow = new ResultWindow(LanguageID,result);
             resultWindow.ShowDialog();
+            timer = true;
             Close();
         }
        
         private void MetroWindow_Closed(object sender, EventArgs e) {
-            if (App.EngSession < TimerMet.numberSessionsLanguageEng() || App.FranSession < TimerMet.numberSessionsLanguageFran()) {//переместить код в тест
-                App.aTimer.Start();
+            if(timer == false) {
+                if (App.EngSession < TimerMet.numberSessionsLanguageEng() || App.FranSession < TimerMet.numberSessionsLanguageFran()) {//переместить код в тест
+                    App.aTimer.Start();
+                }
             }
         }
         

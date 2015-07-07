@@ -38,14 +38,19 @@ namespace LanguageTutorial {
         }
 
         private void MetroWindow_Closed(object sender, EventArgs e) {
-            App.aTimer.Start();
+            if (timer == false) {
+                App.aTimer.Start();
+            }
         }
 
+        bool timer = false;
         private void button_remember_later_Click(object sender, RoutedEventArgs e) {
+            timer = false;
             Close();
         }
 
         private void button_pass_test_Click(object sender, RoutedEventArgs e) {
+            timer = true;
             Close();
             TestWindow test;
             if (cb_language.SelectedIndex == 0) {
