@@ -100,7 +100,7 @@ namespace LanguageTutorial
             App.ChangeUser = true;
 
             this.Visibility = System.Windows.Visibility.Hidden;
-
+            
             App.aTimer.Stop();
 
             MainWindow oMainWindow = new MainWindow();
@@ -119,7 +119,6 @@ namespace LanguageTutorial
             else
             {
                 this.Visibility = System.Windows.Visibility.Visible;
-                App.aTimer.Start();
             }
 
             App.ChangeUser = false;

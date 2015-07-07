@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Data.Entity;
 
 using LanguageTutorial.DataModel;
+using System.Windows.Threading;
 
 namespace LanguageTutorial
 {
@@ -30,28 +31,37 @@ namespace LanguageTutorial
             BitmapImage bitmap = new BitmapImage(uri);
             //Image img = new Image();
             img.Source = bitmap;
+            num_Time_Between_Seans.Value = 2;
         }
+
+        /// <summary>
+        /// Переменная, хранящая текущее значение промежутка между сеансами 
+        /// </summary>
+        double currentTimeBetweenSessions = 2;
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             button_Settings_English.IsEnabled = false;
             button_Settings_Français.IsEnabled = false;
+            
 
             if (App.oActiveUser != null && !App.ChangeUser )
             {// Заполняем значениями профиля
-
+                
                 grid.DataContext = App.oActiveUser;
-
+                
                 // Ставим галочки и активируем управление языков
                 using (var db = new LanguageTutorialContext())
                 {
-                    //var result = db.Course.Where(course => course.UserId == App.oActiveUser.Id && course.LanguageId == 0);
+                    // Вытаскиваем Английский курс пользователя
                     var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 1 );
 
                     if (result != null)
                     {
+                        // Запоминаем Английский курс пользователя
                         App.oCourseEnglish = result as Course;
 
+                        // Активируем элементы управления, если курс активен
                         if (App.oCourseEnglish.Active)
                         {
                             check_English.IsChecked = true;
@@ -59,12 +69,15 @@ namespace LanguageTutorial
                         }
                     }
 
+                    // Вытаскиваем Французский курс пользователя
                     result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 2);
 
                     if (result != null)
                     {
+                        // Запоминаем Французский курс пользователя
                         App.oCourseFrançais = result as Course;
 
+                        // Активируем элементы управления, если курс активен
                         if (App.oCourseFrançais.Active)
                         {
                             check_Français.IsChecked = true;
@@ -76,11 +89,14 @@ namespace LanguageTutorial
             }
             else
             {// Заполняем стандартными значениями настройки языков
+
                 App.oCourseEnglish = new Course() { LanguageId = 1, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
                 App.oCourseFrançais = new Course() { LanguageId = 2, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
             }
 
             App.Registered = false;
+
+            currentTimeBetweenSessions = (double)num_Time_Between_Seans.Value;
         }
 
         /// <summary>
@@ -108,8 +124,19 @@ namespace LanguageTutorial
                             // Добавляем пользователя в БД
                             using (var db = new LanguageTutorialContext())
                             {
-                                db.User.Add(nUser);
-                                db.SaveChanges();
+                                var result = db.User.FirstOrDefault(user => user.Name == nUser.Name);
+
+                                if ( result == null )
+                                {
+                                    db.User.Add(nUser);
+                                    db.SaveChanges();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Такое имя пользователя уже зарегестрировано!");
+                                    return;
+                                }
+
                             }
 
                             // Делаем текущего пользователя активным
@@ -142,8 +169,9 @@ namespace LanguageTutorial
                                     for ( int i = 1; i <= App.oCourseEnglish.WordsToStudy; i++)
                                     {
                                         db.WordQueue.Add(new WordQueue() { TrueAnswers = 0, IsLearned = false, UserId = nUser.Id, WordDictionaryId = i });
-                                        db.SaveChanges();
                                     }
+
+                                    db.SaveChanges();
                                 }
                             }
 
@@ -168,14 +196,20 @@ namespace LanguageTutorial
                                     for (int i = 496; i < 496 + App.oCourseFrançais.WordsToStudy; i++)
                                     {
                                         db.WordQueue.Add(new WordQueue() { TrueAnswers = 0, IsLearned = false, UserId = nUser.Id, WordDictionaryId = i });
-                                        db.SaveChanges();
                                     }
+
+                                    db.SaveChanges();
                                 }
                             }
 
                             App.Registered = true;
                             App.UserChanged = true;
 
+                            DispatcherTimer Timer = new DispatcherTimer();
+                            Timer.Tick += new EventHandler(TimerMet.OnTimedEvent);
+                            Timer.Interval = new TimeSpan(0, /*min*/0, (int)(App.oActiveUser.SessionPeriod * 60)/*0*/);
+                            App.aTimer = Timer;
+                            
                             this.Close();
                         }
                         else
@@ -199,7 +233,9 @@ namespace LanguageTutorial
                                     }
                                 }
 
+                                App.aTimer.Stop();
                                 App.aTimer.Interval = new TimeSpan(0, /*(int)((double)num_Time_Between_Seans.Value * 60)*/0, /*0*/ (int)((double)num_Time_Between_Seans.Value * 60));
+                                App.aTimer.Start();
 
                                 // Проверка изменения курсов пользователя
                                 bool Course_Finded = false;
@@ -260,8 +296,9 @@ namespace LanguageTutorial
                                             for (int i = 1; i <= App.oCourseEnglish.WordsToStudy; i++)
                                             {
                                                 db.WordQueue.Add(new WordQueue() { TrueAnswers = 0, IsLearned = false, UserId = App.oActiveUser.Id, WordDictionaryId = i });
-                                                db.SaveChanges();
                                             }
+
+                                            db.SaveChanges();
                                         }
                                     }
                                 }
@@ -339,8 +376,9 @@ namespace LanguageTutorial
                                             for (int i = 496; i < 496 + App.oCourseFrançais.WordsToStudy; i++)
                                             {
                                                 db.WordQueue.Add(new WordQueue() { TrueAnswers = 0, IsLearned = false, UserId = App.oActiveUser.Id, WordDictionaryId = i });
-                                                db.SaveChanges();
                                             }
+
+                                            db.SaveChanges();
                                         }
                                     }
                                 }
@@ -361,8 +399,6 @@ namespace LanguageTutorial
                                 }
 
                                 this.Close();
-                            
-                            
                         }
                     }
                     else
@@ -388,8 +424,10 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Cancel_Click(object sender, RoutedEventArgs e)
         {
+            num_Time_Between_Seans.Value = currentTimeBetweenSessions;
             this.Close();
         }
+
 
         /// <summary>
         /// Открытие настроек языка Английский
@@ -459,28 +497,30 @@ namespace LanguageTutorial
         {
             using (var db = new LanguageTutorialContext())
             {
-                var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 1);
-
-                if (result != null)
+                if ( App.oActiveUser != null )
                 {
-                    App.oCourseEnglish = result as Course;
-                }
-                else
-                {
-                    App.oCourseEnglish = null;
-                }
+                    var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 1);
 
-                result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 2);
+                    if (result != null)
+                    {
+                        App.oCourseEnglish = result as Course;
+                    }
+                    else
+                    {
+                        App.oCourseEnglish = null;
+                    }
 
-                if (result != null)
-                {
-                    App.oCourseFrançais = result as Course;
-                }
-                else
-                {
-                    App.oCourseFrançais = null;
-                }
+                    result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 2);
 
+                    if (result != null)
+                    {
+                        App.oCourseFrançais = result as Course;
+                    }
+                    else
+                    {
+                        App.oCourseFrançais = null;
+                    }
+                }
             }
 
             base.OnClosing(e);

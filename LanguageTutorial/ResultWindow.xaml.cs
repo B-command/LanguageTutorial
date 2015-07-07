@@ -20,11 +20,13 @@ namespace LanguageTutorial
     public partial class ResultWindow
     {
         int LanguageID;
-        public ResultWindow(int language)
+        int Result;
+        public ResultWindow(int language,int result)
         {
+            Result = result;
             LanguageID=language;
             InitializeComponent();
-            lblBall.Content = "Ваш результат за текущую сессию " + TestWindow.result + WriteBall(TestWindow.result.ToString());
+            lblBall.Content = "Ваш результат за текущую сессию " + Result + WriteBall(Result.ToString());
             lblRight.Content = "Вы отгадали " + TestWindow.countRightWord + WriteWord(TestWindow.countRightWord.ToString());
 
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/caty.png");
@@ -75,19 +77,19 @@ namespace LanguageTutorial
                 case '8':
                 case '9':
                     {
-                        w = " балов";
+                        w = " баллов";
                         break;
                     }
                 case '1':
                     {
-                        w = " бал";
+                        w = " балл";
                         break;
                     }
                 case '2':
                 case '3':
                 case '4':
                     {
-                        w = " бала";
+                        w = " балла";
                         break;
                     }
             }
@@ -101,21 +103,12 @@ namespace LanguageTutorial
             if (LanguageID == 2) {
                 App.FranSession++;
             }
-            if (App.EngSession < Querry.numberSessionsLanguageEng() || App.FranSession < Querry.numberSessionsLanguageFran()) {//переместить код в тест
+            if (App.EngSession < TimerMet.numberSessionsLanguageEng() || App.FranSession < TimerMet.numberSessionsLanguageFran()) {//переместить код в тест
                 App.aTimer.Start();
             }
         }
 
         private void bt_ok_Click(object sender, RoutedEventArgs e) {
-            if (LanguageID == 1) {
-                App.EngSession++;
-            }
-            if (LanguageID == 2) {
-                App.FranSession++;
-            }
-            if (App.EngSession < Querry.numberSessionsLanguageEng() || App.FranSession < Querry.numberSessionsLanguageFran()) {//переместить код в тест
-                App.aTimer.Start();
-            }
             Close();
         }
 

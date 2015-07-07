@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using System.Data.Entity;
 
 using LanguageTutorial.DataModel;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace LanguageTutorial
 {
@@ -39,6 +41,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            App.UserChanged = false;
 
             Update_ComboBox_Users();
 
@@ -98,6 +101,13 @@ namespace LanguageTutorial
                     }
                 }
                 // Открываем окно главного меню
+
+                
+                DispatcherTimer Timer = new DispatcherTimer();
+                Timer.Tick += new EventHandler(TimerMet.OnTimedEvent);
+                Timer.Interval = new TimeSpan(0, /*min*/0, (int)(App.oActiveUser.SessionPeriod * 60)/*0*/);
+                App.aTimer = Timer;
+
                 MainMenuWindow oMainMenuWindow = new MainMenuWindow();
 
                 oMainMenuWindow.Show();
@@ -105,6 +115,8 @@ namespace LanguageTutorial
                 this.Close();
             }
         }
+
+
 
         /// <summary>
         /// Регистраия нового пользователя

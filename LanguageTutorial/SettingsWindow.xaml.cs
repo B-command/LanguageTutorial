@@ -50,14 +50,33 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (label_Settings.Content == "English")
+            if (App.oActiveUser != null)
             {
-                grid.DataContext = App.oCourseEnglish;
+                if (label_Settings.Content == "English")
+                {
+                    Course tempCourseEnglish = new Course();
+
+                    tempCourseEnglish.WordsPerSession = App.oCourseEnglish.WordsPerSession;
+                    tempCourseEnglish.WordsToStudy = App.oCourseEnglish.WordsToStudy;
+                    tempCourseEnglish.SeansPerDay = App.oCourseEnglish.SeansPerDay;
+                    tempCourseEnglish.TrueAnswers = App.oCourseEnglish.TrueAnswers;
+
+                    grid.DataContext = tempCourseEnglish;
+                }
+                else
+                {
+                    Course tempCourseFrançais = new Course();
+
+                    tempCourseFrançais.WordsPerSession = App.oCourseFrançais.WordsPerSession;
+                    tempCourseFrançais.WordsToStudy = App.oCourseFrançais.WordsToStudy;
+                    tempCourseFrançais.SeansPerDay = App.oCourseFrançais.SeansPerDay;
+                    tempCourseFrançais.TrueAnswers = App.oCourseFrançais.TrueAnswers;
+
+                    grid.DataContext = tempCourseFrançais;
+                }
             }
-            else
-            {
-                grid.DataContext = App.oCourseFrançais;
-            }
+
+
         }
 
         /// <summary>
@@ -76,7 +95,6 @@ namespace LanguageTutorial
                     App.oCourseEnglish.SeansPerDay = (int)num_Number_of_Seans_Per_Day.Value;
                     App.oCourseEnglish.TrueAnswers = (int)num_Number_of_True_Answer.Value;
                 }
-
                 catch
                 {
                     this.Close(); //Если какие-то из значений пустые, то происходит отмена изменений
@@ -113,22 +131,12 @@ namespace LanguageTutorial
 
         private void num_Number_of_Words_Per_Seans_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value) num_Number_of_Words_Per_Seans.Value = num_Number_of_Words_To_Study.Value;
+            //if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value) num_Number_of_Words_Per_Seans.Value = num_Number_of_Words_To_Study.Value;
         }
 
         private void num_Number_of_Words_To_Study_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value) num_Number_of_Words_To_Study = num_Number_of_Words_Per_Seans;
-        }
-
-        private void num_Number_of_Words_Per_Seans_LostFocus_1(object sender, RoutedEventArgs e)
-        {
-            //if (num_Number_of_Words_Per_Seans.Value == null) num_Number_of_Words_Per_Seans.Value = defaultWordsForSession;
-        }
-
-        private void num_Number_of_Words_To_Study_LostFocus_1(object sender, RoutedEventArgs e)
-        {
-            // if (num_Number_of_Words_To_Study.Value == null) num_Number_of_Words_To_Study.Value = defaultWordsForStudy;
+            // if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value) num_Number_of_Words_To_Study = num_Number_of_Words_Per_Seans;
         }
 
         private void num_Number_of_Seans_Per_Day_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
@@ -141,6 +149,11 @@ namespace LanguageTutorial
 
         private void num_Number_of_Words_To_Study_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
+            if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value)
+            {
+                num_Number_of_Words_Per_Seans.Maximum = (double)num_Number_of_Words_To_Study.Value;
+            }
+
             if (num_Number_of_Words_To_Study.Value == null)
             {
                 num_Number_of_Words_To_Study.Value = defaultWordsForStudy;
@@ -149,6 +162,11 @@ namespace LanguageTutorial
 
         private void num_Number_of_Words_Per_Seans_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
         {
+            if (num_Number_of_Words_Per_Seans.Value > num_Number_of_Words_To_Study.Value)
+            {
+                num_Number_of_Words_Per_Seans.Maximum = (double)num_Number_of_Words_To_Study.Value;
+            }
+
             if (num_Number_of_Words_Per_Seans.Value == null)
             {
                 num_Number_of_Words_Per_Seans.Value = defaultWordsForSession;
