@@ -19,6 +19,26 @@ namespace LanguageTutorial {
             }
         }
 
+        //Метод для теста
+        static public int numberSessionsLanguage(DataModel.Course oCourseLanguage)
+        {
+            if (oCourseLanguage != null)
+            {
+                if (oCourseLanguage.Active == true)
+                {
+                    return oCourseLanguage.SeansPerDay;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         static public int numberSessionsLanguageFran() {
             if (App.oCourseFrançais != null) {
                 if (App.oCourseFrançais.Active == true) {
