@@ -62,7 +62,7 @@ namespace LanguageTutorial
         //Кол-во балов за сессию
         public int result = 0;
         //Кол-во выученных слов
-        int isLearned = 0;
+ int isLearned = 0;
 
         //текущий словарь изучаемых слов
         List<WordDictionary> currentWord = new List<WordDictionary>();
@@ -119,7 +119,7 @@ namespace LanguageTutorial
             translatingWord = NextWordChosing();
             //берем слово
             SequenceWords();
-            // Debug.WriteLine("Кол-во слов"+currentWord.Count);
+           // Debug.WriteLine("Кол-во слов"+currentWord.Count);
         }
         /// <summary>
         /// Функция выбора следующего слова из текущего списка изучаемых слов
@@ -252,13 +252,14 @@ namespace LanguageTutorial
             translatingWord[1] = s;
         }
 
+           //   lblResult.Co
         /// <summary>
         /// Проверка на наличие символа
         /// </summary>
         /// <param name="sym"></param>
         /// <param name="fran"></param>
         /// <returns></returns>
-        bool ToLatino(char sym, string fran)
+        public bool ToLatino(char sym, string fran)
         {
             if (fran.IndexOf(sym) == -1)
             {
@@ -307,6 +308,36 @@ namespace LanguageTutorial
             }
         }
 
+        public string WriteBall(string result) {
+            string w = "";
+            char last = result[result.Length - 1];
+            if (result.Length > 1 && result[result.Length - 2] == '1') {
+                w = " баллов";
+            } else {
+                switch (last) {
+                    case '0':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9': {
+                            w = " баллов";
+                            break;
+                        }
+                    case '1': {
+                            w = " балл";
+                            break;
+                        }
+                    case '2':
+                    case '3':
+                    case '4': {
+                            w = " балла";
+                            break;
+                        }
+                }
+            }
+            return w;
+        }
         /// <summary>
         /// Переделывает окончания слова балл
         /// </summary>
@@ -501,12 +532,12 @@ namespace LanguageTutorial
                     if (toRussian)
                     {
                         result += 2 * translatingWord[1].Length;
-                        lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+ lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                     }
                     else
                     {
                         result += 3 * translatingWord[1].Length;
-                        lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                       lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                     }
                     if (LetterFalse == 0)
                     {
@@ -556,26 +587,36 @@ namespace LanguageTutorial
 
         private void SkipWord_Click(object sender, RoutedEventArgs e)
         {
-            if (schet > countWordOfS)
+              if (schet > countWordOfS)
             {
-                SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
-                SkipWord.Click += new RoutedEventHandler(OnTestEnd);
-                lblWord.Content = "";
-            }
-            else
-            {
+        SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
+  SkipWord.Click += new RoutedEventHandler(OnTestEnd);
+         lblWord.Content = "";
+            }//else 
+  else
+  {
                 //вычитаем балы за пропуск
                 if (toRussian)
                 {
                     result -= 3 * translatingWord[1].Length;
-                    lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+ lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                 }
                 else
                 {
                     result -= 2 * translatingWord[1].Length;
-                    lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                   lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                 }
                 //следующее слово
+            if(schet>countWordOfS)
+            {
+                SkipWord.Content = "Завершить тестирование";
+                SkipWord.Click+=new RoutedEventHandler(OnTestEnd);
+            }
+            else
+            {
+
+            
+            //schet++;
                 DeleteLabel();
                 schet++;
                 toRussian = true;
@@ -587,7 +628,7 @@ namespace LanguageTutorial
         bool timer = false;
         void OnTestEnd(object sender, RoutedEventArgs e)
         {
-            ResultWindow resultWindow = new ResultWindow(LanguageID, result, countRightWord, isLearned);
+           ResultWindow resultWindow = new ResultWindow(LanguageID, result, countRightWord, isLearned);
             resultWindow.ShowDialog();
             timer = true;
             Close();
