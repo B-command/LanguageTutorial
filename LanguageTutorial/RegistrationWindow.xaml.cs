@@ -52,14 +52,16 @@ namespace LanguageTutorial
                 
                 // Ставим галочки и активируем управление языков
                 using (var db = new LanguageTutorialContext())
-                {                   
-                    //var result = db.Course.Where(course => course.UserId == App.oActiveUser.Id && course.LanguageId == 0);
+                {
+                    // Вытаскиваем Английский курс пользователя
                     var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 1 );
 
                     if (result != null)
                     {
+                        // Запоминаем Английский курс пользователя
                         App.oCourseEnglish = result as Course;
 
+                        // Активируем элементы управления, если курс активен
                         if (App.oCourseEnglish.Active)
                         {
                             check_English.IsChecked = true;
@@ -67,12 +69,15 @@ namespace LanguageTutorial
                         }
                     }
 
+                    // Вытаскиваем Французский курс пользователя
                     result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 2);
 
                     if (result != null)
                     {
+                        // Запоминаем Французский курс пользователя
                         App.oCourseFrançais = result as Course;
 
+                        // Активируем элементы управления, если курс активен
                         if (App.oCourseFrançais.Active)
                         {
                             check_Français.IsChecked = true;
@@ -84,6 +89,7 @@ namespace LanguageTutorial
             }
             else
             {// Заполняем стандартными значениями настройки языков
+
                 App.oCourseEnglish = new Course() { LanguageId = 1, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
                 App.oCourseFrançais = new Course() { LanguageId = 2, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
             }
