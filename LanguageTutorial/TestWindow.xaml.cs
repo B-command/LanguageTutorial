@@ -223,7 +223,7 @@ namespace LanguageTutorial
         /// <param name="sym"></param>
         /// <param name="fran"></param>
         /// <returns></returns>
-        bool ToLatino(char sym, string fran)
+        public bool ToLatino(char sym, string fran)
         {
             if (fran.IndexOf(sym) == -1)
             {
@@ -272,34 +272,33 @@ namespace LanguageTutorial
             }
         }
 
-        string WriteBall(string result)
-        {
+        public string WriteBall(string result) {
             string w = "";
             char last = result[result.Length - 1];
-            switch (last)
-            {
-                case '0':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    {
-                        w = " баллов";
-                        break;
-                    }
-                case '1':
-                    {
-                        w = " балл";
-                        break;
-                    }
-                case '2':
-                case '3':
-                case '4':
-                    {
-                        w = " балла";
-                        break;
-                    }
+            if (result.Length > 1 && result[result.Length - 2] == '1') {
+                w = " баллов";
+            } else {
+                switch (last) {
+                    case '0':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9': {
+                            w = " баллов";
+                            break;
+                        }
+                    case '1': {
+                            w = " балл";
+                            break;
+                        }
+                    case '2':
+                    case '3':
+                    case '4': {
+                            w = " балла";
+                            break;
+                        }
+                }
             }
             return w;
         }
