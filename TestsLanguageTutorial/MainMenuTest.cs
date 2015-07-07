@@ -9,11 +9,7 @@ namespace TestsLanguageTutorial {
         public void openTestingTest() {
             App.EngSession = 10;
             App.FranSession = 10;
-
             MainMenuWindow.openTesting(5, 5);
         }
-
-  }
-
-
+    }
 }

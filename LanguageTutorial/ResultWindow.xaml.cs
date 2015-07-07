@@ -33,65 +33,67 @@ namespace LanguageTutorial
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
         }
-        string WriteWord(string result)
+        public string WriteWord(string result)
         {
             string w = "";
             char last = result[result.Length-1];
-            switch (last)
-            {
-                case '0':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    {
-                        w = " слов";
-                        break;
-                    }
-                case '1':
-                    {
-                        w = " слово";
-                        break;
-                    }
-                case '2':
-                case '3':
-                case '4':
-                    {
-                        w = " слова";
-                        break;
-                    }    
+            if (result.Length > 1 && result[result.Length - 2] == '1') {
+                w = " слов";
+            } else {
+                switch (last) {
+                    case '0':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9': {
+                            w = " слов";
+                            break;
+                        }
+                    case '1': {
+                            w = " слово";
+                            break;
+                        }
+                    case '2':
+                    case '3':
+                    case '4': {
+                            w = " слова";
+                            break;
+                        }
+                }
             }
             return w;
         }
-        string WriteBall(string result)
+
+
+        public string WriteBall(string result)
         {
             string w = "";
             char last = result[result.Length - 1];
-            switch (last)
-            {
-                case '0':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    {
-                        w = " баллов";
-                        break;
-                    }
-                case '1':
-                    {
-                        w = " балл";
-                        break;
-                    }
-                case '2':
-                case '3':
-                case '4':
-                    {
-                        w = " балла";
-                        break;
-                    }
+            if (result.Length > 1 && result[result.Length - 2] == '1') {
+                w = " баллов";
+            } else {
+                switch (last) {
+                    case '0':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9': {
+                            w = " баллов";
+                            break;
+                        }
+                    case '1': {
+                            w = " балл";
+                            break;
+                        }
+                    case '2':
+                    case '3':
+                    case '4': {
+                            w = " балла";
+                            break;
+                        }
+                }
             }
             return w;
         }

@@ -29,7 +29,7 @@ namespace LanguageTutorial {
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e) {
-            if (App.EngSession < TimerMet.numberSessionsLanguageEng()) { //заменить на значение из базы
+            if (App.EngSession < TimerMet.numberSessionsLanguageEng()) {
                 cb_language.Items.Add("English");
             }
             if (App.FranSession < TimerMet.numberSessionsLanguageFran()) {
