@@ -41,6 +41,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            App.UserChanged = false;
 
             Update_ComboBox_Users();
 
