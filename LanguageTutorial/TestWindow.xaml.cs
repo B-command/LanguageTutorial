@@ -26,6 +26,7 @@ namespace LanguageTutorial
         int LanguageID;
         public TestWindow(int language)
         {
+            //
             LanguageID = language;
             InitializeComponent();
 
