@@ -186,6 +186,7 @@ namespace LanguageTutorial
                 }
                 lblSchetchik.Content = schet + "/" + countWordOfS;
                 lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                Debug.WriteLine(result+"SequenceWord");
                 //выводим слово с заглавной буквы
                 lblWord.Content = translatingWord[0].Substring(0, 1).ToUpper() + translatingWord[0].Substring(1, translatingWord[0].Length - 1);
                 //создаем массив Label для слова-перевода
@@ -509,6 +510,7 @@ namespace LanguageTutorial
                 result -= 1;
                 LetterFalse += 1;
                 lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                Debug.WriteLine(result+"-1");
             }
             //записываем из Label букву
             string ss = "";
@@ -523,22 +525,22 @@ namespace LanguageTutorial
                 {
                     SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                     SkipWord.Click += new RoutedEventHandler(OnTestEnd);
-                    // lblWord.Content = "";
-                    // DeleteLabel();
                 }
                 else
                 {
-                    SkipWord.Content = "СЛЕДУЮЩЕЕ СЛОВО";
                     if (toRussian)
                     {
                         result += 2 * translatingWord[1].Length;
- lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                        lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                        Debug.WriteLine(result+"Угадал слово");
                     }
                     else
                     {
                         result += 3 * translatingWord[1].Length;
                        lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                       Debug.WriteLine(result+"Угадал слово");
                     }
+                    SkipWord.Content = "СЛЕДУЮЩЕЕ СЛОВО";
                     if (LetterFalse == 0)
                     {
                         countRightWord += 1;
@@ -573,13 +575,6 @@ namespace LanguageTutorial
                             }
                         }
                     }
-                    //даем другое слово
-                    /*  DeleteLabel();
-                      schet++;
-                      toRussian = true;
-                      translatingWord = NextWordChosing();
-                      LetterFalse = 0;
-                      SequenceWords();*/
                     LetterFalse = 0;
                 }
             }
@@ -587,43 +582,59 @@ namespace LanguageTutorial
 
         private void SkipWord_Click(object sender, RoutedEventArgs e)
         {
-              if (schet > countWordOfS)
+            Debug.WriteLine("Click");
+            if (schet > countWordOfS)
+            
             {
         SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
   SkipWord.Click += new RoutedEventHandler(OnTestEnd);
          lblWord.Content = "";
-            }//else 
-  else
-  {
-                //вычитаем балы за пропуск
-                if (toRussian)
-                {
-                    result -= 3 * translatingWord[1].Length;
- lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
-                }
-                else
-                {
-                    result -= 2 * translatingWord[1].Length;
-                   lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
-                }
-                //следующее слово
-            if(schet>countWordOfS)
-            {
-                SkipWord.Content = "Завершить тестирование";
-                SkipWord.Click+=new RoutedEventHandler(OnTestEnd);
             }
             else
             {
-
-            
-            //schet++;
-                DeleteLabel();
-                schet++;
-                toRussian = true;
-                translatingWord = NextWordChosing();
-                SequenceWords();
+                if (SkipWord.Content == "СЛЕДУЮЩЕЕ СЛОВО")
+                {
+                    DeleteLabel();
+                    schet++;
+                    toRussian = true;
+                    translatingWord = NextWordChosing();
+                    SequenceWords();
+                }
+                else
+                {
+                    //вычитаем балы за пропуск
+                if (toRussian)
+                {
+                        result -= 3 * translatingWord[1].Length;
+lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                        Debug.WriteLine(result + "Click");
+                    }
+                    else
+                    {
+                        result -= 2 * translatingWord[1].Length;
+                       lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                        Debug.WriteLine(result + "Click");
+                        Debug.WriteLine(result + "Click");
+                    }
+                    //следующее слово
+ if(schet>countWordOfS)
+            {
+    SkipWord.Content = "Завершить тестирование";
+                SkipWord.Click+=new RoutedEventHandler(OnTestEnd);
             }
-        }
+                        else
+            {
+            
+                        //schet++;
+                        DeleteLabel();
+                        schet++;
+                        toRussian = true;
+                        translatingWord = NextWordChosing();
+                        SequenceWords();
+                    }
+                }
+            }   
+           }
 
         bool timer = false;
         void OnTestEnd(object sender, RoutedEventArgs e)
