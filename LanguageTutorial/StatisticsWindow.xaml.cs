@@ -80,7 +80,7 @@ namespace LanguageTutorial
                     foreach (var s in sessionsForWeek)
                     {
                         // Заносим в DataGridStatistics новую строку
-                        collection.Add(new StatisticsRow() { Date = s.Datetime.Date, PointsQuantity = s.Points, WordsQuantity = s.Words});
+                        collection.Add(new StatisticsRow() { Date = s.Datetime, PointsQuantity = s.Points, WordsQuantity = s.Words});
                         PointsForWeek += s.Points;
                         WordsForWeek += s.Words;
                     }
@@ -104,7 +104,7 @@ namespace LanguageTutorial
         private void ComboBoxLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // генерация для одного языка статистики за неделю
-            WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex, WeekTopBoundary, WeekBottomBoundary);
+            WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary, WeekBottomBoundary);
             
             // проверка на существование сессий в последующих неделях
             PreviousWeekExisting(ComboBoxLanguage.SelectedIndex, WeekBottomBoundary);
@@ -180,14 +180,14 @@ namespace LanguageTutorial
         private void ButtonPreviousWeek_Click(object sender, RoutedEventArgs e)
         {
             PreviousWeekBoundaryFinding();
-            WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex, WeekTopBoundary, WeekBottomBoundary);
+            WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary, WeekBottomBoundary);
             PreviousWeekExisting(ComboBoxLanguage.SelectedIndex, WeekBottomBoundary);
         }
 
         private void ButtonNextWeek_Click(object sender, RoutedEventArgs e)
         {
             NextWeekBoundaryFinding();
-            WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex, WeekTopBoundary, WeekBottomBoundary);
+            WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary, WeekBottomBoundary);
             NextWeekExisting(ComboBoxLanguage.SelectedIndex, WeekTopBoundary);
         }
     }
