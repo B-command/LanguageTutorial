@@ -72,7 +72,7 @@ namespace TestsLanguageTutorial {
             Assert.AreEqual(res, real, "Сеанс не активен");
         }
 
-        [TestMethod]
+       /* [TestMethod]
         public void TestnumberSessionsLanguage()
         {
            Course someCourse = new LanguageTutorial.DataModel.Course() { Active = true, SeansPerDay = 5 };
@@ -91,6 +91,6 @@ namespace TestsLanguageTutorial {
             int real = TimerMet.numberSessionsLanguage(someCourse);
 
             Assert.AreEqual(real, res);
-        }
+        } */
     }
 }

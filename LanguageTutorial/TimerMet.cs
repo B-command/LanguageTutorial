@@ -19,7 +19,7 @@ namespace LanguageTutorial {
             }
         }
 
-        //Метод для теста
+       /* //Метод для теста
         static public int numberSessionsLanguage(DataModel.Course oCourseLanguage)
         {
             if (oCourseLanguage != null)
@@ -37,7 +37,7 @@ namespace LanguageTutorial {
             {
                 return 0;
             }
-        }
+        } */
 
         static public int numberSessionsLanguageFran() {
             if (App.oCourseFrançais != null) {
