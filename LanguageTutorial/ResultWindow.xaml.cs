@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LanguageTutorial.DataModel;
+using System.Data.Entity;
 
 namespace LanguageTutorial
 {
@@ -21,13 +23,18 @@ namespace LanguageTutorial
     {
         int LanguageID;
         int Result;
-        public ResultWindow(int language,int result)
+        int CountRightWords;
+        int isLearned;
+        public ResultWindow(int language, int result, int countWordS, int learned)
         {
+            isLearned = learned;
+            CountRightWords = countWordS;
             Result = result;
-            LanguageID=language;
+            LanguageID = language;
             InitializeComponent();
             lblBall.Content = "Ваш результат за текущую сессию " + Result + WriteBall(Result.ToString());
-            lblRight.Content = "Вы отгадали " + TestWindow.countRightWord + WriteWord(TestWindow.countRightWord.ToString());
+            lblRight.Content = "Вы отгадали " + CountRightWords + WriteWord(CountRightWords.ToString());
+            lblRight.Content += " с первого раза";
 
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/caty.png");
             BitmapImage bitmap = new BitmapImage(uri);
@@ -36,7 +43,7 @@ namespace LanguageTutorial
         string WriteWord(string result)
         {
             string w = "";
-            char last = result[result.Length-1];
+            char last = result[result.Length - 1];
             switch (last)
             {
                 case '0':
@@ -60,7 +67,7 @@ namespace LanguageTutorial
                     {
                         w = " слова";
                         break;
-                    }    
+                    }
             }
             return w;
         }
@@ -96,21 +103,64 @@ namespace LanguageTutorial
             return w;
         }
 
-        private void Window_Closed(object sender, EventArgs e) {
-            if (LanguageID == 1) {
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if (LanguageID == 1)
+            {
                 App.EngSession++;
             }
-            if (LanguageID == 2) {
+            if (LanguageID == 2)
+            {
                 App.FranSession++;
             }
-            if (App.EngSession < TimerMet.numberSessionsLanguageEng() || App.FranSession < TimerMet.numberSessionsLanguageFran()) {//переместить код в тест
+            if (App.EngSession < TimerMet.numberSessionsLanguageEng() || App.FranSession < TimerMet.numberSessionsLanguageFran())
+            {//переместить код в тест
                 App.aTimer.Start();
             }
         }
 
-        private void bt_ok_Click(object sender, RoutedEventArgs e) {
+        private void bt_ok_Click(object sender, RoutedEventArgs e)
+        {
             Close();
         }
 
-    }
-}
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+           /* using (var db = new LanguageTutorialContext())
+            {
+                if (LanguageID == 1)
+                {
+                    var result = db.Course.Where(wq => wq.UserId == App.oActiveUser.Id && wq.LanguageId == LanguageID);
+                    if (result != null)
+                    {
+                            var session = result as Session;
+                            session.CourseId = App.oCourseEnglish.Id;
+                            session.Words = CountRightWords;
+                            session.Points = Result;
+                            session.Datetime = DateTime.Now;
+                            session.FinishedWords = isLearned;
+                            db.Session.Add(session);
+                        }
+                }
+                        if (LanguageID == 2)
+                        {
+                            var result = db.Course.Where(wq => wq.UserId == App.oActiveUser.Id && wq.LanguageId == LanguageID);
+                    if (result != null)
+                    {
+                            var session = result as Session;
+                            session.CourseId = App.oCourseFrançais.Id;
+                            session.Words = CountRightWords;
+                            session.Points = Result;
+                            session.Datetime = DateTime.Now;
+                            session.FinishedWords = isLearned;
+                            db.Session.Add(session);
+                        }
+                        }
+                db.SaveChanges();
+                    }*/
+                }
+            }
+        }
+    
+  
+

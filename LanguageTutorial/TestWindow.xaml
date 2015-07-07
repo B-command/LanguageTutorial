@@ -8,7 +8,7 @@
             <ColumnDefinition Width="27*"/>
 
         </Grid.ColumnDefinitions>
-        <Label x:Name="lblWord" Content="Слово" HorizontalAlignment="Left" Margin="44,72,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Microsoft Sans Serif" Grid.ColumnSpan="2" Width="463"/>
+        <Label x:Name="lblWord" Content="Слово" HorizontalAlignment="Left" Margin="44,72,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Microsoft Sans Serif" Height="54"/>
         <Button x:Name="SkipWord" Content="Пропустить слово" HorizontalAlignment="Left" Margin="452,351,0,0" VerticalAlignment="Top" Width="208" Height="33" Click="SkipWord_Click"/>
         <StackPanel x:Name="PanelLetters" HorizontalAlignment="Left" Margin="35,212,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblResult" Content="Ты набрал" HorizontalAlignment="Left" Margin="35,313,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.374,-2.605" FontStyle="Italic" FontFamily="Microsoft Sans Serif" FontSize="20" Grid.ColumnSpan="2" Width="616"/>
