@@ -118,8 +118,19 @@ namespace LanguageTutorial
                             // Добавляем пользователя в БД
                             using (var db = new LanguageTutorialContext())
                             {
-                                db.User.Add(nUser);
-                                db.SaveChanges();
+                                var result = db.User.FirstOrDefault(user => user.Name == nUser.Name);
+
+                                if ( result == null )
+                                {
+                                    db.User.Add(nUser);
+                                    db.SaveChanges();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Такое имя пользователя уже зарегестрировано!");
+                                    return;
+                                }
+
                             }
 
                             // Делаем текущего пользователя активным
@@ -382,8 +393,6 @@ namespace LanguageTutorial
                                 }
 
                                 this.Close();
-                            
-                            
                         }
                     }
                     else
