@@ -49,23 +49,25 @@ namespace LanguageTutorial
             App.aTimer.Stop();
             int eng = TimerMet.numberSessionsLanguageEng();
             int fr = TimerMet.numberSessionsLanguageFran();
+            openTesting(eng, fr);
+        }
+
+        public static void openTesting(int eng, int fr) {
             if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
             } else if (App.EngSession < eng || App.FranSession < fr) {
                 TestWindow test;
-                if (App.EngSession < eng && App.oCourseEnglish != null) {
+                if (App.EngSession < eng ) {
                     test = new TestWindow(1);
                     test.ShowDialog();
-                }
-                if (App.FranSession < fr && App.oCourseFrançais != null) {
+                }  else {
                     test = new TestWindow(2);
                     test.ShowDialog();
                 }
             } else {
                 MessageBox.Show("Все тесты на сегодня пройдены");
             }
-
         }
 
         /// <summary>
@@ -112,7 +114,6 @@ namespace LanguageTutorial
                 App.UserChanged = false;
 
                 CanClose = true;
-                
 
                 this.Close();
             }
@@ -148,10 +149,10 @@ namespace LanguageTutorial
             createTrayIcon(); // создание нашей иконки
         }
 
-        private System.Windows.Forms.NotifyIcon TrayIcon = null;
-        private ContextMenu TrayMenu = null;
+        public System.Windows.Forms.NotifyIcon TrayIcon = null;
+        public ContextMenu TrayMenu = null;
 
-        private bool createTrayIcon()
+        public bool createTrayIcon()
         {
             bool result = false;
             if (TrayIcon == null)
@@ -227,22 +228,7 @@ namespace LanguageTutorial
             App.aTimer.Stop();
             int eng = TimerMet.numberSessionsLanguageEng();
             int fr = TimerMet.numberSessionsLanguageFran();
-            if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
-                WindowLanguage winLan = new WindowLanguage();
-                winLan.ShowDialog();
-            } else if (App.EngSession < eng || App.FranSession < fr) {
-                TestWindow test;
-                if (App.EngSession < eng && App.oCourseEnglish != null) {
-                    test = new TestWindow(1);
-                    test.ShowDialog();
-                }
-                if (App.FranSession < fr && App.oCourseFrançais != null) {
-                    test = new TestWindow(2);
-                    test.ShowDialog();
-                }
-            } else {
-                MessageBox.Show("Все тесты на сегодня пройдены");
-            }
+            openTesting(eng, fr);
         }
 
         /// <summary>
@@ -272,32 +258,25 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void ShowHideChangeUserWindow(object sender, RoutedEventArgs e)
         {
-            TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
-
             App.ChangeUser = true;
 
-            this.Visibility = System.Windows.Visibility.Visible;
+            this.Visibility = System.Windows.Visibility.Hidden;
 
-            // показываем
+            App.aTimer.Stop();
+
             MainWindow oMainWindow = new MainWindow();
 
             oMainWindow.ShowDialog();
 
-            oMainWindow.Activate(); // обязательно нужно отдать фокус окну,
-            // иначе пользователь сильно удивится, когда увидит окно
-            // но не сможет в него ничего ввести с клавиатуры
-
-            if (App.UserChanged)
-            {
+            if (App.UserChanged) {
                 App.UserChanged = false;
 
                 CanClose = true;
 
                 this.Close();
-            }
-            else
-            {
+            } else {
                 this.Visibility = System.Windows.Visibility.Visible;
+                App.aTimer.Start();
             }
 
             App.ChangeUser = false;
@@ -391,27 +370,6 @@ namespace LanguageTutorial
             CanClose = true;
             Close();
         }
-
-        public void timer() {
-           // int min;
-           // //using (var db = new LanguageTutorialContext()) {
-           //     min = (int)(App.oActiveUser.SessionPeriod * 60);
-           //// }
-
-           // App.aTimer = new DispatcherTimer();
-           // App.aTimer.Tick += new EventHandler(OnTimedEvent);
-             //изменить время на время из базы
-        }
-
-
-
-        // СОБЫТИЕ ТАЙМЕРА
-        //private static void OnTimedEvent(object source, EventArgs e)
-        //{
-        //        App.aTimer.Stop();
-        //        WindowTimerTest timerWin = new WindowTimerTest();
-        //        timerWin.ShowDialog();
-
-        //}
+       
     }
 }
