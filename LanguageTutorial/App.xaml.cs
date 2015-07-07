@@ -39,7 +39,7 @@ namespace LanguageTutorial
         public static int EngSession = 0;
         public static int FranSession = 0;
 
-        public static bool test = false;
+        public static bool activeWin = false;
 
         protected override void OnStartup(StartupEventArgs e)
         {

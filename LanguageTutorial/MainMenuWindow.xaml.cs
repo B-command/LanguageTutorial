@@ -53,7 +53,7 @@ namespace LanguageTutorial
         }
 
         public static void openTesting(int eng, int fr) {
-            App.test = true;
+            App.activeWin = true;
             if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
@@ -62,11 +62,11 @@ namespace LanguageTutorial
                 if (App.EngSession < eng ) {
                     test = new TestWindow(1);
                     test.ShowDialog();
-                    App.test = false;
+                    App.activeWin = false;
                 }  else {
                     test = new TestWindow(2);
                     test.ShowDialog();
-                    App.test = false;
+                    App.activeWin = false;
                 }
             } else {
                 MessageBox.Show("Все тесты на сегодня пройдены");
@@ -80,11 +80,11 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Settings_Click(object sender, RoutedEventArgs e)
         {
-            App.test = true;
+            App.activeWin = true;
             RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
             oRegistrationWindow.ShowDialog();
-            App.test = false;
+            App.activeWin = false;
 
         }
 
@@ -95,11 +95,11 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Statistics_Click(object sender, RoutedEventArgs e)
         {
-            App.test = true;
+            App.activeWin = true;
             StatisticsWindow oStatisticsWindow = new StatisticsWindow();
 
             oStatisticsWindow.ShowDialog();
-            App.test = false;
+            App.activeWin = false;
         }
 
         /// <summary>
@@ -115,11 +115,11 @@ namespace LanguageTutorial
 
             App.aTimer.Stop();
 
-            App.test = true;
+            App.activeWin = true;
             MainWindow oMainWindow = new MainWindow();
 
             oMainWindow.ShowDialog();
-            App.test = false;
+            App.activeWin = false;
 
 
             if ( App.UserChanged )
@@ -239,7 +239,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void StartTesting(object sender, RoutedEventArgs e)
         {
-            if (App.test == false) {
+            if (App.activeWin == false) {
                 App.aTimer.Stop();
                 int eng = TimerMet.numberSessionsLanguageEng();
                 int fr = TimerMet.numberSessionsLanguageFran();
@@ -259,7 +259,7 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             // показываем
-            if (App.test == false) {
+            if (App.activeWin == false) {
                 RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
                 oRegistrationWindow.ShowDialog();
@@ -280,7 +280,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void ShowHideChangeUserWindow(object sender, RoutedEventArgs e)
         {
-            if (App.test == false) {
+            if (App.activeWin == false) {
                 App.ChangeUser = true;
 
                 this.Visibility = System.Windows.Visibility.Hidden;
@@ -318,7 +318,7 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             // показываем
-            if (App.test == false) {
+            if (App.activeWin == false) {
 
                 StatisticsWindow oStatisticsWindow = new StatisticsWindow();
 

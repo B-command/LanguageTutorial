@@ -33,17 +33,17 @@ namespace LanguageTutorial {
         private void bt_continue_Click(object sender, RoutedEventArgs e) {
             timer = true;
             Close();
-            App.test = true;
+            App.activeWin = true;
             TestWindow test;
             if (cb_language.SelectedIndex == 0) {
                 test = new TestWindow(1);
                 test.ShowDialog();
-                App.test = false;
+                App.activeWin = false;
             }
             if (cb_language.SelectedIndex == 1) { 
                 test = new TestWindow(2);
                 test.ShowDialog();
-                App.test = false;
+                App.activeWin = false;
             }
 
         }

@@ -309,7 +309,7 @@ namespace LanguageTutorial
             }
         }
 
-        /// <summary>
+                /// <summary>
         /// Переделывает окончания слова балл
         /// </summary>
         /// <param name="result"></param>
@@ -550,15 +550,15 @@ namespace LanguageTutorial
             }
         }
 
-        private void SkipWord_Click(object sender, RoutedEventArgs e)
-        {
+        private void SkipWord_Click(object sender, RoutedEventArgs e) {
+            if (schet > countWordOfS) {
             Debug.WriteLine("Click");
-            if (schet > countWordOfS)
+    if (schet > countWordOfS)
+    {
             
-            {
-        SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
-  SkipWord.Click += new RoutedEventHandler(OnTestEnd);
-         lblWord.Content = "";
+                SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
+                SkipWord.Click += new RoutedEventHandler(OnTestEnd);
+                lblWord.Content = "";
             }
             else
             {
@@ -573,34 +573,34 @@ namespace LanguageTutorial
                 else
                 {
                     //вычитаем балы за пропуск
-                if (toRussian)
-                {
+                if (toRussian) {
                         result -= 3 * translatingWord[1].Length;
 lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
-                        Debug.WriteLine(result + "Click");
-                    }
+   Debug.WriteLine(result + "Click");
+      }
                     else
                     {
                         result -= 2 * translatingWord[1].Length;
-                       lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+          lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                         Debug.WriteLine(result + "Click");
                         Debug.WriteLine(result + "Click");
                     }
                     //следующее слово
- if(schet>countWordOfS)
-            {
-    SkipWord.Content = "Завершить тестирование";
-                SkipWord.Click+=new RoutedEventHandler(OnTestEnd);
-            }
-                        else
-            {
+if(schet>countWordOfS)
+{
+  SkipWord.Content = "Завершить тестирование";
+                    SkipWord.Click += new RoutedEventHandler(OnTestEnd);
+                } 
+                   else{
             
+         
                         //schet++;
                         DeleteLabel();
                         schet++;
                         toRussian = true;
                         translatingWord = NextWordChosing();
                         SequenceWords();
+                }
                     }
                 }
             }   
