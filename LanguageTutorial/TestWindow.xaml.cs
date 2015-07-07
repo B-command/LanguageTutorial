@@ -551,8 +551,6 @@ namespace LanguageTutorial
         }
 
         private void SkipWord_Click(object sender, RoutedEventArgs e) {
-            if (schet > countWordOfS) {
-            Debug.WriteLine("Click");
     if (schet > countWordOfS)
     {
             
@@ -602,8 +600,7 @@ if(schet>countWordOfS)
                         SequenceWords();
                 }
                     }
-                }
-            }   
+                }  
            }
 
         bool timer = false;
