@@ -1,7 +1,8 @@
-﻿<Window x:Class="LanguageTutorial.StatisticsWindow"
+﻿<Controls:MetroWindow  x:Class="LanguageTutorial.StatisticsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Статистика" Height="381.739" Width="511.03" IsEnabled="False">
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="Статистика" Height="381.739" Width="511.03" IsEnabled="False" ResizeMode="CanMinimize">
     <Grid Loaded="Grid_Loaded_1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -31,5 +32,6 @@
         </DataGrid>
         <ComboBox x:Name="ComboBoxLanguage" HorizontalAlignment="Left" Margin="15,5,0,0" VerticalAlignment="Top" Width="120" Height="16" SelectionChanged="ComboBoxLanguage_SelectionChanged"/>
         <Label x:Name="LabelEmptyWeek" Content="На этой неделе не было сессий" HorizontalAlignment="Left" Margin="15,43,0,0" VerticalAlignment="Top"/>
+        <Image x:Name="img" HorizontalAlignment="Left" Height="70" Margin="369,284,0,0" VerticalAlignment="Top" Width="126"/>
     </Grid>
-</Window>
+</Controls:MetroWindow>

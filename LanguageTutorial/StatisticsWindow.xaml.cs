@@ -19,7 +19,7 @@ namespace LanguageTutorial
     /// <summary>
     /// Логика взаимодействия для StatisticsWindow.xaml
     /// </summary>
-    public partial class StatisticsWindow : Window
+    public partial class StatisticsWindow //: Window
     {
         //класс, объект которого хранит значения одной сессии
         private class StatisticsRow
@@ -44,6 +44,10 @@ namespace LanguageTutorial
         public StatisticsWindow()
         {
             InitializeComponent();
+
+            Uri uri = new Uri("pack://siteoforigin:,,,/Resources/Без имени-2.png");
+            BitmapImage bitmap = new BitmapImage(uri);
+            img.Source = bitmap;
         }
 
         private void Grid_Loaded_1(object sender, RoutedEventArgs e)
