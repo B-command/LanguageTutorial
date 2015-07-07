@@ -29,7 +29,7 @@ namespace LanguageTutorial {
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e) {
-            if (App.EngSession < TimerMet.numberSessionsLanguageEng()) { //заменить на значение из базы
+            if (App.EngSession < TimerMet.numberSessionsLanguageEng()) {
                 cb_language.Items.Add("English");
             }
             if (App.FranSession < TimerMet.numberSessionsLanguageFran()) {
@@ -52,14 +52,17 @@ namespace LanguageTutorial {
         private void button_pass_test_Click(object sender, RoutedEventArgs e) {
             timer = true;
             Close();
+            App.test = true;
             TestWindow test;
             if (cb_language.SelectedIndex == 0) {
                 test = new TestWindow(1);
                 test.ShowDialog();
+                App.test = false;
             }
             if (cb_language.SelectedIndex == 1) {
                 test = new TestWindow(2);
                 test.ShowDialog();
+                App.test = false;
             }
         }
 

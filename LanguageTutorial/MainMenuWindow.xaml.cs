@@ -49,23 +49,28 @@ namespace LanguageTutorial
             App.aTimer.Stop();
             int eng = TimerMet.numberSessionsLanguageEng();
             int fr = TimerMet.numberSessionsLanguageFran();
+            openTesting(eng, fr);
+        }
+
+        public static void openTesting(int eng, int fr) {
+            App.test = true;
             if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
             } else if (App.EngSession < eng || App.FranSession < fr) {
                 TestWindow test;
-                if (App.EngSession < eng && App.oCourseEnglish != null) {
+                if (App.EngSession < eng ) {
                     test = new TestWindow(1);
                     test.ShowDialog();
-                }
-                if (App.FranSession < fr && App.oCourseFrançais != null) {
+                    App.test = false;
+                }  else {
                     test = new TestWindow(2);
                     test.ShowDialog();
+                    App.test = false;
                 }
             } else {
                 MessageBox.Show("Все тесты на сегодня пройдены");
             }
-
         }
 
         /// <summary>
@@ -75,9 +80,12 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Settings_Click(object sender, RoutedEventArgs e)
         {
+            App.test = true;
             RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
             oRegistrationWindow.ShowDialog();
+            App.test = false;
+
         }
 
         /// <summary>
@@ -87,7 +95,11 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Statistics_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Статистика - Меню (заглушка)");
+            App.test = true;
+            StatisticsWindow oStatisticsWindow = new StatisticsWindow();
+
+            oStatisticsWindow.ShowDialog();
+            App.test = false;
         }
 
         /// <summary>
@@ -103,16 +115,18 @@ namespace LanguageTutorial
 
             App.aTimer.Stop();
 
+            App.test = true;
             MainWindow oMainWindow = new MainWindow();
 
             oMainWindow.ShowDialog();
+            App.test = false;
+
 
             if ( App.UserChanged )
             {
                 App.UserChanged = false;
 
                 CanClose = true;
-                
 
                 this.Close();
             }
@@ -148,10 +162,11 @@ namespace LanguageTutorial
             createTrayIcon(); // создание нашей иконки
         }
 
-        private System.Windows.Forms.NotifyIcon TrayIcon = null;
-        private ContextMenu TrayMenu = null;
+        public System.Windows.Forms.NotifyIcon TrayIcon = null;
+        public ContextMenu TrayMenu = null;
+        
 
-        private bool createTrayIcon()
+        public bool createTrayIcon()
         {
             bool result = false;
             if (TrayIcon == null)
@@ -175,8 +190,8 @@ namespace LanguageTutorial
                     else
                     {
                         // по правой кнопке (и всем остальным) показываем меню
-                        TrayMenu.IsOpen = true;
-                        Activate(); // нужно отдать окну фокус, см. ниже
+                       TrayMenu.IsOpen = true;
+                       //Activate(); // нужно отдать окну фокус, см. ниже
                     }
                 };
                 result = true;
@@ -224,24 +239,13 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void StartTesting(object sender, RoutedEventArgs e)
         {
-            App.aTimer.Stop();
-            int eng = TimerMet.numberSessionsLanguageEng();
-            int fr = TimerMet.numberSessionsLanguageFran();
-            if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
-                WindowLanguage winLan = new WindowLanguage();
-                winLan.ShowDialog();
-            } else if (App.EngSession < eng || App.FranSession < fr) {
-                TestWindow test;
-                if (App.EngSession < eng && App.oCourseEnglish != null) {
-                    test = new TestWindow(1);
-                    test.ShowDialog();
-                }
-                if (App.FranSession < fr && App.oCourseFrançais != null) {
-                    test = new TestWindow(2);
-                    test.ShowDialog();
-                }
+            if (App.test == false) {
+                App.aTimer.Stop();
+                int eng = TimerMet.numberSessionsLanguageEng();
+                int fr = TimerMet.numberSessionsLanguageFran();
+                openTesting(eng, fr);
             } else {
-                MessageBox.Show("Все тесты на сегодня пройдены");
+                App.Current.Windows[App.Current.Windows.Count - 1].Activate();
             }
         }
 
@@ -255,13 +259,17 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             // показываем
-            RegistrationWindow oRegistrationWindow = new RegistrationWindow();
+            if (App.test == false) {
+                RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
-            oRegistrationWindow.ShowDialog();
+                oRegistrationWindow.ShowDialog();
 
-            oRegistrationWindow.Activate(); // обязательно нужно отдать фокус окну,
-            // иначе пользователь сильно удивится, когда увидит окно
-            // но не сможет в него ничего ввести с клавиатуры
+                oRegistrationWindow.Activate(); // обязательно нужно отдать фокус окну,
+                // иначе пользователь сильно удивится, когда увидит окно
+                // но не сможет в него ничего ввести с клавиатуры
+            } else {
+                App.Current.Windows[App.Current.Windows.Count - 1].Activate();
+            }
 
         }
 
@@ -272,35 +280,32 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void ShowHideChangeUserWindow(object sender, RoutedEventArgs e)
         {
-            TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
+            if (App.test == false) {
+                App.ChangeUser = true;
 
-            App.ChangeUser = true;
+                this.Visibility = System.Windows.Visibility.Hidden;
 
-            this.Visibility = System.Windows.Visibility.Visible;
+                App.aTimer.Stop();
 
-            // показываем
-            MainWindow oMainWindow = new MainWindow();
+                MainWindow oMainWindow = new MainWindow();
 
-            oMainWindow.ShowDialog();
+                oMainWindow.ShowDialog();
 
-            oMainWindow.Activate(); // обязательно нужно отдать фокус окну,
-            // иначе пользователь сильно удивится, когда увидит окно
-            // но не сможет в него ничего ввести с клавиатуры
+                if (App.UserChanged) {
+                    App.UserChanged = false;
 
-            if (App.UserChanged)
-            {
-                App.UserChanged = false;
+                    CanClose = true;
 
-                CanClose = true;
+                    this.Close();
+                } else {
+                    this.Visibility = System.Windows.Visibility.Visible;
+                    App.aTimer.Start();
+                }
 
-                this.Close();
+                App.ChangeUser = false;
+            } else {
+                App.Current.Windows[App.Current.Windows.Count - 1].Activate();
             }
-            else
-            {
-                this.Visibility = System.Windows.Visibility.Visible;
-            }
-
-            App.ChangeUser = false;
         }
 
         /// <summary>
@@ -313,10 +318,17 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             // показываем
-            MessageBox.Show("Статистика - Трей (заглушка)");
-            Activate(); // обязательно нужно отдать фокус окну,
-            // иначе пользователь сильно удивится, когда увидит окно
-            // но не сможет в него ничего ввести с клавиатуры
+            if (App.test == false) {
+
+                StatisticsWindow oStatisticsWindow = new StatisticsWindow();
+
+                oStatisticsWindow.ShowDialog();
+                oStatisticsWindow.Activate(); // обязательно нужно отдать фокус окну,
+                // иначе пользователь сильно удивится, когда увидит окно
+                // но не сможет в него ничего ввести с клавиатуры
+            } else {
+                App.Current.Windows[App.Current.Windows.Count - 1].Activate();
+            }
 
         }
 
@@ -389,29 +401,9 @@ namespace LanguageTutorial
         private void MenuExitClick(object sender, RoutedEventArgs e)
         {
             CanClose = true;
-            Close();
+            //Close();
+            Environment.Exit(0);
         }
-
-        public void timer() {
-           // int min;
-           // //using (var db = new LanguageTutorialContext()) {
-           //     min = (int)(App.oActiveUser.SessionPeriod * 60);
-           //// }
-
-           // App.aTimer = new DispatcherTimer();
-           // App.aTimer.Tick += new EventHandler(OnTimedEvent);
-             //изменить время на время из базы
-        }
-
-
-
-        // СОБЫТИЕ ТАЙМЕРА
-        //private static void OnTimedEvent(object source, EventArgs e)
-        //{
-        //        App.aTimer.Stop();
-        //        WindowTimerTest timerWin = new WindowTimerTest();
-        //        timerWin.ShowDialog();
-
-        //}
+       
     }
 }

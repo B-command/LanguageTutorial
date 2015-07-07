@@ -38,7 +38,8 @@ namespace LanguageTutorial
         public static System.Windows.Threading.DispatcherTimer aTimer;
         public static int EngSession = 0;
         public static int FranSession = 0;
-        //public static int SessionIncrement = 0;
+
+        public static bool test = false;
 
         protected override void OnStartup(StartupEventArgs e)
         {

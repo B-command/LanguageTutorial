@@ -50,9 +50,9 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (App.oActiveUser != null)
+            if (label_Settings.Content == "English")
             {
-                if (label_Settings.Content == "English")
+                if ( App.oCourseEnglish != null )
                 {
                     Course tempCourseEnglish = new Course();
 
@@ -65,6 +65,13 @@ namespace LanguageTutorial
                 }
                 else
                 {
+                    App.oCourseEnglish = new Course() { LanguageId = 1, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
+                }
+            }
+            else
+            {
+                if ( App.oCourseFrançais != null)
+                {
                     Course tempCourseFrançais = new Course();
 
                     tempCourseFrançais.WordsPerSession = App.oCourseFrançais.WordsPerSession;
@@ -74,9 +81,11 @@ namespace LanguageTutorial
 
                     grid.DataContext = tempCourseFrançais;
                 }
+                else
+                {
+                    App.oCourseFrançais = new Course() { LanguageId = 2, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
+                }
             }
-
-
         }
 
         /// <summary>

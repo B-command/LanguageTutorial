@@ -15,7 +15,6 @@ using LanguageTutorial.DataModel;
 using System.Data.Entity;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-using System.Threading;
 
 namespace LanguageTutorial
 {
@@ -26,7 +25,6 @@ namespace LanguageTutorial
     {
         //получаем ID языка, который хотим учить(тестировать)
         int LanguageID;
-        //Конструктор
         public TestWindow(int language)
         {
             LanguageID = language;
@@ -35,7 +33,7 @@ namespace LanguageTutorial
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/Без имени-3.png");
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
-        }
+        }     
         //Это все для смены раскладки через WinIP
         [DllImport("user32.dll", SetLastError = true)]
         static extern int GetWindowThreadProcessId(
@@ -50,13 +48,13 @@ namespace LanguageTutorial
             );
 
         /// <summary>
-        /// Функция возвращает Id раскладки.
+        /// Вернёт Id раскладки.
         /// </summary>
         ushort GetKeyboardLayout()
         {
             return GetKeyboardLayout(GetWindowThreadProcessId(GetForegroundWindow(), IntPtr.Zero));
         }
-       
+
         //Кол-во слов за сессию
         static public int countWordOfS;
         //Кол-во угаданных слов
@@ -81,13 +79,13 @@ namespace LanguageTutorial
         WordDictionary useWord = new WordDictionary();
 
         /// <summary>
-        /// при загрузке формы добавляет из базы данных словарь
+        /// при загрузке формы
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           // часть программы, которая загружает список изучаемых слов в dict
+            // часть программы, которая загружает список изучаемых слов в dict
             using (var db = new LanguageTutorialContext())
             {
                 var result = db.WordQueue.Where(wq => wq.UserId == App.oActiveUser.Id && wq.IsLearned == false);
@@ -107,23 +105,22 @@ namespace LanguageTutorial
             //если учим английский, то берем счетчик сессии
             if (LanguageID == 1)
             {
-                countWordOfS=App.oCourseEnglish.WordsPerSession;
+                countWordOfS = App.oCourseEnglish.WordsPerSession;
             }
             //если учим французский, то берем счетчик сессии
             if (LanguageID == 2)
             {
                 countWordOfS = App.oCourseFrançais.WordsPerSession;
-            }            
-                //вытаскиваем словарь, который учит пользователь
+            }
+            //вытаскиваем словарь, который учит пользователь
             //перевод с иностранного на русский
             toRussian = true;
             //выбор случайным образом как переводить(с русского на ин.яз или наоборот)
             translatingWord = NextWordChosing();
             //берем слово
             SequenceWords();
-           // Debug.WriteLine("Кол-во слов"+currentWord.Count);
+            // Debug.WriteLine("Кол-во слов"+currentWord.Count);
         }
-
         /// <summary>
         /// Функция выбора следующего слова из текущего списка изучаемых слов
         /// </summary>
@@ -132,7 +129,7 @@ namespace LanguageTutorial
             toRussian = true;
             Random rnd = new Random();
             // определение индекса очередного слова из текущего списка изучаемых слов currentWord
-            int translatingWordIndex = rnd.Next(0, currentWord.Count-1);// dict.Count - 1);
+            int translatingWordIndex = rnd.Next(0, currentWord.Count - 1);// dict.Count - 1);
             //translatingWord содержит слово и его перевод
             //пример: используется строка "cat,кошка"
             //полученный массив: translatingWord, который содержит:
@@ -140,7 +137,7 @@ namespace LanguageTutorial
             //translatingWord[1] = "кошка"
             translatingWord[0] = currentWord.ElementAt(translatingWordIndex).Word;
             translatingWord[1] = currentWord.ElementAt(translatingWordIndex).Translate;
-            useWord=currentWord.ElementAt(translatingWordIndex);
+            useWord = currentWord.ElementAt(translatingWordIndex);
             //условие, по которому определяем, переводим ли мы с ин.языка на русский
             //или с русского на иностранный
             if (rnd.Next(0, 19) > 9)
@@ -161,13 +158,12 @@ namespace LanguageTutorial
             // возвращаем массив translatingWord, который содержит слово и перевод
             return translatingWord;
         }
-
         int schet = 1;//счетчик слов
         Label[] words;//массив Label для слов
         int length;//Длина угадываемого слова
 
         /// <summary>
-        ///Проверяет счетчик слов за сессию
+        ///Последовательный прогон слов за сессию 
         /// </summary>
         void SequenceWords()
         {
@@ -188,7 +184,7 @@ namespace LanguageTutorial
                 {
                     FranceWord();
                 }
-                lblSchetchik.Content = schet+ "/" + countWordOfS;
+                lblSchetchik.Content = schet + "/" + countWordOfS;
                 lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                 //выводим слово с заглавной буквы
                 lblWord.Content = translatingWord[0].Substring(0, 1).ToUpper() + translatingWord[0].Substring(1, translatingWord[0].Length - 1);
@@ -196,7 +192,7 @@ namespace LanguageTutorial
                 CreateLabel(translatingWord[1]);
             }
         }
-       
+
         /// <summary>
         /// Функция преобразует французские символы в латиницу
         /// </summary>
@@ -221,41 +217,41 @@ namespace LanguageTutorial
                     s = s.Remove(i, 1).Insert(i, "e");
                 }
                 if (ToLatino(s[i], franA))
-                 {
+                {
                     s = s.Remove(i, 1).Insert(i, "a");
-                 }
-                 if (ToLatino(s[i], franU))
-                 {
+                }
+                if (ToLatino(s[i], franU))
+                {
                     s = s.Replace(s[i], 'u');
-                 }
-                 if (ToLatino(s[i], franO))
-                 {
+                }
+                if (ToLatino(s[i], franO))
+                {
                     s = s.Replace(s[i], 'o');
-                 }
-                  if (ToLatino(s[i], franI))
-                 {
-                     s = s.Replace(s[i], 'i');
-                 }
-                  if (ToLatino(s[i], franY))
-                 {
-                     s = s.Replace(s[i], 'y');
-                 }
-                  if (ToLatino(s[i], franC))
-                 {
-                      s = s.Replace(s[i], 'c');
-                 }
-                  if (ToLatino(s[i], franAE))
-                 {
-                     s = s.Remove(i, 1).Insert(i, "ae");
-                 }
-                  if (ToLatino(s[i], franOE))
-                 {
-                     s = s.Remove(i, 1).Insert(i, "oe");
-                 }
+                }
+                if (ToLatino(s[i], franI))
+                {
+                    s = s.Replace(s[i], 'i');
+                }
+                if (ToLatino(s[i], franY))
+                {
+                    s = s.Replace(s[i], 'y');
+                }
+                if (ToLatino(s[i], franC))
+                {
+                    s = s.Replace(s[i], 'c');
+                }
+                if (ToLatino(s[i], franAE))
+                {
+                    s = s.Remove(i, 1).Insert(i, "ae");
+                }
+                if (ToLatino(s[i], franOE))
+                {
+                    s = s.Remove(i, 1).Insert(i, "oe");
+                }
             }
             translatingWord[1] = s;
         }
-       
+
         /// <summary>
         /// Проверка на наличие символа
         /// </summary>
@@ -316,38 +312,45 @@ namespace LanguageTutorial
         /// </summary>
         /// <param name="result"></param>
         /// <returns></returns>
-        string WriteBall(string result)
+        public string WriteBall(string result)
         {
             string w = "";
             char last = result[result.Length - 1];
-            switch (last)
+            if (result.Length > 1 && result[result.Length - 2] == '1')
             {
-                case '0':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    {
-                        w = " баллов";
-                        break;
-                    }
-                case '1':
-                    {
-                        w = " балл";
-                        break;
-                    }
-                case '2':
-                case '3':
-                case '4':
-                    {
-                        w = " балла";
-                        break;
-                    }
+                w = " баллов";
+            }
+            else
+            {
+                switch (last)
+                {
+                    case '0':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        {
+                            w = " баллов";
+                            break;
+                        }
+                    case '1':
+                        {
+                            w = " балл";
+                            break;
+                        }
+                    case '2':
+                    case '3':
+                    case '4':
+                        {
+                            w = " балла";
+                            break;
+                        }
+                }
             }
             return w;
         }
-       
+
         /// <summary>
         /// Проверка слова на - или пробел
         /// </summary>
@@ -374,7 +377,7 @@ namespace LanguageTutorial
             words = null;
             PanelLetters.Children.RemoveRange(0, length);
         }
-      
+
         private string RusKey = "Ё!\"№;%:?*()_+ЙЦУКЕНГШЩЗХЪ/ФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,ё1234567890-=йцукенгшщзхъ\\фывапролджэячсмитьбю. ";
         private string EngKey = "~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:\"ZXCVBNM<>?`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./ ";
 
@@ -451,10 +454,10 @@ namespace LanguageTutorial
             }
             FillTest(s);
         }
-       /// <summary>
-       /// Проверяет символ и добавлет его в Label
-       /// </summary>
-       /// <param name="s"></param>
+        /// <summary>
+        /// Проверяет символ и добавлет его в Label
+        /// </summary>
+        /// <param name="s"></param>
         void FillTest(string s)
         {
             //переписываем в массив символов наше отгадываемое слово
@@ -489,8 +492,8 @@ namespace LanguageTutorial
                 {
                     SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                     SkipWord.Click += new RoutedEventHandler(OnTestEnd);
-                   // lblWord.Content = "";
-                   // DeleteLabel();
+                    // lblWord.Content = "";
+                    // DeleteLabel();
                 }
                 else
                 {
@@ -561,23 +564,23 @@ namespace LanguageTutorial
             }
             else
             {
-            //вычитаем балы за пропуск
-            if (toRussian)
-            {
-                result -= 3 * translatingWord[1].Length;
-                lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
-            }
-            else
-            {
-                result -= 2 * translatingWord[1].Length;
-                lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
-            }
-            //следующее слово
-            DeleteLabel();
-            schet++;
-            toRussian = true;
-            translatingWord = NextWordChosing();
-            SequenceWords();
+                //вычитаем балы за пропуск
+                if (toRussian)
+                {
+                    result -= 3 * translatingWord[1].Length;
+                    lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                }
+                else
+                {
+                    result -= 2 * translatingWord[1].Length;
+                    lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                }
+                //следующее слово
+                DeleteLabel();
+                schet++;
+                toRussian = true;
+                translatingWord = NextWordChosing();
+                SequenceWords();
             }
         }
 

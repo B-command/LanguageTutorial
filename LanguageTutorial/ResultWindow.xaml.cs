@@ -40,127 +40,86 @@ namespace LanguageTutorial
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
         }
-        string WriteWord(string result)
+        public string WriteWord(string result)
         {
             string w = "";
-            char last = result[result.Length - 1];
-            switch (last)
-            {
-                case '0':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    {
-                        w = " слов";
-                        break;
-                    }
-                case '1':
-                    {
-                        w = " слово";
-                        break;
-                    }
-                case '2':
-                case '3':
-                case '4':
-                    {
-                        w = " слова";
-                        break;
-                    }
-            }
-            return w;
-        }
-        string WriteBall(string result)
-        {
-            string w = "";
-            char last = result[result.Length - 1];
-            switch (last)
-            {
-                case '0':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    {
-                        w = " баллов";
-                        break;
-                    }
-                case '1':
-                    {
-                        w = " балл";
-                        break;
-                    }
-                case '2':
-                case '3':
-                case '4':
-                    {
-                        w = " балла";
-                        break;
-                    }
+            char last = result[result.Length-1];
+            if (result.Length > 1 && result[result.Length - 2] == '1') {
+                w = " слов";
+            } else {
+                switch (last) {
+                    case '0':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9': {
+                            w = " слов";
+                            break;
+                        }
+                    case '1': {
+                            w = " слово";
+                            break;
+                        }
+                    case '2':
+                    case '3':
+                    case '4': {
+                            w = " слова";
+                            break;
+                        }
+                }
             }
             return w;
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+
+        public string WriteBall(string result)
         {
-            if (LanguageID == 1)
-            {
+            string w = "";
+            char last = result[result.Length - 1];
+            if (result.Length > 1 && result[result.Length - 2] == '1') {
+                w = " баллов";
+            } else {
+                switch (last) {
+                    case '0':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9': {
+                            w = " баллов";
+                            break;
+                        }
+                    case '1': {
+                            w = " балл";
+                            break;
+                        }
+                    case '2':
+                    case '3':
+                    case '4': {
+                            w = " балла";
+                            break;
+                        }
+                }
+            }
+            return w;
+        }
+
+        private void Window_Closed(object sender, EventArgs e) {
+            if (LanguageID == 1) {
                 App.EngSession++;
             }
-            if (LanguageID == 2)
-            {
+            if (LanguageID == 2) {
                 App.FranSession++;
             }
-            if (App.EngSession < TimerMet.numberSessionsLanguageEng() || App.FranSession < TimerMet.numberSessionsLanguageFran())
-            {//переместить код в тест
+            if (App.EngSession < TimerMet.numberSessionsLanguageEng() || App.FranSession < TimerMet.numberSessionsLanguageFran()) {//переместить код в тест
                 App.aTimer.Start();
             }
         }
 
-        private void bt_ok_Click(object sender, RoutedEventArgs e)
-        {
+        private void bt_ok_Click(object sender, RoutedEventArgs e) {
             Close();
         }
 
-        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-           /* using (var db = new LanguageTutorialContext())
-            {
-                if (LanguageID == 1)
-                {
-                    var result = db.Course.Where(wq => wq.UserId == App.oActiveUser.Id && wq.LanguageId == LanguageID);
-                    if (result != null)
-                    {
-                            var session = result as Session;
-                            session.CourseId = App.oCourseEnglish.Id;
-                            session.Words = CountRightWords;
-                            session.Points = Result;
-                            session.Datetime = DateTime.Now;
-                            session.FinishedWords = isLearned;
-                            db.Session.Add(session);
-                        }
-                }
-                        if (LanguageID == 2)
-                        {
-                            var result = db.Course.Where(wq => wq.UserId == App.oActiveUser.Id && wq.LanguageId == LanguageID);
-                    if (result != null)
-                    {
-                            var session = result as Session;
-                            session.CourseId = App.oCourseFrançais.Id;
-                            session.Words = CountRightWords;
-                            session.Points = Result;
-                            session.Datetime = DateTime.Now;
-                            session.FinishedWords = isLearned;
-                            db.Session.Add(session);
-                        }
-                        }
-                db.SaveChanges();
-                    }*/
-                }
-            }
-        }
-    
-  
-
+    }
+}
