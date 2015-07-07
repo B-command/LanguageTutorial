@@ -89,7 +89,9 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Statistics_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Статистика - Меню (заглушка)");
+            StatisticsWindow oStatisticsWindow = new StatisticsWindow();
+
+            oStatisticsWindow.ShowDialog();
         }
 
         /// <summary>
@@ -292,8 +294,10 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             // показываем
-            MessageBox.Show("Статистика - Трей (заглушка)");
-            Activate(); // обязательно нужно отдать фокус окну,
+            StatisticsWindow oStatisticsWindow = new StatisticsWindow();
+
+            oStatisticsWindow.ShowDialog();
+            oStatisticsWindow.Activate(); // обязательно нужно отдать фокус окну,
             // иначе пользователь сильно удивится, когда увидит окно
             // но не сможет в него ничего ввести с клавиатуры
 
