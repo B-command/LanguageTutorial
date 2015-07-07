@@ -35,7 +35,6 @@ namespace LanguageTutorial {
             App.aTimer.Stop();
             WindowTimerTest timerWin = new WindowTimerTest();
             timerWin.ShowDialog();
-
         }
     }
 }
