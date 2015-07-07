@@ -80,9 +80,12 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Settings_Click(object sender, RoutedEventArgs e)
         {
+            App.test = true;
             RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
             oRegistrationWindow.ShowDialog();
+            App.test = false;
+
         }
 
         /// <summary>
@@ -92,9 +95,11 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Statistics_Click(object sender, RoutedEventArgs e)
         {
+            App.test = true;
             StatisticsWindow oStatisticsWindow = new StatisticsWindow();
 
             oStatisticsWindow.ShowDialog();
+            App.test = false;
         }
 
         /// <summary>
@@ -110,9 +115,12 @@ namespace LanguageTutorial
 
             App.aTimer.Stop();
 
+            App.test = true;
             MainWindow oMainWindow = new MainWindow();
 
             oMainWindow.ShowDialog();
+            App.test = false;
+
 
             if ( App.UserChanged )
             {
@@ -236,6 +244,8 @@ namespace LanguageTutorial
                 int eng = TimerMet.numberSessionsLanguageEng();
                 int fr = TimerMet.numberSessionsLanguageFran();
                 openTesting(eng, fr);
+            } else {
+                App.Current.Windows[App.Current.Windows.Count - 1].Activate();
             }
         }
 
@@ -249,13 +259,17 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             // показываем
-            RegistrationWindow oRegistrationWindow = new RegistrationWindow();
+            if (App.test == false) {
+                RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
-            oRegistrationWindow.ShowDialog();
+                oRegistrationWindow.ShowDialog();
 
-            oRegistrationWindow.Activate(); // обязательно нужно отдать фокус окну,
-            // иначе пользователь сильно удивится, когда увидит окно
-            // но не сможет в него ничего ввести с клавиатуры
+                oRegistrationWindow.Activate(); // обязательно нужно отдать фокус окну,
+                // иначе пользователь сильно удивится, когда увидит окно
+                // но не сможет в него ничего ввести с клавиатуры
+            } else {
+                App.Current.Windows[App.Current.Windows.Count - 1].Activate();
+            }
 
         }
 
@@ -266,28 +280,32 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void ShowHideChangeUserWindow(object sender, RoutedEventArgs e)
         {
-            App.ChangeUser = true;
+            if (App.test == false) {
+                App.ChangeUser = true;
 
-            this.Visibility = System.Windows.Visibility.Hidden;
+                this.Visibility = System.Windows.Visibility.Hidden;
 
-            App.aTimer.Stop();
+                App.aTimer.Stop();
 
-            MainWindow oMainWindow = new MainWindow();
+                MainWindow oMainWindow = new MainWindow();
 
-            oMainWindow.ShowDialog();
+                oMainWindow.ShowDialog();
 
-            if (App.UserChanged) {
-                App.UserChanged = false;
+                if (App.UserChanged) {
+                    App.UserChanged = false;
 
-                CanClose = true;
+                    CanClose = true;
 
-                this.Close();
+                    this.Close();
+                } else {
+                    this.Visibility = System.Windows.Visibility.Visible;
+                    App.aTimer.Start();
+                }
+
+                App.ChangeUser = false;
             } else {
-                this.Visibility = System.Windows.Visibility.Visible;
-                App.aTimer.Start();
+                App.Current.Windows[App.Current.Windows.Count - 1].Activate();
             }
-
-            App.ChangeUser = false;
         }
 
         /// <summary>
@@ -300,12 +318,17 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             // показываем
-            StatisticsWindow oStatisticsWindow = new StatisticsWindow();
+            if (App.test == false) {
 
-            oStatisticsWindow.ShowDialog();
-            oStatisticsWindow.Activate(); // обязательно нужно отдать фокус окну,
-            // иначе пользователь сильно удивится, когда увидит окно
-            // но не сможет в него ничего ввести с клавиатуры
+                StatisticsWindow oStatisticsWindow = new StatisticsWindow();
+
+                oStatisticsWindow.ShowDialog();
+                oStatisticsWindow.Activate(); // обязательно нужно отдать фокус окну,
+                // иначе пользователь сильно удивится, когда увидит окно
+                // но не сможет в него ничего ввести с клавиатуры
+            } else {
+                App.Current.Windows[App.Current.Windows.Count - 1].Activate();
+            }
 
         }
 
