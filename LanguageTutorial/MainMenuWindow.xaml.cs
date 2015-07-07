@@ -53,6 +53,7 @@ namespace LanguageTutorial
         }
 
         public static void openTesting(int eng, int fr) {
+            App.test = true;
             if (App.EngSession < eng && App.FranSession < fr) { //заменить константы на данные из бд
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
@@ -61,9 +62,11 @@ namespace LanguageTutorial
                 if (App.EngSession < eng ) {
                     test = new TestWindow(1);
                     test.ShowDialog();
+                    App.test = false;
                 }  else {
                     test = new TestWindow(2);
                     test.ShowDialog();
+                    App.test = false;
                 }
             } else {
                 MessageBox.Show("Все тесты на сегодня пройдены");
@@ -153,6 +156,7 @@ namespace LanguageTutorial
 
         public System.Windows.Forms.NotifyIcon TrayIcon = null;
         public ContextMenu TrayMenu = null;
+        
 
         public bool createTrayIcon()
         {
@@ -178,8 +182,8 @@ namespace LanguageTutorial
                     else
                     {
                         // по правой кнопке (и всем остальным) показываем меню
-                        TrayMenu.IsOpen = true;
-                        Activate(); // нужно отдать окну фокус, см. ниже
+                       TrayMenu.IsOpen = true;
+                       //Activate(); // нужно отдать окну фокус, см. ниже
                     }
                 };
                 result = true;
@@ -227,10 +231,12 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void StartTesting(object sender, RoutedEventArgs e)
         {
-            App.aTimer.Stop();
-            int eng = TimerMet.numberSessionsLanguageEng();
-            int fr = TimerMet.numberSessionsLanguageFran();
-            openTesting(eng, fr);
+            if (App.test == false) {
+                App.aTimer.Stop();
+                int eng = TimerMet.numberSessionsLanguageEng();
+                int fr = TimerMet.numberSessionsLanguageFran();
+                openTesting(eng, fr);
+            }
         }
 
         /// <summary>
@@ -372,7 +378,8 @@ namespace LanguageTutorial
         private void MenuExitClick(object sender, RoutedEventArgs e)
         {
             CanClose = true;
-            Close();
+            //Close();
+            Environment.Exit(0);
         }
        
     }
