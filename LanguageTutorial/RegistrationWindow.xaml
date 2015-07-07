@@ -6,14 +6,14 @@
 
     <Grid x:Name="grid" DataContext="null" Margin="0,0,-8,-18">
 
-        <Label x:Name="label_Profile_Name" Content="Название профиля" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="21,15,24,320"/>
+        <Label x:Name="label_Profile_Name" Content="Название профиля" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="22,0,25,320"/>
         <TextBox x:Name="textbox_Profile_Name" MaxLength="50" ToolTip="Введи имя, под которым хочешь быть зарегистрирован в дальнейшем. Оно не должно привышать 50 символов. Можешь использовать любые символы." Text="{Binding Name}" Controls:TextBoxHelper.Watermark="Имя профиля" Width="259" TextWrapping="Wrap" VerticalContentAlignment="Center" Margin="21,44,24,289" LostFocus="textbox_Profile_Name_LostFocus" />
 
-        <Label x:Name="label_Time_Between_Seans" Content="Промежуток между сеансами ( часов )" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="21,201,24,134"/>
+        <Label x:Name="label_Time_Between_Seans" Content="Промежуток между сеансами ( часов )" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="22,192,25,134"/>
         <Controls:NumericUpDown x:Name="num_Time_Between_Seans" ToolTip="Выбери время между прохождениями теста в часах." Maximum="4" Minimum="0.5" Value="{Binding SessionPeriod}" HorizontalAlignment="Left" Height="22" Margin="22,230,0,0" VerticalAlignment="Top" Width="258" Interval="0.5"/>
 
 
-        <Label x:Name="label_Language" Content="Языки обучения" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="21,85,24,250"/>
+        <Label x:Name="label_Language" Content="Языки обучения" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="22,73,25,250"/>
         <CheckBox x:Name="check_English" ToolTip="Выбрать для обучения английский язык" Content="English" FontWeight="Bold" Margin="21,120,124,214" Click="check_English_Click"></CheckBox>
         <CheckBox x:Name="check_Français" ToolTip="Выбрать для обучения французский язык" Content="Français" FontWeight="Bold" Margin="21,159,124,175" Click="check_Français_Click"></CheckBox>
         <Button x:Name="button_Settings_English" Content="Настройки" ToolTip="Настройки для английского языка" HorizontalAlignment="Left" Margin="130,123,0,0" VerticalAlignment="Top" Width="95" RenderTransformOrigin="0.107,0.455" FontSize="8" Height="25" Click="button_Settings_English_Click"/>
