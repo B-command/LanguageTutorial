@@ -31,21 +31,28 @@ namespace LanguageTutorial
             BitmapImage bitmap = new BitmapImage(uri);
             //Image img = new Image();
             img.Source = bitmap;
+            num_Time_Between_Seans.Value = 2;
         }
+
+        /// <summary>
+        /// Переменная, хранящая текущее значение промежутка между сеансами 
+        /// </summary>
+        double currentTimeBetweenSessions = 2;
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             button_Settings_English.IsEnabled = false;
             button_Settings_Français.IsEnabled = false;
+            
 
             if (App.oActiveUser != null && !App.ChangeUser )
             {// Заполняем значениями профиля
-
+                
                 grid.DataContext = App.oActiveUser;
-
+                
                 // Ставим галочки и активируем управление языков
                 using (var db = new LanguageTutorialContext())
-                {
+                {                   
                     //var result = db.Course.Where(course => course.UserId == App.oActiveUser.Id && course.LanguageId == 0);
                     var result = db.Course.FirstOrDefault(Course => Course.UserId == App.oActiveUser.Id && Course.LanguageId == 1 );
 
@@ -82,6 +89,8 @@ namespace LanguageTutorial
             }
 
             App.Registered = false;
+
+            currentTimeBetweenSessions = (double)num_Time_Between_Seans.Value;
         }
 
         /// <summary>
@@ -397,8 +406,10 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Cancel_Click(object sender, RoutedEventArgs e)
         {
+            num_Time_Between_Seans.Value = currentTimeBetweenSessions;
             this.Close();
         }
+
 
         /// <summary>
         /// Открытие настроек языка Английский

@@ -108,6 +108,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Cancel_Click(object sender, RoutedEventArgs e)
         {
+
             this.Close();
         }
 
