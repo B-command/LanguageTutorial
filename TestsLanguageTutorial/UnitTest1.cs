@@ -23,5 +23,16 @@ namespace TestsLanguageTutorial {
 
             Assert.AreEqual(real, res);
         }
+
+        [TestMethod]
+        public void TestnumberSessionsLanguage_Null()
+        {
+            //Тестируемая функция должна вернуть 0, т.к. курс не активен
+            Course someCourse = new Course() { Active = false, SeansPerDay = 5 };
+            int res = 0;
+            int real = TimerMet.numberSessionsLanguage(someCourse);
+
+            Assert.AreEqual(real, res);
+        }
     }
 }
