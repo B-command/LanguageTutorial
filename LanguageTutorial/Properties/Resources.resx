@@ -154,4 +154,10 @@
   <data name="Без_имени_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Без имени-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="untitled_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\untitled_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="volume_off_318_25206" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\volume-off_318-25206.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

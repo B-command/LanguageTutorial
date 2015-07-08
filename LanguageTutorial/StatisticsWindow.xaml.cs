@@ -39,7 +39,7 @@ namespace LanguageTutorial
 
         DateTime WeekTopBoundary = DateTime.Now;
 
-        DateTime WeekBottomBoundary = DateTime.Now.AddDays(-7);
+        DateTime WeekBottomBoundary = DateTime.Now.AddDays(-6);
 
         public StatisticsWindow()
         {
@@ -53,14 +53,29 @@ namespace LanguageTutorial
         private void Grid_Loaded_1(object sender, RoutedEventArgs e)
         {
             LabelEmptyWeek.Visibility = System.Windows.Visibility.Hidden;
-            ComboBoxLanguage.Items.Add("English");
-            ComboBoxLanguage.Items.Add("Français");
+            using (var db = new LanguageTutorialContext())
+            {
+                var activeLanguages = db.Course.Where(c => c.Active);
+                foreach (var l in activeLanguages)
+                {
+                    if (l.LanguageId == 1)
+                    {
+                        ComboBoxLanguage.Items.Add("English");
+                    }
+                    else
+                    {
+                        ComboBoxLanguage.Items.Add("Français");
+                    }
+                }
+            }
             ComboBoxLanguage.SelectedIndex = 0;
         }
 
         //функция записи в DataGridStatistics сессии за неделю
         private void WeekStatisticsGenegation(int CourseID, DateTime TopBoundary, DateTime BottomBounadry)
         {
+            LabelTopWeekBoundary.Content = TopBoundary.ToLongDateString();
+            LabelBottomWeekBoundary.Content = BottomBounadry.ToLongDateString();
             // проверка: была ли объявлена коллекция collection раньше
             if (collection == null)
             {
@@ -107,26 +122,26 @@ namespace LanguageTutorial
             WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary, WeekBottomBoundary);
             
             // проверка на существование сессий в последующих неделях
-            PreviousWeekExisting(ComboBoxLanguage.SelectedIndex, WeekBottomBoundary);
+            PreviousWeekExisting(ComboBoxLanguage.SelectedIndex + 1, WeekBottomBoundary);
 
             // проверка на существование сессий в предыдущих неделях
-            NextWeekExisting(ComboBoxLanguage.SelectedIndex, WeekTopBoundary);
+            NextWeekExisting(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary);
         }
 
         //Нахождение границ для следующей недели
-        private void NextWeekBoundaryFinding()
+        private void NextWeekBoundaryFinding(DateTime BottomBoundary, DateTime TopBoundary)
         {
-            WeekBottomBoundary = WeekTopBoundary;
+            TopBoundary = TopBoundary.AddDays(7);
 
-            WeekTopBoundary.AddDays(7);
+            BottomBoundary = BottomBoundary.AddDays(7);
         }
 
         //Нахождение границ для предыдущей недели
-        private void PreviousWeekBoundaryFinding()
+        private void PreviousWeekBoundaryFinding(DateTime BottomBoundary, DateTime TopBoundary)
         {
-            WeekTopBoundary = WeekBottomBoundary;
+            TopBoundary = TopBoundary.AddDays(-7);
 
-            WeekBottomBoundary.AddDays(-7);
+            BottomBoundary = BottomBoundary.AddDays(-7);
         }
 
         //Функция, определяющая есть ли сессии после текущей недели
@@ -150,7 +165,6 @@ namespace LanguageTutorial
                     ButtonNextWeek.IsEnabled = true;
                 }
             }
-            coll.Clear();
         }
 
         //Функция, определяющая есть ли сессии до текущей недели
@@ -174,21 +188,24 @@ namespace LanguageTutorial
                     ButtonPreviousWeek.IsEnabled = true;
                 }
             }
-            coll.Clear();
         }
 
         private void ButtonPreviousWeek_Click(object sender, RoutedEventArgs e)
         {
-            PreviousWeekBoundaryFinding();
+            WeekTopBoundary = WeekTopBoundary.AddDays(-7);
+            WeekBottomBoundary = WeekBottomBoundary.AddDays(-7);
+            ButtonNextWeek.IsEnabled = true;
             WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary, WeekBottomBoundary);
-            PreviousWeekExisting(ComboBoxLanguage.SelectedIndex, WeekBottomBoundary);
+            PreviousWeekExisting(ComboBoxLanguage.SelectedIndex + 1, WeekBottomBoundary);
         }
 
         private void ButtonNextWeek_Click(object sender, RoutedEventArgs e)
         {
-            NextWeekBoundaryFinding();
+            WeekTopBoundary = WeekTopBoundary.AddDays(7);
+            WeekBottomBoundary = WeekBottomBoundary.AddDays(7);
+            ButtonPreviousWeek.IsEnabled = true;
             WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary, WeekBottomBoundary);
-            NextWeekExisting(ComboBoxLanguage.SelectedIndex, WeekTopBoundary);
+            NextWeekExisting(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary);
         }
     }
 }

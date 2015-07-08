@@ -33,6 +33,10 @@ namespace LanguageTutorial
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/Без имени-3.png");
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
+
+            uri = new Uri("pack://siteoforigin:,,,/Resources/untitled_1.png");
+            bitmap = new BitmapImage(uri);
+            beep.Source = bitmap;
         }     
         //Это все для смены раскладки через WinIP
         [DllImport("user32.dll", SetLastError = true)]
@@ -468,11 +472,14 @@ namespace LanguageTutorial
                 }
         }
 
+        static bool sound = true;
         public static void errorSignal()
         {
                   Task.Factory.StartNew(() =>
             {
-                Console.Beep(400, 200);
+                if (sound == true) {
+                    Console.Beep(400, 200);
+                }
                System.Threading.Thread.Sleep(200);
             });
         }
@@ -643,6 +650,21 @@ namespace LanguageTutorial
                 if (App.EngSession < TimerMet.numberSessionsLanguageEng() || App.FranSession < TimerMet.numberSessionsLanguageFran()) {//переместить код в тест
                     App.aTimer.Start();
                 }
+            }
+        }
+
+        private void beep_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            sound = !sound;
+            if (sound == true) {
+                Uri uri = new Uri("pack://siteoforigin:,,,/Resources/untitled_1.png");
+                BitmapImage bitmap = new BitmapImage(uri);
+                beep.Source = bitmap;
+                beep.ToolTip = "Отключить звук";
+            } else {
+                Uri uri = new Uri("pack://siteoforigin:,,,/Resources/volume-off_318-25206.jpg");
+                BitmapImage bitmap = new BitmapImage(uri);
+                beep.Source = bitmap;
+                beep.ToolTip = "Включить звук";
             }
         }
     }
