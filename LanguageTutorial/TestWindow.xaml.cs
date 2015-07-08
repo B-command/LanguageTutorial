@@ -464,7 +464,19 @@ namespace LanguageTutorial
                     FillTest(s);
                 }
         }
-        
+
+        public static void errorSignal()
+        {
+                  Task.Factory.StartNew(() =>
+            {
+                Console.Beep(300, 1000);
+               System.Threading.Thread.Sleep(1000);
+            });
+                 /* Task.Factory.StartNew(() =>
+                  {
+                      System.Threading.Thread.Sleep(Sounds.error(true));
+                  });*/
+        }
         /// <summary>
         /// Проверяет символ и добавлет его в Label
         /// </summary>
@@ -487,6 +499,8 @@ namespace LanguageTutorial
             }
             if (!have)
             {
+                //звук об ошибке
+                errorSignal();
                 result -= 1;
                 LetterFalse += 1;
                 lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
@@ -621,6 +635,14 @@ namespace LanguageTutorial
                 }
             }
         }
-        
+
+        private void SkipWord_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Debug.WriteLine("Enter");
+                SkipWord_Click(new object(),new RoutedEventArgs());
+            }
+        }
     }
 }
