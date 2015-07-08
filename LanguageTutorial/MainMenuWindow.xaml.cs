@@ -54,9 +54,9 @@ namespace LanguageTutorial
 
         public static void openTesting(int eng, int fr)
         {
-            App.activeWin = true;
+            //App.activeWin = true;
             if (App.EngSession < eng && App.FranSession < fr)
-            { //заменить константы на данные из бд
+            { 
                 WindowLanguage winLan = new WindowLanguage();
                 winLan.ShowDialog();
             }
@@ -67,13 +67,13 @@ namespace LanguageTutorial
                 {
                     test = new TestWindow(1);
                     test.ShowDialog();
-                    App.activeWin = false;
+                    //App.activeWin = false;
                 }
                 else
                 {
                     test = new TestWindow(2);
                     test.ShowDialog();
-                    App.activeWin = false;
+                    //App.activeWin = false;
                 }
             }
             else
@@ -89,11 +89,11 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Settings_Click(object sender, RoutedEventArgs e)
         {
-            App.activeWin = true;
+            //App.activeWin = true;
             RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
             oRegistrationWindow.ShowDialog();
-            App.activeWin = false;
+            //App.activeWin = false;
 
         }
 
@@ -104,11 +104,11 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Statistics_Click(object sender, RoutedEventArgs e)
         {
-            App.activeWin = true;
+           // App.activeWin = true;
             StatisticsWindow oStatisticsWindow = new StatisticsWindow();
 
             oStatisticsWindow.ShowDialog();
-            App.activeWin = false;
+           // App.activeWin = false;
         }
 
         /// <summary>
@@ -126,12 +126,12 @@ namespace LanguageTutorial
 
             App.aTimer.Stop();
 
-            App.activeWin = true;
+            //App.activeWin = true;
             MainWindow oMainWindow = new MainWindow();
 
             // Открываем диалог с окном авторизации
             oMainWindow.ShowDialog();
-            App.activeWin = false;
+            //App.activeWin = false;
 
 
             if (App.UserChanged)
@@ -253,7 +253,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void StartTesting(object sender, RoutedEventArgs e)
         {
-            if (App.activeWin == false)
+            if (App.Current.Windows.Count == 1)
             {
                 App.aTimer.Stop();
                 int eng = TimerMet.numberSessionsLanguageEng();
@@ -276,9 +276,9 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             // показываем
-            if (App.activeWin == false)
+            if (App.Current.Windows.Count == 1)
             {
-                App.activeWin = true;
+                //App.activeWin = true;
                 RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
                 oRegistrationWindow.ShowDialog();
@@ -286,7 +286,7 @@ namespace LanguageTutorial
                 oRegistrationWindow.Activate(); // обязательно нужно отдать фокус окну,
                 // иначе пользователь сильно удивится, когда увидит окно
                 // но не сможет в него ничего ввести с клавиатуры
-                App.activeWin = false;
+                //App.activeWin = false;
             }
             else
             {
@@ -302,20 +302,18 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void ShowHideChangeUserWindow(object sender, RoutedEventArgs e)
         {
-            if (App.activeWin == false)
+            if (App.Current.Windows.Count == 1)
             {
                 App.ChangeUser = true;
-
-                //this.Visibility = System.Windows.Visibility.Hidden;
-
+                
                 App.aTimer.Stop();
 
-                App.activeWin = true;
+                //App.activeWin = true;
 
                 MainWindow oMainWindow = new MainWindow();
 
                 oMainWindow.ShowDialog();
-                App.activeWin = false;
+                //App.activeWin = false;
 
 
                 if (App.UserChanged)
@@ -350,9 +348,9 @@ namespace LanguageTutorial
             TrayMenu.IsOpen = false; // спрячем менюшку, если она вдруг видима
 
             // показываем
-            if (App.activeWin == false)
+            if (App.Current.Windows.Count == 1)
             {
-                App.activeWin = true;
+                //App.activeWin = true;
 
                 StatisticsWindow oStatisticsWindow = new StatisticsWindow();
 
@@ -360,7 +358,7 @@ namespace LanguageTutorial
                 oStatisticsWindow.Activate(); // обязательно нужно отдать фокус окну,
                 // иначе пользователь сильно удивится, когда увидит окно
                 // но не сможет в него ничего ввести с клавиатуры
-                App.activeWin = false;
+                //App.activeWin = false;
 
             }
             else
@@ -439,7 +437,6 @@ namespace LanguageTutorial
         private void MenuExitClick(object sender, RoutedEventArgs e)
         {
             CanClose = true;
-            //Close();
             Environment.Exit(0);
         }
 

@@ -52,17 +52,14 @@ namespace LanguageTutorial {
         private void button_pass_test_Click(object sender, RoutedEventArgs e) {
             timer = true;
             Close();
-            App.activeWin = true;
             TestWindow test;
             if (cb_language.SelectedIndex == 0) {
                 test = new TestWindow(1);
                 test.ShowDialog();
-                App.activeWin = false;
             }
             if (cb_language.SelectedIndex == 1) {
                 test = new TestWindow(2);
                 test.ShowDialog();
-                App.activeWin = false;
             }
         }
 
