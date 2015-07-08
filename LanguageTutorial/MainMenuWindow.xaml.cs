@@ -278,6 +278,7 @@ namespace LanguageTutorial
             // показываем
             if (App.activeWin == false)
             {
+                App.activeWin = true;
                 RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
                 oRegistrationWindow.ShowDialog();
@@ -285,6 +286,7 @@ namespace LanguageTutorial
                 oRegistrationWindow.Activate(); // обязательно нужно отдать фокус окну,
                 // иначе пользователь сильно удивится, когда увидит окно
                 // но не сможет в него ничего ввести с клавиатуры
+                App.activeWin = false;
             }
             else
             {
@@ -308,9 +310,13 @@ namespace LanguageTutorial
 
                 App.aTimer.Stop();
 
+                App.activeWin = true;
+
                 MainWindow oMainWindow = new MainWindow();
 
                 oMainWindow.ShowDialog();
+                App.activeWin = false;
+
 
                 if (App.UserChanged)
                 {
@@ -346,12 +352,16 @@ namespace LanguageTutorial
             // показываем
             if (App.activeWin == false)
             {
+                App.activeWin = true;
+
                 StatisticsWindow oStatisticsWindow = new StatisticsWindow();
 
                 oStatisticsWindow.ShowDialog();
                 oStatisticsWindow.Activate(); // обязательно нужно отдать фокус окну,
                 // иначе пользователь сильно удивится, когда увидит окно
                 // но не сможет в него ничего ввести с клавиатуры
+                App.activeWin = false;
+
             }
             else
             {

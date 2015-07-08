@@ -128,9 +128,6 @@ namespace LanguageTutorial
             {
                 if (LanguageID == 1)
                 {
-                    //var result = db.Course.Where(wq => wq.UserId == App.oActiveUser.Id && wq.LanguageId == LanguageID).FirstOrDefault().Id;
-                   // if (result != null)
-                    //{
                             var session = new Session();
                             session.CourseId = App.oCourseEnglish.Id;
                             session.Words = CountRightWords;
@@ -138,13 +135,9 @@ namespace LanguageTutorial
                             session.Datetime = DateTime.Now;
                             session.FinishedWords = isLearned;
                             db.Session.Add(session);
-                        //}
                 }
-                        if (LanguageID == 2)
+                if (LanguageID == 2)
                         {
-                           // var result = db.Course.Where(wq => wq.UserId == App.oActiveUser.Id && wq.LanguageId == LanguageID);
-                    //if (result != null)
-                    //{
                             var session = new Session();
                             session.CourseId = App.oCourseFrançais.Id;
                             session.Words = CountRightWords;
@@ -152,7 +145,6 @@ namespace LanguageTutorial
                             session.Datetime = DateTime.Now;
                             session.FinishedWords = isLearned;
                             db.Session.Add(session);
-                        //}
                         }
                 db.SaveChanges();
                     }
