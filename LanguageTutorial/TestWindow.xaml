@@ -9,13 +9,14 @@
 
         </Grid.ColumnDefinitions>
         <Label x:Name="lblWord" Content="Слово" HorizontalAlignment="Left" Margin="44,72,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Microsoft Sans Serif" Height="54"/>
-        <Button x:Name="SkipWord" Content="Пропустить слово" HorizontalAlignment="Left" Margin="452,351,0,0" VerticalAlignment="Top" Width="208" Height="33" Click="SkipWord_Click"/>
+        <Button x:Name="SkipWord" Content="Пропустить слово"  IsDefault="True" HorizontalAlignment="Left" Margin="452,351,0,0" VerticalAlignment="Top" Width="208" Height="33" Click="SkipWord_Click" />
         <StackPanel x:Name="PanelLetters" HorizontalAlignment="Left" Margin="35,212,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblResult" Content="Ты набрал" HorizontalAlignment="Left" Margin="35,313,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.374,-2.605" FontStyle="Italic" FontFamily="Microsoft Sans Serif" FontSize="20" Grid.ColumnSpan="2" Width="616"/>
         <Label x:Name="lblSchetchik" Content="Label" HorizontalAlignment="Left" Margin="571,21,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="18" Height="35" Width="71"/>
         <Label Content="Буквы откроются по мере нажатия на клавиши клавиатуры." HorizontalAlignment="Left" Margin="35,32,0,0" VerticalAlignment="Top" FontSize="16" Height="35" FontStyle="Italic" Grid.ColumnSpan="2"/>
         <Label Content="Отгадай перевод слова, спрятаный за звездочками.  " HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" Height="31" FontSize="16" FontStyle="Italic" Grid.ColumnSpan="2"/>
         <Image x:Name="img" HorizontalAlignment="Left" Height="114" Margin="517,61,0,0" VerticalAlignment="Top" Width="134"/>
+        <Label x:Name="lblLie" Content="" HorizontalAlignment="Left" Margin="44,388,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="18"/>
 
     </Grid>
 </Controls:MetroWindow>
