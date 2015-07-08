@@ -530,6 +530,16 @@ namespace LanguageTutorial
                 if (schet == countWordOfS)
                 {
                     enter = true;
+                    if (toRussian)
+                    {
+                        result += 2 * translatingWord[1].Length;
+                        lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                    }
+                    else
+                    {
+                        result += 3 * translatingWord[1].Length;
+                        lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                    }
                     SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                     SkipWord.Click += new RoutedEventHandler(OnTestEnd);
                 }
@@ -605,7 +615,7 @@ namespace LanguageTutorial
                     translatingWord = NextWordChosing();
                     SequenceWords();
                 }
-                else
+                else if (SkipWord.Content == "ПРОПУСТИТЬ СЛОВО")
                 {
                     //вычитаем балы за пропуск
                 if (toRussian) 
