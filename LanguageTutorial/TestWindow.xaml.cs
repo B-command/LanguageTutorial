@@ -473,14 +473,12 @@ namespace LanguageTutorial
         {
                   Task.Factory.StartNew(() =>
             {
-                Console.Beep(300, 1000);
-               System.Threading.Thread.Sleep(1000);
+                Console.Beep(400, 200);
+               System.Threading.Thread.Sleep(200);
             });
-                 /* Task.Factory.StartNew(() =>
-                  {
-                      System.Threading.Thread.Sleep(Sounds.error(true));
-                  });*/
         }
+
+        string lieLetters="";
         /// <summary>
         /// Проверяет символ и добавлет его в Label
         /// </summary>
@@ -503,6 +501,11 @@ namespace LanguageTutorial
             }
             if (!have)
             {
+                if (lieLetters.IndexOf(s[0]) == -1)
+                {
+                    lieLetters += " "+s[0];
+                    lblLie.Content = lieLetters;
+                }
                 //звук об ошибке
                 errorSignal();
                 result -= 1;

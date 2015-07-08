@@ -16,6 +16,7 @@
         <Label Content="Буквы откроются по мере нажатия на клавиши клавиатуры." HorizontalAlignment="Left" Margin="35,32,0,0" VerticalAlignment="Top" FontSize="16" Height="35" FontStyle="Italic" Grid.ColumnSpan="2"/>
         <Label Content="Отгадай перевод слова, спрятаный за звездочками.  " HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" Height="31" FontSize="16" FontStyle="Italic" Grid.ColumnSpan="2"/>
         <Image x:Name="img" HorizontalAlignment="Left" Height="114" Margin="517,61,0,0" VerticalAlignment="Top" Width="134"/>
+        <Label x:Name="lblLie" Content="" HorizontalAlignment="Left" Margin="44,388,0,0" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="18"/>
 
     </Grid>
 </Controls:MetroWindow>
