@@ -169,11 +169,12 @@ namespace LanguageTutorial
         void SequenceWords()
         {
             flag = false;
+            enter = false;
             //Если счетчик равен списку слов, то 
             if (schet > countWordOfS)
             {
+                enter = true;
                 //конец тестирования
-                Debug.WriteLine("Из SequenceWords");
                 SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                 lblWord.Content = "";
                 SkipWord.Click += new RoutedEventHandler(OnTestEnd);
@@ -426,7 +427,7 @@ namespace LanguageTutorial
                 {
                     e.Handled = true;
                 }
-            if (e.Key==Key.Enter)
+            if (e.Key==Key.Enter&&enter==false)
             {
                 SkipWord_Click(new object(), new RoutedEventArgs());
             }
@@ -463,8 +464,6 @@ namespace LanguageTutorial
                 }
                 if (flag == false && translatingWord[1].ToLower() != ss.ToLower())
                 {
-                    Debug.WriteLine(flag);
-                    Debug.WriteLine(ss+" KeyDown");
                     FillTest(s);
                 }
         }
@@ -505,10 +504,12 @@ namespace LanguageTutorial
                 {
                     lieLetters += " "+s[0];
                     lblLie.Content = lieLetters;
+                    result -= 1;
+                    LetterFalse += 1;
+                    lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                 }
                 //звук об ошибке
                 errorSignal();
-                result -= 1;
                 LetterFalse += 1;
                 lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
             }
@@ -519,9 +520,9 @@ namespace LanguageTutorial
             //если слово отгадано, даем другое слово
             if (translatingWord[1].ToLower() == ss.ToLower())
             {
-                Debug.WriteLine(ss+" FillTest");
                 if (schet == countWordOfS)
                 {
+                    enter = true;
                     SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                     SkipWord.Click += new RoutedEventHandler(OnTestEnd);
                 }
@@ -575,12 +576,14 @@ namespace LanguageTutorial
             }
             
         }
+        bool enter = false;
         bool flag = false;
         private void SkipWord_Click(object sender, RoutedEventArgs e) 
         {
             flag = true;
             if (schet > countWordOfS)
             {
+                enter = true;
                 SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                 SkipWord.Click += new RoutedEventHandler(OnTestEnd);
                 lblWord.Content = "";
