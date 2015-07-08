@@ -29,11 +29,6 @@ namespace LanguageTutorial
         public static Course oCourseEnglish { get; set; } // Английский курс и его настройки активного профиля
         public static Course oCourseFrançais { get; set; } // Французский курс и его настройки у активного профиля
 
-        // Устанавливаются после нажатия клавиши "Принять" в окне настроек конкретного языка
-        //public static Settings oTempSettingsEnglish { get; set; } // Временные Настройки английского языка активного профиля
-        //public static Settings oTempSettingsFrançais { get; set; } // Временные Настройки французского языка активного профиля
-
-        
         //Переменные для работы таймера
         public static System.Windows.Threading.DispatcherTimer aTimer;
         public static int EngSession = 0;
