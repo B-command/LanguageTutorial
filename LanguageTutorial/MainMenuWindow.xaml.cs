@@ -54,7 +54,6 @@ namespace LanguageTutorial
 
         public static void openTesting(int eng, int fr)
         {
-            //App.activeWin = true;
             if (App.EngSession < eng && App.FranSession < fr)
             { 
                 WindowLanguage winLan = new WindowLanguage();
@@ -67,13 +66,11 @@ namespace LanguageTutorial
                 {
                     test = new TestWindow(1);
                     test.ShowDialog();
-                    //App.activeWin = false;
                 }
                 else
                 {
                     test = new TestWindow(2);
                     test.ShowDialog();
-                    //App.activeWin = false;
                 }
             }
             else
@@ -89,12 +86,9 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Settings_Click(object sender, RoutedEventArgs e)
         {
-            //App.activeWin = true;
             RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
             oRegistrationWindow.ShowDialog();
-            //App.activeWin = false;
-
         }
 
         /// <summary>
@@ -104,11 +98,8 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Statistics_Click(object sender, RoutedEventArgs e)
         {
-           // App.activeWin = true;
             StatisticsWindow oStatisticsWindow = new StatisticsWindow();
-
             oStatisticsWindow.ShowDialog();
-           // App.activeWin = false;
         }
 
         /// <summary>
@@ -126,12 +117,9 @@ namespace LanguageTutorial
 
             App.aTimer.Stop();
 
-            //App.activeWin = true;
             MainWindow oMainWindow = new MainWindow();
-
             // Открываем диалог с окном авторизации
             oMainWindow.ShowDialog();
-            //App.activeWin = false;
 
 
             if (App.UserChanged)
@@ -278,7 +266,6 @@ namespace LanguageTutorial
             // показываем
             if (App.Current.Windows.Count == 1)
             {
-                //App.activeWin = true;
                 RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
                 oRegistrationWindow.ShowDialog();
@@ -286,7 +273,6 @@ namespace LanguageTutorial
                 oRegistrationWindow.Activate(); // обязательно нужно отдать фокус окну,
                 // иначе пользователь сильно удивится, когда увидит окно
                 // но не сможет в него ничего ввести с клавиатуры
-                //App.activeWin = false;
             }
             else
             {
@@ -308,13 +294,9 @@ namespace LanguageTutorial
                 
                 App.aTimer.Stop();
 
-                //App.activeWin = true;
-
                 MainWindow oMainWindow = new MainWindow();
 
                 oMainWindow.ShowDialog();
-                //App.activeWin = false;
-
 
                 if (App.UserChanged)
                 {
@@ -350,16 +332,12 @@ namespace LanguageTutorial
             // показываем
             if (App.Current.Windows.Count == 1)
             {
-                //App.activeWin = true;
-
                 StatisticsWindow oStatisticsWindow = new StatisticsWindow();
 
                 oStatisticsWindow.ShowDialog();
                 oStatisticsWindow.Activate(); // обязательно нужно отдать фокус окну,
                 // иначе пользователь сильно удивится, когда увидит окно
                 // но не сможет в него ничего ввести с клавиатуры
-                //App.activeWin = false;
-
             }
             else
             {
