@@ -48,7 +48,12 @@ namespace LanguageTutorial
             if (App.oActiveUser != null && !App.ChangeUser)
             {// Заполняем значениями профиля
 
-                grid.DataContext = App.oActiveUser;
+                User tempUser = new User();
+
+                tempUser.Name = App.oActiveUser.Name;
+                tempUser.SessionPeriod = App.oActiveUser.SessionPeriod;
+
+                grid.DataContext = tempUser;
 
                 // Ставим галочки и активируем управление языков
                 using (var db = new LanguageTutorialContext())
