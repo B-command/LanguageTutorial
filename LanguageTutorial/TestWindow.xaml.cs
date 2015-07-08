@@ -486,7 +486,7 @@ namespace LanguageTutorial
 
         string lieLetters="";
         /// <summary>
-        /// Проверяет символ и добавлет его в Label
+        /// Проверяет символ и добавляет его в Label
         /// </summary>
         /// <param name="s"></param>
         void FillTest(string s)
@@ -643,7 +643,9 @@ namespace LanguageTutorial
                         SequenceWords();
                     }
                 }
-            }  
+            }
+            lieLetters = "";
+            lblLie.Content = "";
         }
 
         bool timer = false;
