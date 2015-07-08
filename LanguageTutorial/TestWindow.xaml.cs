@@ -426,6 +426,10 @@ namespace LanguageTutorial
                 {
                     e.Handled = true;
                 }
+            if (e.Key==Key.Enter)
+            {
+                SkipWord_Click(new object(), new RoutedEventArgs());
+            }
             }
 
         //записываем из Label букву
@@ -633,15 +637,6 @@ namespace LanguageTutorial
                 if (App.EngSession < TimerMet.numberSessionsLanguageEng() || App.FranSession < TimerMet.numberSessionsLanguageFran()) {//переместить код в тест
                     App.aTimer.Start();
                 }
-            }
-        }
-
-        private void SkipWord_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                Debug.WriteLine("Enter");
-                SkipWord_Click(new object(),new RoutedEventArgs());
             }
         }
     }
