@@ -185,5 +185,30 @@ namespace LanguageTutorial
                 num_Number_of_True_Answer.Value = defaultTrueAnsers;
             }
         }
+
+        /// <summary>
+        /// Запрет на ввод в Numeric
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void num_Number_of_Words_Per_Seans_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void num_Number_of_Words_To_Study_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void num_Number_of_Seans_Per_Day_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void num_Number_of_True_Answer_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

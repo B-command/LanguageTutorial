@@ -563,5 +563,10 @@ namespace LanguageTutorial
 
             base.OnClosing(e);
         }
+
+        private void num_Time_Between_Seans_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
