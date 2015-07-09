@@ -17,13 +17,14 @@ namespace LanguageTutorial
     /// <summary>
     /// Interaction logic for TestEndWindow.xaml
     /// </summary>
-    public partial class TestEndWindow : Window
+    public partial class TestEndWindow 
     {
         int LanguageID;
         public TestEndWindow(int language)
         {
+            LanguageID = language;
+
             InitializeComponent();
-            LanguageID=language;
         }
         public TestEndWindow()
         {

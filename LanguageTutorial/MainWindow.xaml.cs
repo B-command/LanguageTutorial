@@ -152,5 +152,10 @@ namespace LanguageTutorial
                 button_SignIn.IsEnabled = true;
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            TestEndWindow t = new TestEndWindow(1);
+            t.ShowDialog();
+        }
     }
 }
