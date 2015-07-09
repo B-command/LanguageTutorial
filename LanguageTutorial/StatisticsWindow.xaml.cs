@@ -34,17 +34,21 @@ namespace LanguageTutorial
             public int WordsQuantity { get; set; }
         }
 
+        // массив, хранящий индексы активных курсов пользователя
+        private int[] ActiveCourseID = new int[2];
+
         // коллекция, хранящая строки в DataGridStatistics
         ObservableCollection<StatisticsRow> collection;
 
+        // поле, хранящее последний день отображаемой недели        
         DateTime WeekTopBoundary = DateTime.Now;
 
+        // поле, хранящее первый день отображаемой недели
         DateTime WeekBottomBoundary = DateTime.Now.AddDays(-6);
 
         public StatisticsWindow()
         {
             InitializeComponent();
-
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/Без имени-2.png");
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
@@ -52,21 +56,20 @@ namespace LanguageTutorial
 
         private void Grid_Loaded_1(object sender, RoutedEventArgs e)
         {
-            ComboBoxLanguage.Items.Clear();
-            
-            LabelEmptyWeek.Visibility = System.Windows.Visibility.Hidden;
             using (var db = new LanguageTutorialContext())
             {
-                var activeLanguages = db.Course.Where(c => c.Active && c.User.Name == App.oActiveUser.Name);
+                var activeLanguages = db.Course.Where(c => c.Active && c.UserId == App.oActiveUser.Id);
                 foreach (var l in activeLanguages)
                 {
                     if (l.LanguageId == 1)
                     {
                         ComboBoxLanguage.Items.Add("English");
+                        ActiveCourseID[0] = l.Id;
                     }
                     else
                     {
                         ComboBoxLanguage.Items.Add("Français");
+                        ActiveCourseID[1] = l.Id;
                     }
                 }
             }
@@ -76,60 +79,82 @@ namespace LanguageTutorial
         //функция записи в DataGridStatistics сессии за неделю
         private void WeekStatisticsGenegation(int CourseID, DateTime TopBoundary, DateTime BottomBounadry)
         {
+            //показ в лэйбле последнего дня отображаемой недели
             LabelTopWeekBoundary.Content = TopBoundary.ToLongDateString();
+
+            //показ в лэйбле первого дня отображаемой недели
             LabelBottomWeekBoundary.Content = BottomBounadry.ToLongDateString();
-            // проверка: была ли объявлена коллекция collection раньше
             if (collection == null)
             {
                 collection = new ObservableCollection<StatisticsRow>();
                 DataGridStatistics.ItemsSource = collection;
             }
-
+            //очистка коллекции, хранящей строки для отображения статистики
             collection.Clear();
+            
+            //скрыть надпись, информирующую о том, что на отображаемой
+            //неделе не было сессий
             LabelEmptyWeek.Visibility = System.Windows.Visibility.Hidden;
+            
+            //переменные, хранящие кол-во баллов за неделю и 
+            //кол-во отгаданных слов за неделю
+            //(слово считается, если было отгаданно без ошибок)
             int PointsForWeek = 0, WordsForWeek = 0;
 
             using (var db = new LanguageTutorialContext())
             {
+                //выбор всех сессий для текущей недели и данного курса
                 var sessionsForWeek = db.Session.Where(s => s.Datetime <= TopBoundary
-                    && s.Datetime >= BottomBounadry && s.CourseId == CourseID 
-                    && s.Course.User.Name == App.oActiveUser.Name).ToList();
+                    && s.Datetime >= BottomBounadry && s.CourseId == CourseID).ToList();
                 if (sessionsForWeek != null)
                 {
                     foreach (var s in sessionsForWeek)
                     {
-                        // Заносим в DataGridStatistics новую строку
+                        // Заносим в DataGridStatistics новую строку,
+                        // содержащую информацию о дате сессии, 
+                        //кол-ве баллов за сессию и кол-ве отгаданных слов за сессию
+                        //(слово считается, если было отгаданно без ошибок)
                         collection.Add(new StatisticsRow() {Date = s.Datetime, PointsQuantity = s.Points, WordsQuantity = s.Words});
+                        
+                        //изменяем общее кол-во баллов за неделю с учетом сессии
                         PointsForWeek += s.Points;
+
+                        //изменяем общее кол-во отгаданных слов 
+                        //за неделю с учетом сессии
                         WordsForWeek += s.Words;
                     }
                 }
 
+                //если не было сессий на недели
                 if (collection.Count == 0)
                 {
+                    //вывести надпись, информирующую о том, что на отображаемой
+                    //неделе не было сессий
                     LabelEmptyWeek.Visibility = System.Windows.Visibility.Visible;
                     LabelFullPointsQuantityResult.Content = "";
                     LabelFullWordsQuantityResult.Content = "";
                 }
                 else
                 {
+                    // вывод кол-ва баллов за неделю
                     LabelFullPointsQuantityResult.Content = Convert.ToString(PointsForWeek);
+                    
+                    // вывод кол-ва отгаданных слов за неделю 
                     LabelFullWordsQuantityResult.Content = Convert.ToString(WordsForWeek);
                 }
-                
             }
         }
 
         private void ComboBoxLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // генерация для одного языка статистики за неделю
-            WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary, WeekBottomBoundary);
+            WeekStatisticsGenegation(CourseIdFinding(ComboBoxLanguage, ActiveCourseID), WeekTopBoundary, WeekBottomBoundary);
             
             // проверка на существование сессий в последующих неделях
-            PreviousWeekExisting(ComboBoxLanguage.SelectedIndex + 1, WeekBottomBoundary);
+            PreviousWeekExisting(CourseIdFinding(ComboBoxLanguage, ActiveCourseID), WeekBottomBoundary);
 
             // проверка на существование сессий в предыдущих неделях
-            NextWeekExisting(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary);
+            NextWeekExisting(CourseIdFinding(ComboBoxLanguage, ActiveCourseID), WeekTopBoundary);
         }
 
         //Нахождение границ для следующей недели
@@ -154,8 +179,7 @@ namespace LanguageTutorial
             List<StatisticsRow> coll = new List<StatisticsRow>();
             using (var db = new LanguageTutorialContext())
             {
-                var nextAllSessions = db.Session.Where(s => s.Datetime >= TopBoundary && s.CourseId == CourseID 
-                    && s.Course.User.Name == App.oActiveUser.Name).ToList();
+                var nextAllSessions = db.Session.Where(s => s.Datetime >= TopBoundary && s.CourseId == CourseID).ToList();
                 foreach (var s in nextAllSessions)
                 {
                     // Заносим в DataGridStatistics новую строку
@@ -178,8 +202,7 @@ namespace LanguageTutorial
             List<StatisticsRow> coll = new List<StatisticsRow>();
             using (var db = new LanguageTutorialContext())
             {
-                var nextAllSessions = db.Session.Where(s => s.Datetime <= BottomBoundary && s.CourseId == CourseID
-                    && s.Course.User.Name == App.oActiveUser.Name).ToList();
+                var nextAllSessions = db.Session.Where(s => s.Datetime <= BottomBoundary && s.CourseId == CourseID).ToList();
                 foreach (var s in nextAllSessions)
                 {
                     // Заносим в DataGridStatistics новую строку
@@ -195,14 +218,26 @@ namespace LanguageTutorial
                 }
             }
         }
+        
+        private int CourseIdFinding( ComboBox ChosenLanguage, int[] ActiveCourseID)
+        {
+            if (ChosenLanguage.SelectedItem == "English")
+            {
+                return ActiveCourseID[0];
+            }
+            else
+            {
+                return ActiveCourseID[1];
+            }
+        }
 
         private void ButtonPreviousWeek_Click(object sender, RoutedEventArgs e)
         {
             WeekTopBoundary = WeekTopBoundary.AddDays(-7);
             WeekBottomBoundary = WeekBottomBoundary.AddDays(-7);
             ButtonNextWeek.IsEnabled = true;
-            WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary, WeekBottomBoundary);
-            PreviousWeekExisting(ComboBoxLanguage.SelectedIndex + 1, WeekBottomBoundary);
+            WeekStatisticsGenegation(CourseIdFinding(ComboBoxLanguage, ActiveCourseID), WeekTopBoundary, WeekBottomBoundary);
+            PreviousWeekExisting(CourseIdFinding(ComboBoxLanguage, ActiveCourseID), WeekBottomBoundary);
         }
 
         private void ButtonNextWeek_Click(object sender, RoutedEventArgs e)
@@ -210,8 +245,8 @@ namespace LanguageTutorial
             WeekTopBoundary = WeekTopBoundary.AddDays(7);
             WeekBottomBoundary = WeekBottomBoundary.AddDays(7);
             ButtonPreviousWeek.IsEnabled = true;
-            WeekStatisticsGenegation(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary, WeekBottomBoundary);
-            NextWeekExisting(ComboBoxLanguage.SelectedIndex + 1, WeekTopBoundary);
+            WeekStatisticsGenegation(CourseIdFinding(ComboBoxLanguage, ActiveCourseID), WeekTopBoundary, WeekBottomBoundary);
+            NextWeekExisting(CourseIdFinding(ComboBoxLanguage, ActiveCourseID), WeekTopBoundary);
         }
     }
 }
