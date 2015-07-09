@@ -146,13 +146,141 @@ namespace LanguageTutorial
             SequenceWords();
         }
 
+       /*  private void Window_Loaded(object sender, RoutedEventArgs e)
+         {
+             //количество слов за курс
+             int CountOfK = 0;
+             //Max ID
+             int max = 0;
+             //нехватающие слова
+             int countDontWord = 0;
+             int kol_vo = 0;
+             // часть программы, которая загружает список изучаемых слов в dict
+             using (var db = new LanguageTutorialContext())
+             {
+                 var result = db.WordQueue.Where(wq => wq.UserId == App.oActiveUser.Id && wq.IsLearned == false);
+                 if (result != null)
+                 {
+                     foreach (var wd in result)
+                     {
+                         var pair = db.WordDictionary.Find(wd.WordDictionaryId);
+                         if (pair.LanguageId == LanguageID)
+                         {
+                             // Сохраняешь в список
+                             currentWord.Add(pair);
+                         }
+                     }
+                 }
+             }
+             //если учим английский, то берем счетчик сессии
+             if (LanguageID == 1)
+             {
+                 countWordOfS = App.oCourseEnglish.WordsPerSession;
+                 CountOfK = App.oCourseEnglish.WordsToStudy;
+                 kol_vo = CountOfK;
+             }
 
+             //если учим французский, то берем счетчик сессии
+             if (LanguageID == 2)
+             {
+                 countWordOfS = App.oCourseFrançais.WordsPerSession;
+                 CountOfK = App.oCourseFrançais.WordsToStudy;
+                 kol_vo = CountOfK + 496;
+             }
+             //проверяем, количество слов в курсе равно количеству слов в настройках
+             if (currentWord.Count == CountOfK - 1)
+             {
+                 //вытаскиваем словарь, который учит пользователь
+                 //перевод с иностранного на русский
+                 toRussian = true;
+                 //выбор случайным образом как переводить(с русского на ин.яз или наоборот)
+                 translatingWord = NextWordChosing();
+                 //берем слово
+                 SequenceWords();
+             }
+             else
+             {
+                 //считаем, сколько нам не хватает слов
+                 countDontWord = CountOfK - currentWord.Count + 1;
+                 using (var db = new LanguageTutorialContext())
+                 {
+                     //Берем максимальный индекс с словаре курса
+                     max = db.Course.Max(q => q.Id);
+                     //открыть большой словарь
+                     var result = db.WordDictionary.Where(wq => wq.Id > CountOfK && wq.LanguageId == LanguageID);
+                     if (result != null)
+                     {
+                         var wordsInQueue = db.WordQueue.Where(wq => wq.UserId == App.oActiveUser.Id && wq.WordDictionary.LanguageId == LanguageID);
+                         //посмотреть, можно ли загрузить недостающие строки
+                         int c = result.Count();
+                         if (c >= countDontWord)
+                         {
+                             if (LanguageID == 1)
+                             {
+                                 //если можно, то загружаем в курс и наш словарь
+                                 for (int i = 1; i < countDontWord + 1; i++)
+                                 {
+                                     //загружаем в наш словарь
+                                     currentWord.Add(result.ElementAt(i + max));
+                                     //загружаем в курс
+                                     db.WordQueue.Add(wordsInQueue.{WordDictionaryId=i});
+                                 }
+                             }
+                             if (LanguageID == 2)
+                             {
+                                 //если можно, то загружаем в курс и наш словарь
+                                 for (int i = 1; i < 496+countDontWord + 1; i++)
+                                 {
+                                     //загружаем в наш словарь
+                                     currentWord.Add(result.ElementAt(i + max));
+                                     //загружаем в курс
+                                     db.WordQueue.Add(wordsInQueue.{WordDictionaryId=i});
+                                 }
+                             }
+                         }
+                             //если меньше количества недостающих слов
+                         else
+                         { 
+                             //если нет, то берем остатки и загружаем в курс и наш словарь
+                             foreach (var s in result)
+                             {
+                                 currentWord.Add(s);
+                                 //загрузить в курс
+                                 db.WordQueue.Add(wordsInQueue(){WordDictionaryId=i});
+                                 // db.WordQueue.Add(wordsInQueue);
+                             }
+                         }
+                     }
+                     //проверяем хватает ли слов для сессии
+                     //если да то, тестируем
+                     if (currentWord.Count + 1 > countWordOfS)
+                     {
+                         //вытаскиваем словарь, который учит пользователь
+                         //перевод с иностранного на русский
+                         toRussian = true;
+                         //выбор случайным образом как переводить(с русского на ин.яз или наоборот)
+                         translatingWord = NextWordChosing();
+                         //берем слово
+                         SequenceWords();
+                     }
+                     else 
+                     {
+                         //если нет, то даем остатки
+                         countWordOfS=currentWord.Count+1;
+                         //вытаскиваем словарь, который учит пользователь
+                         //перевод с иностранного на русский
+                         toRussian = true;
+                         //выбор случайным образом как переводить(с русского на ин.яз или наоборот)
+                         translatingWord = NextWordChosing();
+                         //берем слово
+                         SequenceWords();
+                     } 
+                     db.SaveChanges();
+                 }
+             }
+         }
 
-
-
-
-
-
+        */
 
         //метод догрузки слов из словаря
         private void Dictionary(List<WordDictionary> currentWordDictionary, int WordsInSessionQuantity)
@@ -164,20 +292,16 @@ namespace LanguageTutorial
                 {
                     var wordsInDictionary = db.WordDictionary.Where(wd => wd.LanguageId == LanguageID).ToList();
                     var wordsInQueue = db.WordQueue.Where(wq => wq.UserId == App.oActiveUser.Id && wq.WordDictionary.LanguageId == LanguageID).ToList();
-                    foreach (var word in wordsInQueue)
+                    if (wordsInQueue != null)
                     {
+                        foreach (var word in wordsInDictionary)
+                        {
 
+                        }
                     }
                 }
             }
         }
-
-
-
-
-
-
-
 
         /// <summary>
         /// Функция выбора следующего слова из текущего списка изучаемых слов
