@@ -153,9 +153,5 @@ namespace LanguageTutorial
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
-            TestEndWindow t = new TestEndWindow(1);
-            t.ShowDialog();
-        }
     }
 }
