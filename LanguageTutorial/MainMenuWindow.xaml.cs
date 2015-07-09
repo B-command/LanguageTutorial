@@ -297,16 +297,21 @@ namespace LanguageTutorial
         {
             if (App.Current.Windows.Count == 1)
             {
+                // Происходит смена пользователя
                 App.ChangeUser = true;
-                
+
+                // Скрываем главное меню
+                this.Visibility = System.Windows.Visibility.Hidden;
+
                 App.aTimer.Stop();
 
                 MainWindow oMainWindow = new MainWindow();
-
+                // Открываем диалог с окном авторизации
                 oMainWindow.ShowDialog();
 
                 if (App.UserChanged)
-                {
+                {// Если пользователь был сменён или зарегестрирован новый, Закрываем меню для открытия нового
+
                     App.UserChanged = false;
 
                     CanClose = true;
@@ -314,11 +319,13 @@ namespace LanguageTutorial
                     this.Close();
                 }
                 else
-                {
-                    //this.Visibility = System.Windows.Visibility.Visible;
+                {// Если окно авторизации было закрыто, Возвращаем видимость главного меню
+
+                    this.Visibility = System.Windows.Visibility.Visible;
                     App.aTimer.Start();
                 }
 
+                // Конец смены пользователя
                 App.ChangeUser = false;
             }
             else
