@@ -562,7 +562,7 @@ namespace LanguageTutorial
                 if (lieLetters.IndexOf(s[0]) == -1)
                 {
                     lieLetters += " "+s[0];
-                    lblLie.Content = lieLetters;
+                    lblLie.Text = lieLetters;
                     result -= 1;
                     LetterFalse += 1;
                     lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
@@ -697,7 +697,7 @@ namespace LanguageTutorial
                 }
             }
             lieLetters = "";
-            lblLie.Content = "";
+            lblLie.Text = "";
         }
 
         bool timer = false;
