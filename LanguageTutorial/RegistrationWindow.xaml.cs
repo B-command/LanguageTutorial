@@ -211,7 +211,7 @@ namespace LanguageTutorial
 
                             DispatcherTimer Timer = new DispatcherTimer();
                             Timer.Tick += new EventHandler(TimerMet.OnTimedEvent);
-                            Timer.Interval = new TimeSpan(0, /*min*/0, (int)(App.oActiveUser.SessionPeriod * 60)/*0*/);
+                            Timer.Interval = new TimeSpan(0, (int)(App.oActiveUser.SessionPeriod * 60), 0);
                             App.aTimer = Timer;
 
                             this.Close();
@@ -272,7 +272,7 @@ namespace LanguageTutorial
                             }
 
                             App.aTimer.Stop();
-                            App.aTimer.Interval = new TimeSpan(0, /*(int)((double)num_Time_Between_Seans.Value * 60)*/0, /*0*/ (int)((double)num_Time_Between_Seans.Value * 60));
+                            App.aTimer.Interval = new TimeSpan(0, (int)((double)num_Time_Between_Seans.Value * 60), 0);
                             App.aTimer.Start();
 
                             // Проверка изменения курсов пользователя

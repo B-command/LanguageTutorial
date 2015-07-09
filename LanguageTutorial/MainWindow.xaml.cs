@@ -105,7 +105,7 @@ namespace LanguageTutorial
                 
                 DispatcherTimer Timer = new DispatcherTimer();
                 Timer.Tick += new EventHandler(TimerMet.OnTimedEvent);
-                Timer.Interval = new TimeSpan(0, /*min*/0, (int)(App.oActiveUser.SessionPeriod * 60)/*0*/);
+                Timer.Interval = new TimeSpan(0, (int)(App.oActiveUser.SessionPeriod * 60), 0);
                 App.aTimer = Timer;
 
                 MainMenuWindow oMainMenuWindow = new MainMenuWindow();
