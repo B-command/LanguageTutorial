@@ -33,6 +33,10 @@ namespace LanguageTutorial
             Uri uri = new Uri("pack://siteoforigin:,,,/Resources/Без имени-3.png");
             BitmapImage bitmap = new BitmapImage(uri);
             img.Source = bitmap;
+
+            uri = new Uri("pack://siteoforigin:,,,/Resources/untitled_1.png");
+            bitmap = new BitmapImage(uri);
+            beep.Source = bitmap;
         }     
         //Это все для смены раскладки через WinIP
         [DllImport("user32.dll", SetLastError = true)]
@@ -221,11 +225,12 @@ namespace LanguageTutorial
         void SequenceWords()
         {
             flag = false;
+            enter = false;
             //Если счетчик равен списку слов, то 
             if (schet > countWordOfS)
             {
+                enter = true;
                 //конец тестирования
-                Debug.WriteLine("Из SequenceWords");
                 SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                 lblWord.Content = "";
                 SkipWord.Click += new RoutedEventHandler(OnTestEnd);
@@ -478,7 +483,7 @@ namespace LanguageTutorial
                 {
                     e.Handled = true;
                 }
-            if (e.Key==Key.Enter)
+            if (e.Key==Key.Enter&&enter==false)
             {
                 SkipWord_Click(new object(), new RoutedEventArgs());
             }
@@ -515,24 +520,25 @@ namespace LanguageTutorial
                 }
                 if (flag == false && translatingWord[1].ToLower() != ss.ToLower())
                 {
-                    Debug.WriteLine(flag);
-                    Debug.WriteLine(ss+" KeyDown");
                     FillTest(s);
                 }
         }
 
+        static bool sound = true;
         public static void errorSignal()
         {
                   Task.Factory.StartNew(() =>
             {
-                Console.Beep(400, 200);
+                if (sound == true) {
+                    Console.Beep(400, 200);
+                }
                System.Threading.Thread.Sleep(200);
             });
         }
 
         string lieLetters="";
         /// <summary>
-        /// Проверяет символ и добавлет его в Label
+        /// Проверяет символ и добавляет его в Label
         /// </summary>
         /// <param name="s"></param>
         void FillTest(string s)
@@ -557,10 +563,12 @@ namespace LanguageTutorial
                 {
                     lieLetters += " "+s[0];
                     lblLie.Content = lieLetters;
+                    result -= 1;
+                    LetterFalse += 1;
+                    lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                 }
                 //звук об ошибке
                 errorSignal();
-                result -= 1;
                 LetterFalse += 1;
                 lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
             }
@@ -571,9 +579,19 @@ namespace LanguageTutorial
             //если слово отгадано, даем другое слово
             if (translatingWord[1].ToLower() == ss.ToLower())
             {
-                Debug.WriteLine(ss+" FillTest");
                 if (schet == countWordOfS)
                 {
+                    enter = true;
+                    if (toRussian)
+                    {
+                        result += 2 * translatingWord[1].Length;
+                        lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                    }
+                    else
+                    {
+                        result += 3 * translatingWord[1].Length;
+                        lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                    }
                     SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                     SkipWord.Click += new RoutedEventHandler(OnTestEnd);
                 }
@@ -627,12 +645,14 @@ namespace LanguageTutorial
             }
             
         }
+        bool enter = false;
         bool flag = false;
         private void SkipWord_Click(object sender, RoutedEventArgs e) 
         {
             flag = true;
             if (schet > countWordOfS)
             {
+                enter = true;
                 SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                 SkipWord.Click += new RoutedEventHandler(OnTestEnd);
                 lblWord.Content = "";
@@ -647,7 +667,7 @@ namespace LanguageTutorial
                     translatingWord = NextWordChosing();
                     SequenceWords();
                 }
-                else
+                else if (SkipWord.Content == "ПРОПУСТИТЬ СЛОВО")
                 {
                     //вычитаем балы за пропуск
                 if (toRussian) 
@@ -675,7 +695,9 @@ namespace LanguageTutorial
                         SequenceWords();
                     }
                 }
-            }  
+            }
+            lieLetters = "";
+            lblLie.Content = "";
         }
 
         bool timer = false;
@@ -692,6 +714,21 @@ namespace LanguageTutorial
                 if (App.EngSession < TimerMet.numberSessionsLanguageEng() || App.FranSession < TimerMet.numberSessionsLanguageFran()) {//переместить код в тест
                     App.aTimer.Start();
                 }
+            }
+        }
+
+        private void beep_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            sound = !sound;
+            if (sound == true) {
+                Uri uri = new Uri("pack://siteoforigin:,,,/Resources/untitled_1.png");
+                BitmapImage bitmap = new BitmapImage(uri);
+                beep.Source = bitmap;
+                beep.ToolTip = "Отключить звук";
+            } else {
+                Uri uri = new Uri("pack://siteoforigin:,,,/Resources/volume-off_318-25206.jpg");
+                BitmapImage bitmap = new BitmapImage(uri);
+                beep.Source = bitmap;
+                beep.ToolTip = "Включить звук";
             }
         }
     }

@@ -44,11 +44,15 @@ namespace LanguageTutorial
             button_Settings_English.IsEnabled = false;
             button_Settings_Français.IsEnabled = false;
 
-
             if (App.oActiveUser != null && !App.ChangeUser)
             {// Заполняем значениями профиля
 
-                grid.DataContext = App.oActiveUser;
+                User tempUser = new User();
+
+                tempUser.Name = App.oActiveUser.Name;
+                tempUser.SessionPeriod = App.oActiveUser.SessionPeriod;
+
+                grid.DataContext = tempUser;
 
                 // Ставим галочки и активируем управление языков
                 using (var db = new LanguageTutorialContext())
@@ -215,24 +219,46 @@ namespace LanguageTutorial
                         else
                         {// Если есть активный пользователь, то необходимо обновить его настройки
 
-                            // Применяем изменения в профиле
-                            App.oActiveUser.Name = textbox_Profile_Name.Text.Trim();
-                            App.oActiveUser.SessionPeriod = (double)num_Time_Between_Seans.Value;
-
                             // Обновление параметров профиля в БД
                             using (var db = new LanguageTutorialContext())
                             {
-                                var result = db.User.FirstOrDefault(user => user.Name == App.oActiveUser.Name);
+                                var result = db.User.FirstOrDefault(user => user.Name == textbox_Profile_Name.Text.Trim());
 
                                 if (result != null)
-                                {// Если имя занято, Выводим об этом сообщение и прерываем
+                                { // Если пользователь с таким именем найден
 
-                                    MessageBox.Show("Такое имя пользователя уже зарегистрировано!");
-                                    return;
+                                    if (App.oActiveUser.Name != textbox_Profile_Name.Text.Trim())
+                                    {// Если пользователь сменил имя
+
+                                        // Делаем прерывание т.к. имя уже занято
+                                        MessageBox.Show("Такое имя пользователя уже зарегистрировано!");
+                                        return;
+                                    }
+                                    else
+                                    { // Если пользователь не сменил имя
+
+                                        // Обновляем данные активного пользователя
+                                        App.oActiveUser.SessionPeriod = (double)num_Time_Between_Seans.Value;
+
+                                        // Обновляем базу данных
+                                        var original = db.User.Find(App.oActiveUser.Id);
+
+                                        if (original != null)
+                                        {
+                                            original.SessionPeriod = (double)num_Time_Between_Seans.Value;
+
+                                            db.SaveChanges();
+                                        }
+                                    }
                                 }
                                 else
-                                {// Если имя не занято, Обновляем профиль в БД
+                                { // Если пользователь с таким именем не найден, значит произошла смена имени.
+                                    
+                                    // Обновляем данные активного пользователя
+                                    App.oActiveUser.Name = textbox_Profile_Name.Text.Trim();
+                                    App.oActiveUser.SessionPeriod = (double)num_Time_Between_Seans.Value;
 
+                                    // Обновляем базу данных
                                     var original = db.User.Find(App.oActiveUser.Id);
 
                                     if (original != null)
@@ -515,7 +541,7 @@ namespace LanguageTutorial
 
                     if (result != null)
                     {
-                        App.oCourseEnglish = result as Course;
+                        App.oCourseEnglish = result;
                     }
                     else
                     {
@@ -526,7 +552,7 @@ namespace LanguageTutorial
 
                     if (result != null)
                     {
-                        App.oCourseFrançais = result as Course;
+                        App.oCourseFrançais = result;
                     }
                     else
                     {
