@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         Title="Пройти тестирование" Height="435.821" Width="420.895" ResizeMode="NoResize"
- Loaded="MetroWindow_Loaded" Closed="MetroWindow_Closed" WindowStartupLocation="CenterScreen" Icon="icon.ico">
-
+        Loaded="MetroWindow_Loaded" Closed="MetroWindow_Closed" WindowStartupLocation="CenterScreen" Icon="icon.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="213*"/>

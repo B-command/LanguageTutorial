@@ -2,11 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"              
-<<<<<<< HEAD
-        Title="Тестирование" Name="myTest" Height="465" Width="686" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown" Closed="MetroWindow_Closed" ResizeMode="CanMinimize">
-=======
-        Title="Тестирование" Height="465" Width="686" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown" Closed="MetroWindow_Closed" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
->>>>>>> af9287e82520a5beab0f8439a1e9071951161d3f
+        Title="Тестирование" Height="465" Width="686" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown" Closed="MetroWindow_Closed" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="icon.ico">
     <Grid x:Name="GridTest" Margin="0,0,0,-20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="27*"/>
@@ -20,17 +16,12 @@
         <Label Content="Буквы откроются по мере нажатия на клавиши клавиатуры." HorizontalAlignment="Left" Margin="35,32,0,0" VerticalAlignment="Top" FontSize="16" Height="35" FontStyle="Italic" Grid.ColumnSpan="2"/>
         <Label Content="Отгадай перевод слова, спрятаный за звездочками.  " HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" Height="31" FontSize="16" FontStyle="Italic" Grid.ColumnSpan="2"/>
         <Image x:Name="img" HorizontalAlignment="Left" Height="114" Margin="517,61,0,0" VerticalAlignment="Top" Width="134"/>
-<<<<<<< HEAD
         <Label x:Name="lblLie" HorizontalAlignment="Left" Margin="10,330,0,22" VerticalAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="18" Width="399" Height="104">
             <Label.Content>
                 <TextBlock Name="textBlockLie" TextWrapping="Wrap"></TextBlock>
             </Label.Content>
         </Label>
-=======
->>>>>>> af9287e82520a5beab0f8439a1e9071951161d3f
         <Image x:Name="beep" HorizontalAlignment="Left" Height="31" Margin="626,399,0,0" VerticalAlignment="Top" Width="34"  MouseLeftButtonDown="beep_MouseLeftButtonDown"/>
-        <TextBlock Name="lblLie" FontSize="16" FontStyle="Italic" HorizontalAlignment="Left" Margin="35,388,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="364"/>
-        <Label x:Name="lblResult_Copy" Content="Неверно нажатые кнопки:" HorizontalAlignment="Left" Margin="35,355,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.374,-2.605" FontStyle="Italic" FontFamily="Microsoft Sans Serif" FontSize="18" Width="235"/>
 
     </Grid>
 </Controls:MetroWindow>
