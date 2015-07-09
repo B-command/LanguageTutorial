@@ -12,7 +12,7 @@
     <Grid x:Name="grid" DataContext="null" Margin="0,0,-8,-18">
 
         <Label x:Name="label_Profile_Name" Content="Название профиля" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="22,0,25,320"/>
-        <TextBox x:Name="textbox_Profile_Name" MaxLength="50" ToolTip="Введи имя, под которым хочешь быть зарегистрирован в дальнейшем. Оно не должно привышать 50 символов. Можешь использовать любые символы." Text="{Binding Name}" Controls:TextBoxHelper.Watermark="Имя профиля" Width="259" TextWrapping="Wrap" VerticalContentAlignment="Center" Margin="21,44,24,289" LostFocus="textbox_Profile_Name_LostFocus" />
+        <TextBox x:Name="textbox_Profile_Name" MaxLength="50" ToolTip="Введи имя, под которым хочешь быть зарегистрирован в дальнейшем. Оно не должно привышать 50 символов. Можешь использовать любые символы." Text="{Binding Name}" Controls:TextBoxHelper.Watermark="Имя профиля" Width="259" TextWrapping="Wrap" VerticalContentAlignment="Center" Margin="21,44,24,289" LostFocus="textbox_Profile_Name_LostFocus" Controls:TextBoxHelper.ClearTextButton="True"/>
 
         <Label x:Name="label_Time_Between_Seans" Content="Промежуток между сеансами ( часов )" VerticalContentAlignment="Center" Width="259" FontSize="14" FontStyle="Italic" Margin="22,192,25,134"/>
         <Controls:NumericUpDown x:Name="num_Time_Between_Seans" ToolTip="Выбери время между прохождениями теста в часах." Maximum="4" Minimum="0.5" Value="{Binding SessionPeriod}" HorizontalAlignment="Left" Height="22" Margin="22,230,0,0" VerticalAlignment="Top" Width="258" Interval="0.5" KeyDown="num_Time_Between_Seans_KeyDown"/>
