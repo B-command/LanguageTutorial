@@ -52,10 +52,12 @@ namespace LanguageTutorial
 
         private void Grid_Loaded_1(object sender, RoutedEventArgs e)
         {
+            ComboBoxLanguage.Items.Clear();
+            
             LabelEmptyWeek.Visibility = System.Windows.Visibility.Hidden;
             using (var db = new LanguageTutorialContext())
             {
-                var activeLanguages = db.Course.Where(c => c.Active);
+                var activeLanguages = db.Course.Where(c => c.Active && c.User.Name == App.oActiveUser.Name);
                 foreach (var l in activeLanguages)
                 {
                     if (l.LanguageId == 1)
@@ -89,13 +91,15 @@ namespace LanguageTutorial
 
             using (var db = new LanguageTutorialContext())
             {
-                var sessionsForWeek = db.Session.Where(s => s.Datetime <= TopBoundary && s.Datetime >= BottomBounadry && s.CourseId == CourseID).ToList();
+                var sessionsForWeek = db.Session.Where(s => s.Datetime <= TopBoundary
+                    && s.Datetime >= BottomBounadry && s.CourseId == CourseID 
+                    && s.Course.User.Name == App.oActiveUser.Name).ToList();
                 if (sessionsForWeek != null)
                 {
                     foreach (var s in sessionsForWeek)
                     {
                         // Заносим в DataGridStatistics новую строку
-                        collection.Add(new StatisticsRow() { Date = s.Datetime, PointsQuantity = s.Points, WordsQuantity = s.Words});
+                        collection.Add(new StatisticsRow() {Date = s.Datetime, PointsQuantity = s.Points, WordsQuantity = s.Words});
                         PointsForWeek += s.Points;
                         WordsForWeek += s.Words;
                     }
@@ -150,7 +154,8 @@ namespace LanguageTutorial
             List<StatisticsRow> coll = new List<StatisticsRow>();
             using (var db = new LanguageTutorialContext())
             {
-                var nextAllSessions = db.Session.Where(s => s.Datetime >= TopBoundary && s.CourseId == CourseID).ToList();
+                var nextAllSessions = db.Session.Where(s => s.Datetime >= TopBoundary && s.CourseId == CourseID 
+                    && s.Course.User.Name == App.oActiveUser.Name).ToList();
                 foreach (var s in nextAllSessions)
                 {
                     // Заносим в DataGridStatistics новую строку
@@ -173,7 +178,8 @@ namespace LanguageTutorial
             List<StatisticsRow> coll = new List<StatisticsRow>();
             using (var db = new LanguageTutorialContext())
             {
-                var nextAllSessions = db.Session.Where(s => s.Datetime <= BottomBoundary && s.CourseId == CourseID).ToList();
+                var nextAllSessions = db.Session.Where(s => s.Datetime <= BottomBoundary && s.CourseId == CourseID
+                    && s.Course.User.Name == App.oActiveUser.Name).ToList();
                 foreach (var s in nextAllSessions)
                 {
                     // Заносим в DataGridStatistics новую строку

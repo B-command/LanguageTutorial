@@ -112,6 +112,25 @@ namespace LanguageTutorial
             {
                 countWordOfS = App.oCourseFrançais.WordsPerSession;
             }
+            
+
+
+
+
+
+
+
+
+            // сюда втыкаем метод догрузки
+
+
+
+
+
+
+
+            
+
             //вытаскиваем словарь, который учит пользователь
             //перевод с иностранного на русский
             toRussian = true;
@@ -120,7 +139,40 @@ namespace LanguageTutorial
             //берем слово
             SequenceWords();
         }
-      
+
+
+
+
+
+
+
+
+
+        //метод догрузки слов из словаря
+        private void Dictionary(List<WordDictionary> currentWordDictionary, int WordsInSessionQuantity)
+        {
+            if (currentWordDictionary.Count - 1 < WordsInSessionQuantity)
+            {
+                int WordsForAddiotionQuantity = WordsInSessionQuantity - (currentWordDictionary.Count - 1);
+                using (var db = new LanguageTutorialContext())
+                {
+                    var wordsInDictionary = db.WordDictionary.Where(wd => wd.LanguageId == LanguageID).ToList();
+                    var wordsInQueue = db.WordQueue.Where(wq => wq.UserId == App.oActiveUser.Id && wq.WordDictionary.LanguageId == LanguageID).ToList();
+                    foreach (var word in wordsInQueue)
+                    {
+                        
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
         /// <summary>
         /// Функция выбора следующего слова из текущего списка изучаемых слов
         /// </summary>
