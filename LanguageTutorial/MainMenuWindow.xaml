@@ -7,7 +7,7 @@
                       Width="500.582"
                       MinHeight="130"
                       MinWidth="260"
-                      Loaded="MetroWindow_Loaded" ResizeMode="CanMinimize" FontSize="14" WindowStartupLocation="CenterScreen">
+                      Loaded="MetroWindow_Loaded" ResizeMode="CanMinimize" FontSize="14" WindowStartupLocation="CenterScreen" Icon="icon.ico">
 
     <Window.Resources>
         <ContextMenu x:Key="TrayMenu">

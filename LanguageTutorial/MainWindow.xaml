@@ -5,7 +5,7 @@
                       Height="232"
                       Width="249" Title="Авторизация"
                       WindowStartupLocation="CenterScreen"
-                      Loaded="MetroWindow_Loaded" ResizeMode="CanMinimize">
+                      Loaded="MetroWindow_Loaded" Icon="icon.ico" ResizeMode="NoResize">
     <Grid>
 
         <Label x:Name="label" Content="Выбери профиль" FontSize="16" FontStyle="Italic" Margin="10,15,10,156" VerticalContentAlignment="Center"/>

@@ -7,7 +7,7 @@
                       Width="304" 
                       Loaded="MetroWindow_Loaded" 
                       ResizeMode="CanMinimize"
-                      WindowStartupLocation="CenterScreen">
+                      WindowStartupLocation="CenterScreen" Icon="icon.ico">
 
     <Grid x:Name="grid" DataContext="null" Margin="0,0,-8,-18">
 
