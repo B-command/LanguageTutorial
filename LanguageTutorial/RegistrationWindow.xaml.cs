@@ -568,5 +568,10 @@ namespace LanguageTutorial
         {
             e.Handled = true;
         }
+
+        private void num_Time_Between_Seans_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            if (num_Time_Between_Seans.Value == null) num_Time_Between_Seans.Value = currentTimeBetweenSessions;
+        }
     }
 }
