@@ -157,7 +157,7 @@ namespace LanguageTutorial
         //метод догрузки слов из словаря
         private void Dictionary(List<WordDictionary> currentWordDictionary, int WordsInSessionQuantity)
         {
-    if (currentWordDictionary.Count < WordsInSessionQuantity-1)
+            if (currentWordDictionary.Count < WordsInSessionQuantity-1)
             {
                 int WordsForAddiotionQuantity = WordsInSessionQuantity - (currentWordDictionary.Count + 1);
                 using (var db = new LanguageTutorialContext())
@@ -568,7 +568,7 @@ namespace LanguageTutorial
                 if (lieLetters.IndexOf(s[0]) == -1)
                 {
                     SpezZnaki(s[0]);
-   /* lieLetters += " "+s[0];
+                   /* lieLetters += " "+s[0];
                     textBlockLie.Text = lieLetters;
                     result -= 1;
                     LetterFalse += 1;
@@ -589,8 +589,8 @@ namespace LanguageTutorial
                 
                 if (schet == countWordOfS)
                 {
-                    if (toRussian)                   
-                     {
+                    if (toRussian)
+                    {
                         result += 2 * translatingWord[1].Length;
                         lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                     }
@@ -598,7 +598,6 @@ namespace LanguageTutorial
                     {
                         result += 3 * translatingWord[1].Length;
                         lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
-                    }
                     }
                     SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                     SkipWord.Click += new RoutedEventHandler(OnTestEnd);
@@ -725,7 +724,7 @@ namespace LanguageTutorial
                 textBlockLie.Text = "";
                 lieLetters = "";
             }
-   else
+            else
             {
                     //вычитаем балы за пропуск
                 if (toRussian) 
@@ -754,9 +753,7 @@ namespace LanguageTutorial
                         SequenceWords();
                          lieLetters = "";
                     }
-}
-            //lieLetters = "";
-            //lblLie.Text = "";
+                }
             }
 
         bool timer = false;
