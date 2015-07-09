@@ -34,6 +34,7 @@ namespace LanguageTutorial
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             textblock_Username.DataContext = App.oActiveUser;
+
             App.EngSession = 0;
             App.FranSession = 0;
             App.aTimer.Start();
@@ -89,6 +90,9 @@ namespace LanguageTutorial
             RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
             oRegistrationWindow.ShowDialog();
+
+            textblock_Username.DataContext = null;
+            textblock_Username.DataContext = App.oActiveUser;
         }
 
         /// <summary>
@@ -269,6 +273,9 @@ namespace LanguageTutorial
                 RegistrationWindow oRegistrationWindow = new RegistrationWindow();
 
                 oRegistrationWindow.ShowDialog();
+
+                textblock_Username.DataContext = null;
+                textblock_Username.DataContext = App.oActiveUser;
 
                 oRegistrationWindow.Activate(); // обязательно нужно отдать фокус окну,
                 // иначе пользователь сильно удивится, когда увидит окно

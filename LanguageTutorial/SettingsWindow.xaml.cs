@@ -52,39 +52,35 @@ namespace LanguageTutorial
         {
             if (label_Settings.Content == "English")
             {
-                if ( App.oCourseEnglish != null )
-                {
-                    Course tempCourseEnglish = new Course();
-
-                    tempCourseEnglish.WordsPerSession = App.oCourseEnglish.WordsPerSession;
-                    tempCourseEnglish.WordsToStudy = App.oCourseEnglish.WordsToStudy;
-                    tempCourseEnglish.SeansPerDay = App.oCourseEnglish.SeansPerDay;
-                    tempCourseEnglish.TrueAnswers = App.oCourseEnglish.TrueAnswers;
-
-                    grid.DataContext = tempCourseEnglish;
-                }
-                else
+                if ( App.oCourseEnglish == null )
                 {
                     App.oCourseEnglish = new Course() { LanguageId = 1, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
                 }
+
+                Course tempCourseEnglish = new Course();
+
+                tempCourseEnglish.WordsPerSession = App.oCourseEnglish.WordsPerSession;
+                tempCourseEnglish.WordsToStudy = App.oCourseEnglish.WordsToStudy;
+                tempCourseEnglish.SeansPerDay = App.oCourseEnglish.SeansPerDay;
+                tempCourseEnglish.TrueAnswers = App.oCourseEnglish.TrueAnswers;
+
+                grid.DataContext = tempCourseEnglish;
             }
             else
             {
-                if ( App.oCourseFrançais != null)
-                {
-                    Course tempCourseFrançais = new Course();
-
-                    tempCourseFrançais.WordsPerSession = App.oCourseFrançais.WordsPerSession;
-                    tempCourseFrançais.WordsToStudy = App.oCourseFrançais.WordsToStudy;
-                    tempCourseFrançais.SeansPerDay = App.oCourseFrançais.SeansPerDay;
-                    tempCourseFrançais.TrueAnswers = App.oCourseFrançais.TrueAnswers;
-
-                    grid.DataContext = tempCourseFrançais;
-                }
-                else
+                if ( App.oCourseFrançais == null)
                 {
                     App.oCourseFrançais = new Course() { LanguageId = 2, WordsPerSession = 20, WordsToStudy = 50, SeansPerDay = 5, TrueAnswers = 3 };
                 }
+
+                Course tempCourseFrançais = new Course();
+
+                tempCourseFrançais.WordsPerSession = App.oCourseFrançais.WordsPerSession;
+                tempCourseFrançais.WordsToStudy = App.oCourseFrançais.WordsToStudy;
+                tempCourseFrançais.SeansPerDay = App.oCourseFrançais.SeansPerDay;
+                tempCourseFrançais.TrueAnswers = App.oCourseFrançais.TrueAnswers;
+
+                grid.DataContext = tempCourseFrançais;
             }
         }
 

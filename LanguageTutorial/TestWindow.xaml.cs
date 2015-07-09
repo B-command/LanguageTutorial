@@ -15,6 +15,8 @@ using LanguageTutorial.DataModel;
 using System.Data.Entity;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace LanguageTutorial
 {
@@ -116,6 +118,25 @@ namespace LanguageTutorial
             {
                 countWordOfS = App.oCourseFrançais.WordsPerSession;
             }
+            
+
+
+
+
+
+
+
+
+            // сюда втыкаем метод догрузки
+
+
+
+
+
+
+
+            
+
             //вытаскиваем словарь, который учит пользователь
             //перевод с иностранного на русский
             toRussian = true;
@@ -124,7 +145,40 @@ namespace LanguageTutorial
             //берем слово
             SequenceWords();
         }
-      
+
+
+
+
+
+
+
+
+
+        //метод догрузки слов из словаря
+        private void Dictionary(List<WordDictionary> currentWordDictionary, int WordsInSessionQuantity)
+        {
+            if (currentWordDictionary.Count < WordsInSessionQuantity-1)
+            {
+                int WordsForAddiotionQuantity = WordsInSessionQuantity - (currentWordDictionary.Count + 1);
+                using (var db = new LanguageTutorialContext())
+                {
+                    var wordsInDictionary = db.WordDictionary.Where(wd => wd.LanguageId == LanguageID).ToList();
+                    var wordsInQueue = db.WordQueue.Where(wq => wq.UserId == App.oActiveUser.Id && wq.WordDictionary.LanguageId == LanguageID).ToList();
+                    foreach (var word in wordsInQueue)
+                    {
+                        
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
         /// <summary>
         /// Функция выбора следующего слова из текущего списка изучаемых слов
         /// </summary>
@@ -173,11 +227,9 @@ namespace LanguageTutorial
         void SequenceWords()
         {
             flag = false;
-            enter = false;
             //Если счетчик равен списку слов, то 
             if (schet > countWordOfS)
             {
-                enter = true;
                 //конец тестирования
                 SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                 lblWord.Content = "";
@@ -280,6 +332,7 @@ namespace LanguageTutorial
         /// </summary>
         void CreateLabel(string word)
         {
+            notKeyDown = true;
             length = word.Length;
             words = new Label[length];
             //Проверка пробела, чтоб отобразить в Label
@@ -396,6 +449,8 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            if (notKeyDown)
+            {
                 if ((int)e.Key >= 44 && (int)e.Key <= 69 || (int)e.Key == 149 || (int)e.Key == 140 || (int)e.Key == 142 ||
                    (int)e.Key == 144 || (int)e.Key == 152 || (int)e.Key == 151)
                 {
@@ -431,10 +486,12 @@ namespace LanguageTutorial
                 {
                     e.Handled = true;
                 }
-            if (e.Key==Key.Enter&&enter==false)
-            {
-                SkipWord_Click(new object(), new RoutedEventArgs());
+                if (e.Key == Key.Enter)
+                {
+                    SkipWord_Click(new object(), new RoutedEventArgs());
+                }
             }
+            else { e.Handled = true; }
             }
 
         //записываем из Label букву
@@ -486,7 +543,7 @@ namespace LanguageTutorial
 
         string lieLetters="";
         /// <summary>
-        /// Проверяет символ и добавлет его в Label
+        /// Проверяет символ и добавляет его в Label
         /// </summary>
         /// <param name="s"></param>
         void FillTest(string s)
@@ -503,17 +560,19 @@ namespace LanguageTutorial
                     //Добавляем в Label букву
                     words[i].Content = s[0];
                     have = true;
+                    Refresh(words[i]);
                 }
             }
             if (!have)
             {
                 if (lieLetters.IndexOf(s[0]) == -1)
                 {
-                    lieLetters += " "+s[0];
-                    lblLie.Content = lieLetters;
+                    SpezZnaki(s[0]);
+                   /* lieLetters += " "+s[0];
+                    textBlockLie.Text = lieLetters;
                     result -= 1;
                     LetterFalse += 1;
-                    lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                    lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());*/
                 }
                 //звук об ошибке
                 errorSignal();
@@ -527,14 +586,25 @@ namespace LanguageTutorial
             //если слово отгадано, даем другое слово
             if (translatingWord[1].ToLower() == ss.ToLower())
             {
+                
                 if (schet == countWordOfS)
                 {
-                    enter = true;
+                    if (toRussian)
+                    {
+                        result += 2 * translatingWord[1].Length;
+                        lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                    }
+                    else
+                    {
+                        result += 3 * translatingWord[1].Length;
+                        lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                    }
                     SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                     SkipWord.Click += new RoutedEventHandler(OnTestEnd);
                 }
                 else
                 {
+                    
                         if (toRussian)
                         {
                             result += 2 * translatingWord[1].Length;
@@ -545,7 +615,6 @@ namespace LanguageTutorial
                             result += 3 * translatingWord[1].Length;
                             lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                         }
-                        SkipWord.Content = "СЛЕДУЮЩЕЕ СЛОВО";
                         if (LetterFalse == 0)
                         {
                             countRightWord += 1;
@@ -580,33 +649,83 @@ namespace LanguageTutorial
                         }
                     }
                     LetterFalse = 0;
-            }
-            
+                    notKeyDown = false;
+                    Task.Delay(1500);
+                    DeleteLabel();
+                    schet++;
+                    textBlockLie.Text = "";
+                    lieLetters = "";
+                    toRussian = true;
+                    translatingWord = NextWordChosing();
+                    SequenceWords();
+            } 
         }
-        bool enter = false;
+        bool notKeyDown = true;
+       
+        
+        void SpezZnaki(char s)
+        {
+            if (toRussian == false)
+            {
+                string spez = "{}\":><";
+                if (spez.IndexOf(s) != -1)
+                {
+                    // result -= 1;
+                    //LetterFalse += 1;
+                    lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                }
+                else
+                {
+                    lieLetters += " " + s;
+                    textBlockLie.Text = lieLetters;
+                    result -= 1;
+                    LetterFalse += 1;
+                    lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+                }
+
+            }
+            else
+            {
+                lieLetters += " " + s;
+                textBlockLie.Text = lieLetters;
+                result -= 1;
+                LetterFalse += 1;
+                lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
+            }
+        }
+
+        private delegate void NoArgDelegate();
+        /// <summary>
+        /// Перерисовка Label
+        /// </summary>
+        /// <param name="obj"></param>
+        public static void Refresh(DependencyObject obj)
+        {
+            obj.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Loaded,
+                (NoArgDelegate)delegate { });
+        }
+
+
+
         bool flag = false;
+        /// <summary>
+        /// Перход на новое слово или завершению тестирования
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SkipWord_Click(object sender, RoutedEventArgs e) 
         {
             flag = true;
             if (schet > countWordOfS)
             {
-                enter = true;
                 SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
                 SkipWord.Click += new RoutedEventHandler(OnTestEnd);
                 lblWord.Content = "";
+                textBlockLie.Text = "";
+                lieLetters = "";
             }
             else
             {
-                if (SkipWord.Content == "СЛЕДУЮЩЕЕ СЛОВО")
-                {
-                    DeleteLabel();
-                    schet++;
-                    toRussian = true;
-                    translatingWord = NextWordChosing();
-                    SequenceWords();
-                }
-                else
-                {
                     //вычитаем балы за пропуск
                 if (toRussian) 
                 {
@@ -626,15 +745,16 @@ namespace LanguageTutorial
                     } 
                    else
                     {
+                        textBlockLie.Text = "";
                         DeleteLabel();
                         schet++;
                         toRussian = true;
                         translatingWord = NextWordChosing();
                         SequenceWords();
+                         lieLetters = "";
                     }
                 }
-            }  
-        }
+            }
 
         bool timer = false;
         void OnTestEnd(object sender, RoutedEventArgs e)
@@ -667,5 +787,7 @@ namespace LanguageTutorial
                 beep.ToolTip = "Включить звук";
             }
         }
+
+     
     }
 }

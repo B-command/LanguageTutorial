@@ -41,20 +41,20 @@ namespace LanguageTutorial
             App.ChangeUser = false;
 
             // Загрузка языков и их слов при 1 запуске программы
-            //using ( var db = new LanguageTutorialContext())
+            //using (var db = new LanguageTutorialContext())
             //{
-            //    if ( db.Language.ToList().Count == 0 )
+            //    if (db.Language.ToList().Count == 0)
             //    { // Если таблица пуста, значит программа запущена впервые.
 
             //        // Заполнение языков
             //        db.Language.Add(new Language() { Name = "English" });
             //        db.SaveChanges();
 
-            //        db.Language.Add(new Language() { Name = "Français"});
+            //        db.Language.Add(new Language() { Name = "Français" });
             //        db.SaveChanges();
 
             //        // Заполнение словаря Английского языка
-            //        using ( var loadDictionary = new StreamReader("Dictionary\\English.txt"))
+            //        using (var loadDictionary = new StreamReader("Dictionary\\English.txt"))
             //        {
             //            string str = String.Empty;
 
@@ -67,10 +67,10 @@ namespace LanguageTutorial
             //                    string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
 
             //                    db.WordDictionary.Add(new WordDictionary() { LanguageId = 1, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
-            //                    db.SaveChanges();
+
             //                }
             //            }
-
+            //            db.SaveChanges();
             //            loadDictionary.Close();
             //        }
 
@@ -88,16 +88,14 @@ namespace LanguageTutorial
             //                    string[] wordAndTranslationd = str.Trim().Split(new char[] { ',' });
 
             //                    db.WordDictionary.Add(new WordDictionary() { LanguageId = 2, Word = wordAndTranslationd[0], Translate = wordAndTranslationd[1] });
-            //                    db.SaveChanges();
+
             //                }
             //            }
-
+            //            db.SaveChanges();
             //            loadDictionary.Close();
             //        }
             //    }
             //}
         }
-
-
     }
 }
