@@ -32,7 +32,7 @@ namespace LanguageTutorial
             Result = result;
             LanguageID = language;
             InitializeComponent();
-            lblBall.Content = "Ваш результат за текущую сессию " + Result + WriteBall(Result.ToString());
+            lblBall.Content = "Твой результат за текущую сессию " + Result + WriteBall(Result.ToString());
             lblRight.Content = "Вы отгадали " + CountRightWords + WriteWord(CountRightWords.ToString());
             lblRight.Content += " с первого раза";
 
@@ -147,7 +147,16 @@ namespace LanguageTutorial
                             db.Session.Add(session);
                         }
                 db.SaveChanges();
+               //Проверка на то, что пользователь прошел веь курс
+                var result = db.WordQueue.Where(wq => wq.UserId == App.oActiveUser.Id && wq.WordDictionary.LanguageId == LanguageID && wq.IsLearned == false).ToList();
+                if (result.Count == 0)
+                {
+                    //Ты прошел весь курс
+                    TestEndWindow testEnd = new TestEndWindow(LanguageID);
+                    testEnd.ShowDialog();
+                }
                     }
+            
                 }
     }
 }

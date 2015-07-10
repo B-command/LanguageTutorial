@@ -141,8 +141,14 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ReturnKursWindow.xaml.cs">
+      <DependentUpon>ReturnKursWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StatisticsWindow.xaml.cs">
       <DependentUpon>StatisticsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestEndWindow.xaml.cs">
+      <DependentUpon>TestEndWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TimerMet.cs" />
     <Compile Include="RegistrationWindow.xaml.cs">
@@ -187,6 +193,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ReturnKursWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -198,6 +208,10 @@
     <Page Include="Style\VS2012\VS2012WindowStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TestEndWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TestWindow.xaml">
       <SubType>Designer</SubType>

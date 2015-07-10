@@ -205,7 +205,8 @@ namespace LanguageTutorial
                  using (var db = new LanguageTutorialContext())
                  {
                      //Берем максимальный индекс с словаре курса
-                     max = db.Course.Max(q => q.Id);
+                     var slovar = db.WordQueue.Where(q =>q.WordDictionary.LanguageId==LanguageID&&q.UserId==App.oActiveUser.Id).ToList();
+                     max = slovar.Max();
                      //открыть большой словарь
                      var result = db.WordDictionary.Where(wq => wq.Id > CountOfK && wq.LanguageId == LanguageID);
                      if (result != null)
@@ -278,9 +279,9 @@ namespace LanguageTutorial
                      db.SaveChanges();
                  }
              }
-         }
+         }*/
 
-        */
+        
 
         //метод догрузки слов из словаря
         private void Dictionary(List<WordDictionary> currentWordDictionary, int WordsInSessionQuantity)
@@ -576,7 +577,7 @@ namespace LanguageTutorial
             if (notKeyDown)
             {
                 if ((int)e.Key >= 44 && (int)e.Key <= 69 || (int)e.Key == 149 || (int)e.Key == 140 || (int)e.Key == 142 ||
-                   (int)e.Key == 144 || (int)e.Key == 152 || (int)e.Key == 151)
+                   (int)e.Key == 144 || (int)e.Key == 152 || (int)e.Key == 151 ||(int)e.Key==146)
                 {
                     e.Handled = false;
                     string a;
@@ -599,6 +600,9 @@ namespace LanguageTutorial
                             break;
                         case 151:
                             a = "}";
+                            break;
+                        case 146:
+                            a = Convert.ToString("`");
                             break;
                         default:
                             a = e.Key.ToString();
@@ -725,7 +729,8 @@ namespace LanguageTutorial
                         lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                     }
                     SkipWord.Content = "ЗАВЕРШИТЬ ТЕСТИРОВАНИЕ";
-                    SkipWord.Click += new RoutedEventHandler(OnTestEnd);
+                    //SkipWord.Click += new RoutedEventHandler(OnTestEnd);
+                    
                 }
                 else
                 {
@@ -792,7 +797,7 @@ namespace LanguageTutorial
         {
             if (toRussian == false)
             {
-                string spez = "{}\":><";
+                string spez = "{}\":><`";
                 if (spez.IndexOf(s) != -1)
                 {
                     // result -= 1;
@@ -862,14 +867,6 @@ namespace LanguageTutorial
                     result -= 2 * translatingWord[1].Length;
                     lblResult.Content = "Твой текущий результат " + result + WriteBall(result.ToString());
                 }
-                //следующее слово
-                if (schet > countWordOfS)
-                {
-                    SkipWord.Content = "Завершить тестирование";
-                    SkipWord.Click += new RoutedEventHandler(OnTestEnd);
-                }
-                else
-                {
                     textBlockLie.Text = "";
                     DeleteLabel();
                     schet++;
@@ -877,7 +874,6 @@ namespace LanguageTutorial
                     translatingWord = NextWordChosing();
                     SequenceWords();
                     lieLetters = "";
-                }
             }
         }
 
