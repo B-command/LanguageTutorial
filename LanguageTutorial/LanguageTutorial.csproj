@@ -260,6 +260,9 @@
     <None Include="DB\LanguageTutorialContext.sqlite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Help\help.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
     <None Include="Properties\Settings.settings">

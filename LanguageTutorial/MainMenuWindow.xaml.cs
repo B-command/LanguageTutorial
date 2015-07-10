@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 using System.Timers;
 using System.Windows.Threading;
+using System.IO;
 
 
 namespace LanguageTutorial
@@ -439,7 +440,7 @@ namespace LanguageTutorial
         /// <param name="e"></param>
         private void button_Help_Click(object sender, RoutedEventArgs e)
         {
-
+            System.Diagnostics.Process.Start(Directory.GetCurrentDirectory() + "\\Help\\help.chm");
         }
     }
 }
