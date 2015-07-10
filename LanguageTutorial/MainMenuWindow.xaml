@@ -21,6 +21,12 @@ Loaded="MetroWindow_Loaded" ResizeMode="CanMinimize" FontSize="14" WindowStartup
         </ContextMenu>
     </Window.Resources>
 
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button x:Name="button_Help" Content="Справка" Click="button_Help_Click"></Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>

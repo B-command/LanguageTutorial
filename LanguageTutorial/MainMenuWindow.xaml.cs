@@ -178,7 +178,7 @@ namespace LanguageTutorial
             if (TrayIcon == null)
             { // только если мы не создали иконку ранее
                 TrayIcon = new System.Windows.Forms.NotifyIcon(); // создаем новую
-                TrayIcon.Icon = LanguageTutorial.Properties.Resources.Bulb; // изображение для трея
+                TrayIcon.Icon = LanguageTutorial.Properties.Resources.Tray_Icon; // изображение для трея
                 // обратите внимание, за ресурсом с картинкой мы лезем в свойства проекта, а не окна,
                 // поэтому нужно указать полный namespace
                 TrayIcon.Text = "Учебник иностранных языков"; // текст подсказки, всплывающей над иконкой
@@ -425,5 +425,14 @@ namespace LanguageTutorial
             Environment.Exit(0);
         }
 
+        /// <summary>
+        /// Кнопка в строке заголовка
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_Help_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
