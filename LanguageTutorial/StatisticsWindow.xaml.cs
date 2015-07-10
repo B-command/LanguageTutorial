@@ -34,17 +34,27 @@ namespace LanguageTutorial
             public int WordsQuantity { get; set; }
         }
 
+        //класс, объект которого хранит значения сессии для отображения на графике
+        private class ChartElement
+        {
+            public DateTime Date { get; set; }
+
+            public int PointsQuantity { get; set; }
+        }
+
         // массив, хранящий индексы активных курсов пользователя
         private int[] ActiveCourseID = new int[2];
 
         // коллекция, хранящая строки в DataGridStatistics
         ObservableCollection<StatisticsRow> collection;
 
+        ObservableCollection<ChartElement> chartElements;
+
         // поле, хранящее последний день отображаемой недели        
         DateTime WeekTopBoundary = DateTime.Now;
 
         // поле, хранящее первый день отображаемой недели
-        DateTime WeekBottomBoundary = DateTime.Now.AddDays(-6);
+        DateTime WeekBottomBoundary = DateTime.Now.Date.AddDays(-6);
 
         public StatisticsWindow()
         {
@@ -89,8 +99,15 @@ namespace LanguageTutorial
                 collection = new ObservableCollection<StatisticsRow>();
                 DataGridStatistics.ItemsSource = collection;
             }
+            if (chartElements == null)
+            {
+                chartElements = new ObservableCollection<ChartElement>();
+                chartStatistics.ItemsSource = chartElements;
+
+            }
             //очистка коллекции, хранящей строки для отображения статистики
             collection.Clear();
+            chartElements.Clear();
             
             //скрыть надпись, информирующую о том, что на отображаемой
             //неделе не было сессий
@@ -118,6 +135,9 @@ namespace LanguageTutorial
                         
                         //изменяем общее кол-во баллов за неделю с учетом сессии
                         PointsForWeek += s.Points;
+
+                        //добавление значения на график
+                        chartElements.Add(new ChartElement() { Date = s.Datetime, PointsQuantity = PointsForWeek });
 
                         //изменяем общее кол-во отгаданных слов 
                         //за неделю с учетом сессии
