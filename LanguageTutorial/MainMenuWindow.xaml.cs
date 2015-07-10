@@ -425,5 +425,14 @@ namespace LanguageTutorial
             Environment.Exit(0);
         }
 
+        /// <summary>
+        /// Кнопка в строке заголовка
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_Help_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
