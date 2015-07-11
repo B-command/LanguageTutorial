@@ -84,74 +84,10 @@ namespace LanguageTutorial
         // для ID использованного слова, отгаданного с первого раза
         WordDictionary useWord = new WordDictionary();
 
-        /// <summary>
-        /// при загрузке формы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            // часть программы, которая загружает список изучаемых слов в dict
-            using (var db = new LanguageTutorialContext())
-            {
-                var result = db.WordQueue.Where(wq => wq.UserId == App.oActiveUser.Id && wq.IsLearned == false);
-                if (result != null)
-                {
-                    foreach (var wd in result)
-                    {
-                        var pair = db.WordDictionary.Find(wd.WordDictionaryId);
-                        if (pair.LanguageId == LanguageID)
-                        {
-                            // Сохраняешь в список
-                            currentWord.Add(pair);
-                        }
-                    }
-                }
-            }
-            //если учим английский, то берем счетчик сессии
-            if (LanguageID == 1)
-            {
-                countWordOfS = App.oCourseEnglish.WordsPerSession;
-            }
-            //если учим французский, то берем счетчик сессии
-            if (LanguageID == 2)
-            {
-                countWordOfS = App.oCourseFrançais.WordsPerSession;
-            }
-
-
-
-
-
-
-
-
-
-            // сюда втыкаем метод догрузки
-
-
-
-
-
-
-
-
-
-            //вытаскиваем словарь, который учит пользователь
-            //перевод с иностранного на русский
-            toRussian = true;
-            //выбор случайным образом как переводить(с русского на ин.яз или наоборот)
-            translatingWord = NextWordChosing();
-            //берем слово
-            SequenceWords();
-        }
-
-       /*  private void Window_Loaded(object sender, RoutedEventArgs e)
+            private void Window_Loaded(object sender, RoutedEventArgs e)
          {
              //количество слов за курс
              int CountOfK = 0;
-             //Max ID
-             int max = 0;
              //нехватающие слова
              int countDontWord = 0;
              int kol_vo = 0;
@@ -205,13 +141,13 @@ namespace LanguageTutorial
                  using (var db = new LanguageTutorialContext())
                  {
                      //Берем максимальный индекс с словаре курса
-                     var slovar = db.WordQueue.Where(q =>q.WordDictionary.LanguageId==LanguageID&&q.UserId==App.oActiveUser.Id).ToList();
-                     max = slovar.Max();
+                     var max= db.WordQueue.Where(q =>q.WordDictionary.LanguageId==LanguageID && q.UserId==App.oActiveUser.Id).Max(q => q.Id);
                      //открыть большой словарь
-                     var result = db.WordDictionary.Where(wq => wq.Id > CountOfK && wq.LanguageId == LanguageID);
+                     var result = db.WordDictionary.Where(wq => wq.Id > CountOfK && wq.LanguageId == LanguageID).ToList();
                      if (result != null)
                      {
-                         var wordsInQueue = db.WordQueue.Where(wq => wq.UserId == App.oActiveUser.Id && wq.WordDictionary.LanguageId == LanguageID);
+                        // var wordsInQueue = db.WordQueue.Where(wq => wq.UserId == App.oActiveUser.Id && wq.WordDictionary.LanguageId == LanguageID);
+                         
                          //посмотреть, можно ли загрузить недостающие строки
                          int c = result.Count();
                          if (c >= countDontWord)
@@ -222,20 +158,20 @@ namespace LanguageTutorial
                                  for (int i = 1; i < countDontWord + 1; i++)
                                  {
                                      //загружаем в наш словарь
-                                     currentWord.Add(result.ElementAt(i + max));
+                                     currentWord.Add(result[i + max]);
                                      //загружаем в курс
-                                     db.WordQueue.Add(wordsInQueue.{WordDictionaryId=i});
+                                     db.WordQueue.Add(new WordQueue() { TrueAnswers = 0, IsLearned = false, UserId =  App.oActiveUser.Id, WordDictionaryId = i + max});
                                  }
                              }
-                             if (LanguageID == 2)
+                             else if (LanguageID == 2)
                              {
                                  //если можно, то загружаем в курс и наш словарь
                                  for (int i = 1; i < 496+countDontWord + 1; i++)
                                  {
-                                     //загружаем в наш словарь
-                                     currentWord.Add(result.ElementAt(i + max));
+                                    //загружаем в наш словарь
+                                     currentWord.Add(result[i + max]);
                                      //загружаем в курс
-                                     db.WordQueue.Add(wordsInQueue.{WordDictionaryId=i});
+                                     db.WordQueue.Add(new WordQueue() { TrueAnswers = 0, IsLearned = false, UserId =  App.oActiveUser.Id, WordDictionaryId = i + max});
                                  }
                              }
                          }
@@ -247,7 +183,7 @@ namespace LanguageTutorial
                              {
                                  currentWord.Add(s);
                                  //загрузить в курс
-                                 db.WordQueue.Add(wordsInQueue(){WordDictionaryId=i});
+                                 db.WordQueue.Add(new WordQueue() { TrueAnswers = 0, IsLearned = false, UserId = App.oActiveUser.Id, WordDictionaryId = s.Id});
                                  // db.WordQueue.Add(wordsInQueue);
                              }
                          }
@@ -279,31 +215,9 @@ namespace LanguageTutorial
                      db.SaveChanges();
                  }
              }
-         }*/
+         }
 
-        
-
-        //метод догрузки слов из словаря
-        private void Dictionary(List<WordDictionary> currentWordDictionary, int WordsInSessionQuantity)
-        {
-            if (currentWordDictionary.Count < WordsInSessionQuantity - 1)
-            {
-                int WordsForAddiotionQuantity = WordsInSessionQuantity - (currentWordDictionary.Count + 1);
-                using (var db = new LanguageTutorialContext())
-                {
-                    var wordsInDictionary = db.WordDictionary.Where(wd => wd.LanguageId == LanguageID).ToList();
-                    var wordsInQueue = db.WordQueue.Where(wq => wq.UserId == App.oActiveUser.Id && wq.WordDictionary.LanguageId == LanguageID).ToList();
-                    if (wordsInQueue != null)
-                    {
-                        foreach (var word in wordsInDictionary)
-                        {
-
-                        }
-                    }
-                }
-            }
-        }
-
+  
         /// <summary>
         /// Функция выбора следующего слова из текущего списка изучаемых слов
         /// </summary>
