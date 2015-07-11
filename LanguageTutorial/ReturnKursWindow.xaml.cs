@@ -19,13 +19,13 @@ namespace LanguageTutorial
     /// <summary>
     /// Interaction logic for ReturnKursWindow.xaml
     /// </summary>
-    public partial class ReturnKursWindow : Window
+    public partial class ReturnKursWindow
     {
         int LanguageID;
         public ReturnKursWindow(int language)
         {
-            InitializeComponent();
             LanguageID = language;
+            InitializeComponent();
         }
 
         private void btnNO_Click(object sender, RoutedEventArgs e)
